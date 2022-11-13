@@ -22,7 +22,7 @@ namespace ConsoleApp2
 
         public override string ToString()
         {
-            return base.ToString()+" Mentor for: "+intern.ToString();
+            return base.ToString()+" Mentor for: "+intern?.ToString();
         }
 
     }
