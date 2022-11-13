@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Mentor : User
+    internal class Mentor : Member
     {
         private Intern intern;
         public Intern Intern

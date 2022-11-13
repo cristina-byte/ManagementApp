@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class User
+    internal class Member
     {
         private string name;
         private int age;
         private BigInteger cnp;
 
 
-        public User(string _name, int _age, BigInteger _cnp)
+        public Member(string _name, int _age, BigInteger _cnp)
         {
             name = _name;
             age = _age;

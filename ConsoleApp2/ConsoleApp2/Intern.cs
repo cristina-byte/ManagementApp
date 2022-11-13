@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Intern : User
+    internal class Intern : Member
     {
         private DateTime startDate;
 
