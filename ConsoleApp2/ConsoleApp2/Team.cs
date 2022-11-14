@@ -10,9 +10,9 @@ namespace ConsoleApp2
     {
         private string name;
         private DateTime createdAt;
-        private List<Member> members;
+        private List<User> members;
 
-        public List<Member> Members
+        public List<User> Members
         {
             get { return members; }
             set { members = value; }

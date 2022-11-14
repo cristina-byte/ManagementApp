@@ -5,16 +5,24 @@
         static void Main(string[] args)
         {
 
-            List<Member> users = new List<Member>();
-            users.Add(new Intern("Cristina Siscanu", 22, 1234321234563, DateTime.Parse("01/11/2022")));
-            users.Add(new Mentor("Ion Ceban", 34, 5678945678904,new Intern("Maria Tirsina", 25, 1234321234563, DateTime.Parse("01/11/2022"))));
-            users.Add(new Intern("Elena Ciumeica", 25, 1234321234563, DateTime.Parse("01/11/2022")));
-            users.Add(new Mentor("Valeria Murdeala", 34, 5432167890456, null));
 
-            foreach (Member user in users)
+
+            List<User> users = new List<User>();
+            users.Add(new User("Cristina Siscanu", "mypassword", "cristinasiscanu30@gmail.com", 0749292012, 3422110987658, DateTime.Parse("15/04/2000")));
+            users.Add(new User("Ana Cebanu", "password456", "ana.ceban@gmail.com", 0949396012, 3409874567898, DateTime.Parse("20/09/1998")));
+            users.Add(new Admin("Ion Tutu", "pppy&8881", "ion.tutu@gmail.com", 074097826, 9000756789734, DateTime.Parse("12/02/2001")));
+
+            foreach(User user in users)
             {
-                Console.WriteLine(user);
+                Console.WriteLine(user.ToString());
             }
+
+            users[0].authentificate("cristinasiscanu30@gmail.com");
+            users[1].authentificate("mypassword", "cristinasiscanu30@gmail.com");
+
+
+
+
 
 
 
