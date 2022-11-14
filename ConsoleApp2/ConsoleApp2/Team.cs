@@ -8,30 +8,30 @@ namespace ConsoleApp2
 {
     internal class Team
     {
-        private string name;
-        private DateTime createdAt;
-        private List<User> members;
+        private string _name;
+        private DateTime _createdAt;
+        private List<User> _members;
 
         public List<User> Members
         {
-            get { return members; }
-            set { members = value; }
+            get { return _members; }
+            set { _members = value; }
         }
 
-        public Team(string _name, DateTime _createdAt)
+        public Team(string name, DateTime createdAt)
         {
-            name=_name;
-            createdAt = _createdAt;
-            
+            _name=name;
+            _createdAt = createdAt; 
         }
 
         public DateTime CreatedAt { 
-            get { return createdAt; }
-            set { createdAt = value; }
+            get { return _createdAt; }
+            set { _createdAt = value; }
         }
+
         public string Name { 
-            get { return name; } 
-            set { name = value; }
+            get { return _name; } 
+            set { _name = value; }
         }
     }
 }

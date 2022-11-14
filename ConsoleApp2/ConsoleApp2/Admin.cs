@@ -17,7 +17,5 @@ namespace ConsoleApp2
         {
             return "This is an admin. He has special rights" + "\n" + "Name:" + name + "\nEmail:" + email + "\nPhone:" + phone + "\nBorned at:" + birthDay + "\nCnp:" + cnp;
         }
-
-
     }
 }
