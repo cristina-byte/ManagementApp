@@ -9,13 +9,11 @@ namespace ConsoleApp2
 {
     internal class Admin : User
     {
-        public Admin(string _name, string _password, string _email, BigInteger _phone, BigInteger _cnp, DateTime _birthDay) : base(_name, _password, _email, _phone, _cnp, _birthDay)
-        {
+        public Admin(string name, string password, string email, BigInteger phone, BigInteger cnp, DateTime birthDay) : base(name, password, email, phone, cnp, birthDay){
         }
 
-        public override string ToString()
-        {
-            return "This is an admin. He has special rights" + "\n" + "Name:" + name + "\nEmail:" + email + "\nPhone:" + phone + "\nBorned at:" + birthDay + "\nCnp:" + cnp;
+        public override string ToString(){
+            return "This is an admin. He has special rights" + "\n" + "Name:" + _name + "\nEmail:" + _email + "\nPhone:" + _phone + "\nBorned at:" + _birthDay + "\nCnp:" + _cnp;
         }
     }
 }

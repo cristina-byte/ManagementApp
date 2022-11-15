@@ -18,11 +18,5 @@ namespace ConsoleApp2
             _action = action;   
             _created = created;
         }
-
-        public string Action { get; set; }
-
-        public User Responsible { get; set; }
-
-        public DateTime Created { get; set; }
     }
 }

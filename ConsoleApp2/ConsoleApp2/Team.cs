@@ -33,5 +33,17 @@ namespace ConsoleApp2
             get { return _name; } 
             set { _name = value; }
         }
+
+        public void AddMember(User user)
+        {
+            _members.Add(user);
+        }
+
+        public void DeleteMember(User user)
+        {
+           for(int i = 0; i < _members.Count; i++)
+                if (_members[i] == user)
+                    _members.Remove(user);
+        }
     }
 }

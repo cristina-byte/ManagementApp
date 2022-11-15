@@ -11,15 +11,20 @@ namespace ConsoleApp2
     {
         private string _text;
         private DateTime _sent;
+        private User _destination;
 
-        public Message(string text,DateTime sent)
+        public Message(string text,DateTime sent, User destination)
         {
             _text = text;
-            _sent=sent;
+            _sent = sent;
+            _destination = destination;
         }
 
-        public string Text { get; set; }
+        public string Text {
+            get { return _text; }
+            set { _text = value; }
+        }
 
-        public DateTime Sent { get; set; }
+        public override string ToString() => "Message:" + _text + "\nSent at:" + _sent + "\nTo:" + _destination.Name;
     }
 }
