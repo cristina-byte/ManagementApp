@@ -10,59 +10,27 @@ namespace ConsoleApp2
 {
     internal class User
     {
-        protected string _name;
-        protected string _password;
-        protected string _email;
-        protected BigInteger _phone;
-        protected BigInteger _cnp;
-        protected DateTime _birthDay;
-        protected List<Message> _sentMessages;
-        protected List<Message> _receivedMessages;
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public BigInteger Phone { get; set; }
+        public BigInteger Cnp { get; set; }
+        public DateTime BirthDay { get; set; }
+        public List<Message> SentMessages { get; set; }
+        public List<Message> ReceivedMessages { get; set; }
 
         public User(string name,string password,string email, BigInteger phone,BigInteger cnp, DateTime birthDay){
-           _sentMessages = new List<Message>();
-           _receivedMessages = new List<Message>();
-           _name= name;
-           _password= password;
-           _email= email;
-           _phone= phone;
-           _cnp= cnp;  
-           _birthDay= birthDay;
+           SentMessages = new List<Message>();
+           ReceivedMessages = new List<Message>();
+           Name= name;
+           Password= password;
+           Email= email;
+           Phone= phone;
+           Cnp= cnp;  
+           BirthDay= birthDay;
         }
-      
-        public List<Message> SentMessages{
-            get{
-                return _sentMessages;
-            }
-            set{
-                _sentMessages = value;
-            }
-        }
-
-        public string Name {
-            get{
-                return _name;
-            }
-            set{
-                _name = value;
-            }
-        }
-
-        public string Email{
-            get{
-                return _email;
-            }
-            set{
-                _email= value;
-            }
-        }
-
-        public string Password { 
-            get { return _password; }
-            set { _password = value; }
-        }
-       
-        public override string ToString() => "This is a simple user" + "\n" + "Name:" + _name + "\nEmail:" + _email + "\nPhone:" + _phone + "\nBorned at:" + _birthDay + "\nCnp:" + _cnp;
+     
+        public override string ToString() => $"\nName:{Name} \nEmail:{Email} \nPhone:{Phone} \nBorned at:{BirthDay} \nCnp:{Cnp}";
 
         public static User Authentificate(string password,string email,List<User> users){
             foreach (User user in users)
@@ -76,13 +44,30 @@ namespace ConsoleApp2
         }
 
         public void SendMessage(Message message){
-            _sentMessages.Add(message);
+            SentMessages.Add(message);
+        }
+
+        public void prinMessagesSentOn(DateTime date)
+        {
+            if (DateTime.Now < date)
+                throw new InvalidDateException("The action can't be done on this date");
+
+            foreach(Message message in SentMessages)
+            {
+                if (message.Sent.Equals(date))
+                    Console.WriteLine(message.ToString());
+            }
         }
 
         public List<Message> searchInConversions(string text){
+            if(text==null)
+                throw new ArgumentNullException("The argument text is null");
+
             List<Message> messages = new List<Message>();
-            foreach(Message message in _sentMessages){
+            foreach(Message message in SentMessages)
+            {
                 string[] words = message.Text.Split(' ');
+
                 foreach(string word in words)
                     if(word.Equals(text))
                         messages.Add(message); 

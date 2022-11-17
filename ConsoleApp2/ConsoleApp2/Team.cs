@@ -8,42 +8,20 @@ namespace ConsoleApp2
 {
     internal class Team
     {
-        private string _name;
-        private DateTime _createdAt;
-        private List<User> _members;
+        public string Name { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public List<User> Members { get; set; }
 
-        public List<User> Members
+        public Team(string name)
         {
-            get { return _members; }
-            set { _members = value; }
-        }
-
-        public Team(string name, DateTime createdAt)
-        {
-            _name=name;
-            _createdAt = createdAt; 
-        }
-
-        public DateTime CreatedAt { 
-            get { return _createdAt; }
-            set { _createdAt = value; }
-        }
-
-        public string Name { 
-            get { return _name; } 
-            set { _name = value; }
-        }
-
-        public void AddMember(User user)
-        {
-            _members.Add(user);
+            Name = name;
         }
 
         public void DeleteMember(User user)
         {
-           for(int i = 0; i < _members.Count; i++)
-                if (_members[i] == user)
-                    _members.Remove(user);
+           for(int i = 0; i < Members.Count; i++)
+                if (Members[i] == user)
+                    Members.Remove(user);
         }
     }
 }

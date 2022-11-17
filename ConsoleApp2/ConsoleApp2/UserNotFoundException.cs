@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Task
+    internal class UserNotFoundException:Exception
     {
-        public string Title;
-        public User AssignedTo;
-        public string Status; 
+        public UserNotFoundException(string message) : base(message) 
+        {
+        
+        }
     }
 }

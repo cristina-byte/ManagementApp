@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp2
 {
-    internal class Task
+    internal class InvalidDateException:Exception
     {
-        public string Title;
-        public User AssignedTo;
-        public string Status; 
+        public InvalidDateException(string message) : base(message)
+        {
+
+        }
     }
 }

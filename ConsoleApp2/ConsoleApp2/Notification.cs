@@ -8,15 +8,15 @@ namespace ConsoleApp2
 {
     internal class Notification
     {
-        private User _responsible;
-        private string _action;
-        private DateTime _created;
+        public User Responsible;
+        public string Action;
+        public DateTime Created;
 
         public Notification(User responsible, string action, DateTime created)
         {
-            _responsible = responsible;
-            _action = action;   
-            _created = created;
+            Responsible = responsible;
+            Action = action;   
+            Created = created;
         }
     }
 }

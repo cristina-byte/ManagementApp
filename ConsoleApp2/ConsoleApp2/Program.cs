@@ -8,27 +8,41 @@ namespace ConsoleApp2
         public static  List<User> _users=new List<User>();
         public static User _authentificatedUser;
        
-      
-
         static void LogIn()
         {
-            string email, password;
-            Console.WriteLine("Log In:");
-            Console.WriteLine("Email:");
-            email = Console.ReadLine();
-            Console.WriteLine("Password:");
-            password = Console.ReadLine();
-            _authentificatedUser = User.Authentificate(password, email,_users);
-            if (_authentificatedUser != null)
+            try
+            {
+                string email, password;
+                Console.WriteLine("Log In:");
+                Console.WriteLine("Email:");
+                email = Console.ReadLine();
+                if (email == null)
+                    throw new ArgumentNullException("The argument email is null");
+                Console.WriteLine("Password:");
+                password = Console.ReadLine();
+                if(password == null)    
+                    throw new ArgumentNullException("The argument password is null");
+                _authentificatedUser = User.Authentificate(password, email, _users);
                 Console.WriteLine("User " + _authentificatedUser.Name + " was authentificated!");
-            else
+            }
+
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+            catch (UserNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Authentification failed");
+            }
         }
 
-        static User getUserByEmail(string email){
-            foreach (User user in _users)
-                if (user.Email.Equals(email))
-                    return user;
+        static User GetUserByEmail(string email){
+            
+                foreach (User user in _users)
+                    if (user.Email.Equals(email))
+                        return user;
             return null;
         }
 
@@ -37,7 +51,7 @@ namespace ConsoleApp2
             //add users
             _users.Add(new User("Cristina Siscanu", "hardware", "cristinasiscanu30@gmail.com", 0749292012, 0986789067890, new DateTime(2000,4,15)));
             _users.Add(new User("Ion Tutu", "mypassword", "iontutu@gmail.com", 074896712, 1234543215678, new DateTime(1994, 3, 10)));
-
+        
             do{
                 Console.WriteLine("\n1.Log in your account");
                 Console.WriteLine("2.Iesire");
@@ -54,8 +68,11 @@ namespace ConsoleApp2
                             Console.WriteLine("3. Send a message");
                             Console.WriteLine("4. View all messages ");
                             Console.WriteLine("5. View messages that contain a specific word");
-                            Console.WriteLine("6. Log out");
-                           
+                            Console.WriteLine("6. Print all users");
+                            Console.WriteLine("7. Print messages sent on some date");
+                            Console.WriteLine("9. Log out");
+
+
                             Console.WriteLine("\nChoose an option:");
                             select = Int32.Parse(Console.ReadLine());
 
@@ -68,12 +85,26 @@ namespace ConsoleApp2
                                     string message;
                                     string email;
                                     Console.Write("Type the message:");
-                                    message=Console.ReadLine();
-                                    Console.WriteLine("The email of person you want to send the message:");
-                                    email = Console.ReadLine();
-                                    User destination = getUserByEmail(email);
-                                    if(destination!=null)
-                                    _authentificatedUser.SendMessage(new Message(message, DateTime.Now,destination));
+
+                                    try
+                                    {
+                                        message = Console.ReadLine();
+                                        if (message == null)
+                                            throw new ArgumentNullException("The argument message is null");
+                                        Console.WriteLine("The email of person you want to send the message:");
+                                        email = Console.ReadLine();
+                                        if (email == null)
+                                            throw new ArgumentNullException("The argument email is null");
+                                        User destination = GetUserByEmail(email);
+                                        if (destination != null)
+                                            _authentificatedUser.SendMessage(new Message(message, DateTime.Now, destination));
+                                    }
+
+                                    catch (ArgumentNullException ex)
+                                    {
+                                        Console.WriteLine(ex.Message);
+
+                                    }
                                     break;
 
                                 case 4:
@@ -81,24 +112,44 @@ namespace ConsoleApp2
                                         Console.WriteLine(msg.ToString());
                                     break;
 
-
                                 case 5:
                                     string word;
                                     Console.WriteLine("Type the word");
                                     word = Console.ReadLine();
-                                    Console.WriteLine("Messages taht contain the word "+word);
-                                    List<Message> messages=_authentificatedUser.searchInConversions(word);
-                                    foreach(Message m in messages)
-                                        Console.WriteLine(m.ToString());
+                                    try
+                                    {
+                                        List<Message> messages = _authentificatedUser.searchInConversions(word);
+                                        Console.WriteLine("Messages taht contain the word " + word);
+                                        foreach (Message m in messages)
+                                            Console.WriteLine(m.ToString());
+                                    }
+                                    catch(ArgumentNullException ex)
+                                    {
+                                        Console.WriteLine(ex.Message);
+                                    }
+                                    break;
+                                case 6:
+                                    Console.WriteLine(string.Join('\n',_users));
+                                    break;
+
+                                case 7:
+                                    try {
+                                        _authentificatedUser.prinMessagesSentOn(new DateTime(2023, 12, 4));
+                                    }
+
+                                    catch(InvalidDateException ex)
+                                    {
+                                        Console.WriteLine(ex.Message);
+                                    }                                  
                                     break;
                             }
 
-                        } while (select != 6);
+                        } while (select != 9);
                         break;
                   
                     case 2:break;  
                 } 
-            } while (option != 7);
+            } while (option != 2);
         }
     }
 }

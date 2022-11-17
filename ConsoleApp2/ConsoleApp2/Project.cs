@@ -8,24 +8,24 @@ namespace ConsoleApp2
 {
     internal class Project
     {
-        private string _name;
-        private DateTime _created;
-        private User _createdBy;
-        private List<User> _members;
-        private List<Task> _toDo;
+        public string Name { get; set; }
+        public DateTime Created { get; set; }
+        public User CreatedBy { get; set; }
+        public List<User> Members { get; set; }
+        public List<Task> ToDo { get; set; }
 
         public Project(string name, DateTime created, User createdBy, List<User> members, List<Task> toDo)
         {
-            _name = name;
-            _created = created;
-            _createdBy = createdBy;
-            _members = members;
-            _toDo = toDo;
+            Name = name;
+            Created = created;
+            CreatedBy = createdBy;
+            Members = members;
+            ToDo = toDo;
         }
 
         public void AddTask(Task task)
         {
-            _toDo.Add(task);
+            ToDo.Add(task);
         }
     }
 }

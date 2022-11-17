@@ -13,7 +13,7 @@ namespace ConsoleApp2
         }
 
         public override string ToString(){
-            return "This is an admin. He has special rights" + "\n" + "Name:" + _name + "\nEmail:" + _email + "\nPhone:" + _phone + "\nBorned at:" + _birthDay + "\nCnp:" + _cnp;
+            return $"\nName: _name \nEmail: _email \nPhone: _phone \nBorned at: _birthDay \nCnp:_cnp";
         }
     }
 }
