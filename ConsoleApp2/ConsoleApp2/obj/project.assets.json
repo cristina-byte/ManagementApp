@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
-      "projectName": "ConsoleApp2",
-      "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
+      "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\OrganizationManagementTool.csproj",
+      "projectName": "OrganizationManagementTool",
+      "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\OrganizationManagementTool.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\obj\\",
       "projectStyle": "PackageReference",
