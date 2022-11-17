@@ -42,8 +42,8 @@ namespace ConsoleApp2
             }
             else { time = interval.Days.ToString() + " days"; }
 
-            return $"time ago \nMessage:{Text} \nSent at: {new DateTimeOffset(Sent).ToString()} " +
-                   $"\nSent to:{ Destination.Name} \nSent from:{ CultureInfo.CurrentCulture.DisplayName}" +
+            return $"{time} ago \nMessage:{Text} \nSent at: {new DateTimeOffset(Sent).ToString()} " +
+                   $"\nSent to:{ Destination.Email} \nSent from:{ CultureInfo.CurrentCulture.DisplayName}" +
                    $" \nTime zone: { TimeZone.CurrentTimeZone.StandardName}";
         }
     }

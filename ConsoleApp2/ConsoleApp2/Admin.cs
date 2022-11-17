@@ -9,7 +9,14 @@ namespace ConsoleApp2
 {
     internal class Admin : User
     {
-        public Admin(string name, string password, string email, BigInteger phone, BigInteger cnp, DateTime birthDay) : base(name, password, email, phone, cnp, birthDay){
+        public Admin(string name, string password, string email, BigInteger phone, BigInteger cnp, DateTime birthDay) : base(name, password, email, phone, cnp, birthDay)
+        {
+
+        }
+
+        public Admin(string email,string password) : base(email, password)
+        {
+
         }
 
         public override string ToString(){

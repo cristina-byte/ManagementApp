@@ -19,7 +19,8 @@ namespace ConsoleApp2
         public List<Message> SentMessages { get; set; }
         public List<Message> ReceivedMessages { get; set; }
 
-        public User(string name,string password,string email, BigInteger phone,BigInteger cnp, DateTime birthDay){
+        public User(string name,string password,string email, BigInteger phone,BigInteger cnp, DateTime birthDay)
+        {
            SentMessages = new List<Message>();
            ReceivedMessages = new List<Message>();
            Name= name;
@@ -29,37 +30,57 @@ namespace ConsoleApp2
            Cnp= cnp;  
            BirthDay= birthDay;
         }
+
+        public User(string email,string password)
+        {
+            SentMessages = new List<Message>();
+            ReceivedMessages = new List<Message>();
+            Email = email;
+            Password = password;
+        }
      
         public override string ToString() => $"\nName:{Name} \nEmail:{Email} \nPhone:{Phone} \nBorned at:{BirthDay} \nCnp:{Cnp}";
 
-        public static User Authentificate(string password,string email,List<User> users){
+        public static User Authentificate(string email,string password,List<User> users)
+        {
             foreach (User user in users)
                 if (user.Password.Equals(password) && user.Email.Equals(email))
                     return user;
             return null;
         }
 
-        public static void Authentificate(string email){
+        public static void Authentificate(string email)
+        {
             Console.WriteLine("Authentification using a google account");
         }
 
-        public void SendMessage(Message message){
+        public void SendMessage(Message message)
+        {
             SentMessages.Add(message);
         }
 
-        public void prinMessagesSentOn(DateTime date)
+        public void PrintMessagesSentOn(DateTime date)
         {
             if (DateTime.Now < date)
                 throw new InvalidDateException("The action can't be done on this date");
 
             foreach(Message message in SentMessages)
             {
-                if (message.Sent.Equals(date))
-                    Console.WriteLine(message.ToString());
+                if (message.Sent.Year==date.Year && message.Sent.Month==date.Month && message.Sent.Day==date.Day)
+                    Console.WriteLine($"\n{message.ToString()}");
             }
         }
 
-        public List<Message> searchInConversions(string text){
+        public void ChangePassword(string newPassword,string confirmedPassword)
+        {
+            if (newPassword.Equals(confirmedPassword))
+            {
+                Password = newPassword;
+            }
+        }
+
+        public List<Message> SearchInConversions(string text)
+        {
             if(text==null)
                 throw new ArgumentNullException("The argument text is null");
 
@@ -69,7 +90,7 @@ namespace ConsoleApp2
                 string[] words = message.Text.Split(' ');
 
                 foreach(string word in words)
-                    if(word.Equals(text))
+                    if(word.Equals(text,StringComparison.CurrentCultureIgnoreCase))
                         messages.Add(message); 
             }
             return messages;
