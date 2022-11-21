@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj": {}
+    "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\MyProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj": {
+    "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\MyProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
-        "projectName": "ConsoleApp2",
-        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\ConsoleApp2.csproj",
+        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\MyProject.csproj",
+        "projectName": "MyProject",
+        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\MyProject.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\obj\\",
+        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

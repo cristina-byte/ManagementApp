@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\OrganizationManagementTool.csproj",
-      "projectName": "OrganizationManagementTool",
-      "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\OrganizationManagementTool.csproj",
+      "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\MyProject.csproj",
+      "projectName": "MyProject",
+      "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\MyProject.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\InternshipProject\\ProjectRepository\\Project\\ConsoleApp2\\ConsoleApp2\\obj\\",
+      "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\MyProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
