@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Domain.Entities.OportunityEntities
 {
     public class Oportunity
     {
@@ -19,8 +19,8 @@ namespace Domain.Entities
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
 
-        public Oportunity(int id,string title, DateTime createdAt,User postedBy,string description,
-            User organizer,List<Position> positions,DateTime startDate,DateTime endDate,string location)
+        public Oportunity(int id, string title, DateTime createdAt, User postedBy, string description,
+            User organizer, List<Position> positions, DateTime startDate, DateTime endDate, string location)
         {
             Id = id;
             Title = title;

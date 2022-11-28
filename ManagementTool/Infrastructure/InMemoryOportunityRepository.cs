@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.Oportunity;
+using Domain.Entities.OportunityEntities;
 
 namespace Infrastructure
 {
@@ -36,6 +36,11 @@ namespace Infrastructure
         public void Update(int id,Oportunity oportunity)
         {
             Oportunities.Where(oportunity => oportunity.Id == id).ToList<Oportunity>().ForEach(op => op = oportunity);
+        }
+
+        public void Update(Oportunity oportunity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
