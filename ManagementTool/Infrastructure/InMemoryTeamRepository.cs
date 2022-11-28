@@ -22,9 +22,14 @@ namespace Infrastructure
             _teams.Add(team);
         }
 
-        public void DeleteTeam(Team team)
+        public void Delete(Team team)
         {
             _teams.Remove(team);
+        }
+
+        public IEnumerable<Team> GetAll()
+        {
+            return _teams;
         }
 
         public Team GetByName(string name)
@@ -32,14 +37,9 @@ namespace Infrastructure
             return _teams.Find(t => t.Name.Equals(name));
         }
 
-        public IEnumerable<Team> GetTeams()
+        public void Update(int id, Team team)
         {
-            return _teams;
-        }
-
-        public void UpdateTeam(Team team)
-        {
-            
+            throw new NotImplementedException();
         }
     }
 }

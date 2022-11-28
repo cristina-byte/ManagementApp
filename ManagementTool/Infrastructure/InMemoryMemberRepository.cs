@@ -20,7 +20,7 @@ namespace Infrastructure
 
         public User GetById(int id)
         {
-            return Users.Find(user => user.Cnp == id);
+            return Users.Find(user => user.Id == id);
         }
 
         public IEnumerable<User> GetMembers()
@@ -28,7 +28,7 @@ namespace Infrastructure
             return Users;
         }
 
-        public void Update(User member)
+        public void Update(int id, User member)
         {
             
         }

@@ -37,10 +37,5 @@ namespace Infrastructure
         {
             Oportunities.Where(oportunity => oportunity.Id == id).ToList<Oportunity>().ForEach(op => op = oportunity);
         }
-
-        public void Update(Oportunity oportunity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
