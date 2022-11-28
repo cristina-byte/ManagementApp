@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Domain.Entities.TeamEntities;
 using Domain.Entities;
 
 namespace Infrastructure
@@ -11,9 +12,9 @@ namespace Infrastructure
         {
             _teams = new List<Team>()
             {
-                new Team("Internship"),
-                new Team("Interns"),
-                new Team("Amdaris")
+                new Team(1,"Internship",new User(1,"Cristina Siscanu")),
+                new Team(2,"Interns",new User(2,"Ion Tutu")),
+                new Team(3,"Amdaris",new User(1,"Cristina Siscanu"))
             };
         }
         public void Create(Team team)

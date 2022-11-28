@@ -1,4 +1,4 @@
-﻿using Task = Domain.Entities.Task;
+﻿using Task = Domain.Entities.TeamEntities.Task;
 
 namespace Application.Abstraction
 {

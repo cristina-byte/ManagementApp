@@ -10,18 +10,20 @@ namespace Domain.Entities
 {
     public class Message
     {
-        public DateTime Sent { get; set; }
-        public string Text { get; set; }
-        public User Destination { get; set; }
+        public int Id { get; private set; }
+        public DateTime SentAt { get; set; }
+        public string Content { get; set; }
+        public User Sender { get; set; }
 
-        public Message(string text, DateTime sent, User destination)
+        public Message(string content, DateTime sentAt, User sender)
         {
-            Text = text;
-            Sent = sent;
-            Destination = destination;
+            Id = Id;
+            Content = content;
+            SentAt = sentAt;
+            Sender = sender;
         }
 
-        public TimeSpan GetTimeByNow() => DateTime.Now - Sent;
+        public TimeSpan GetTimeByNow() => DateTime.Now - SentAt;
 
         public override string ToString()
         {
@@ -42,8 +44,8 @@ namespace Domain.Entities
             }
             else { time = interval.Days.ToString() + " days"; }
 
-            return $"{time} ago \nMessage:{Text} \nSent at: {new DateTimeOffset(Sent).ToString()} " +
-                   $"\nSent to:{Destination.Email} \nSent from:{CultureInfo.CurrentCulture.DisplayName}" +
+            return $"{time} ago \nMessage:{Content} \nSent at: {new DateTimeOffset(SentAt).ToString()} " +
+                   $"\nSent to:{Sender.Email} \nSent from:{CultureInfo.CurrentCulture.DisplayName}" +
                    $" \nTime zone: {TimeZone.CurrentTimeZone.StandardName}";
         }
     }

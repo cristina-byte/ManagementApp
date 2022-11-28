@@ -8,15 +8,17 @@ namespace Domain.Entities
 {
    public class Notification
     {
+        public int Id { get; private set; }
         public User Responsible;
         public string Action;
-        public DateTime Created;
+        public DateTime CreatedAt;
 
-        public Notification(User responsible, string action, DateTime created)
+        public Notification(int id,User responsible, string action, DateTime created)
         {
+            Id = id;
             Responsible = responsible;
             Action = action;
-            Created = created;
+            CreatedAt = created;
         }
     }
 }

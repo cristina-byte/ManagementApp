@@ -8,24 +8,24 @@ namespace Domain.Entities
 {
     public class Event
     {
-        private string _name;
-        private DateTime _date;
-        private string _address;
-        private string _description;
-        private List<User> _invited;
-        private List<User> _accepted;
-        private List<User> _rejected;
+        public int Id { get; private set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Address { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public List<CoreTeamPosition> CoreTeam { get; set; }
 
-        public Event(string name, DateTime date, string address, string description, 
-            List<User> invited, List<User> accepted, List<User> rejected)
+        public Event(int id,string name,string description,string address,DateTime startDate, 
+            DateTime endDate)
         {
-            _name = name;
-            _date = date;
-            _address = address;
-            _description = description;
-            _invited = invited;
-            _accepted = accepted;
-            _rejected = rejected;
+            Id = id;
+            Name = name;
+            Description = description;
+            Address = address;
+            StartDate = startDate;
+            EndDate = endDate;
+            CoreTeam = new List<CoreTeamPosition>();
         }
     }
 }
