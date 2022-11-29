@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "s2XmQb7EBH+OqqEHMNbxXtFiJabjY4YTPIgJz8ov5bb/1mJ8cfpa6mI0gRFhypH7IXtfuFrgDZQfZ0cgtdr0Ig==",
+  "dgSpecHash": "y1nta5frem98Ae1tFFGbHBLZoeeycAo549jD+CGFmfn4aUWAdQ3rSez6AUasfxTY6wUMpApzx4Ih6Mr8Pxup8A==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\mediatr\\11.1.0\\mediatr.11.1.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

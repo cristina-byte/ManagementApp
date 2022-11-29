@@ -6,6 +6,7 @@ namespace Infrastructure
     public class InMemoryOportunityRepository : IOportunityRepository
     {
         public List<Oportunity> Oportunities { get; set; }
+        public ApplicationContext Context { get; private set; }
 
         public InMemoryOportunityRepository()
         {

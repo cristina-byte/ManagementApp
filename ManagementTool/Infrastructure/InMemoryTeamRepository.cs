@@ -7,6 +7,7 @@ namespace Infrastructure
     public class InMemoryTeamRepository : ITeamRepository
     {
         private readonly List<Team> _teams;
+        public ApplicationContext Context { get; private set; }
 
         public InMemoryTeamRepository()
         {
@@ -17,6 +18,7 @@ namespace Infrastructure
                 new Team(3,"Amdaris",new User(1,"Cristina Siscanu"))
             };
         }
+
         public void Create(Team team)
         {
             _teams.Add(team);
@@ -37,9 +39,9 @@ namespace Infrastructure
             return _teams.Find(t => t.Name.Equals(name));
         }
 
-        public void Update(int id, Team team)
+        public void UpdateName(int id, string Name)
         {
-            throw new NotImplementedException();
+            _teams.Where(t => t.Id == id).ToList<Team>().ForEach(t => t.Name = Name);
         }
     }
 }

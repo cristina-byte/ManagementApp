@@ -7,6 +7,12 @@ namespace Infrastructure
     public class InMemoryMemberRepository : IMemberRepository
     {
         public List<User> Users { get; set; }
+        public ApplicationContext Context { get; private set; }
+
+        public InMemoryMemberRepository(ApplicationContext context)
+        {
+            Context = context;
+        }
 
         public void Create(User member)
         {

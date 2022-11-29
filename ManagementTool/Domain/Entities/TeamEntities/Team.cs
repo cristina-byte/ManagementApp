@@ -19,6 +19,12 @@ namespace Domain.Entities.TeamEntities
             Id = id;
             Name = name;
             Admin = admin;
+            CreatedAt = DateTime.Now;
+        }
+
+        public override string ToString()
+        {
+            return $"Name:{Name}\nAdmin:{Admin.Name}\nCreatedAt:{CreatedAt}";
         }
     }
 }
