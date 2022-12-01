@@ -5,9 +5,9 @@ namespace Application.Abstraction
     public interface ITeamRepository
     {
         public void Create(Team team);
-        public void UpdateName(int id, string Name);
-        public void Delete(Team team);
-        public Team GetByName(string name);
+        public void Update(int id, Team team);
+        public void Delete(int id);
+        public Team Get(int id);
         public IEnumerable<Team> GetAll();
     }
 }

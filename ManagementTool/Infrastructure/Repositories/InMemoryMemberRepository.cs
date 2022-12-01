@@ -2,7 +2,7 @@
 using Domain.Entities;
 
 
-namespace Infrastructure
+namespace Infrastructure.Repositories
 {
     public class InMemoryMemberRepository : IMemberRepository
     {
@@ -36,7 +36,7 @@ namespace Infrastructure
 
         public void Update(int id, User member)
         {
-            
+
         }
     }
 }

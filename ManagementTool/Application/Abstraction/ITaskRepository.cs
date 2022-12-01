@@ -6,7 +6,7 @@ namespace Application.Abstraction
     {
         public void Create(Task task);
         public void Update(int id, Task task);
-        public Task Delete(Task task);
+        public Task Delete(int id);
         public IEnumerable<Task> GetAll();
     }
 }

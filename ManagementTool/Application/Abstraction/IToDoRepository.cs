@@ -6,7 +6,7 @@ namespace Application.Abstraction
     {
         public void Create(ToDo toDoItem);
         public void Update(int id, ToDo toDoItem);
-        public void Delete(ToDo toDoItem);
+        public void Delete(int id);
         public IEnumerable<ToDo> GetAll();
     }
 }

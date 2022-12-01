@@ -9,9 +9,9 @@ namespace Domain.Entities
    public class Notification
     {
         public int Id { get; private set; }
-        public User Responsible;
-        public string Action;
-        public DateTime CreatedAt;
+        public User Responsible { get;set; }
+        public string Action { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public Notification(int id,User responsible, string action, DateTime created)
         {

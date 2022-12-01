@@ -1,11 +1,12 @@
 ﻿using Application.Abstraction;
-using Infrastructure;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Domain.Entities;
 using Domain.Entities.TeamEntities;
 using Application.Commands.TeamCommands;
 using Application.Queries.TeamQueries;
+using System.Reflection;
+using Infrastructure.Repositories;
 
 namespace Presentation
 {
@@ -38,7 +39,7 @@ namespace Presentation
         {
             //define a container for dependency injection
             var iOContainer = new ServiceCollection()
-                .AddMediatR(typeof (IMemberRepository))
+                .AddMediatR(Assembly.GetAssembly(typeof(CreateTeamCommand)))
                 .AddScoped<ITeamRepository, InMemoryTeamRepository>()
                 .BuildServiceProvider();
 

@@ -6,8 +6,8 @@ namespace Application.Abstraction
     {
         public void Create(Oportunity oportunity);
         public void Update(int id,Oportunity oportunity);
-        public void Delete(Oportunity oportunity);
-        public Oportunity GetById(int id);
+        public void Delete(int id);
+        public Oportunity Get(int id);
         public IEnumerable<Oportunity> GetAll();
     }
 }

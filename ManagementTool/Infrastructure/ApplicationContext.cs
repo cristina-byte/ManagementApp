@@ -6,7 +6,9 @@ using Task = Domain.Entities.TeamEntities.Task;
 
 namespace Infrastructure
 {
-    public class ApplicationContext : DbContext//it's virtual representation of the database
+    public class ApplicationContext : DbContext
+
+        //it's virtual representation of the database
     {
         //DbSet represents the collection of all entities in the context or that can be queried from the database, of a given type
 
@@ -32,10 +34,15 @@ namespace Infrastructure
             //connection database providing connection string
             optionsBuilder.UseSqlServer("Data Source=WINDOWS-7MAF9I6\\SQLEXPRESS;Initial Catalog=Project;Integrated Security=True").LogTo(Console.WriteLine, new[] {DbLoggerCategory.Database.Command.Name})
                 .EnableSensitiveDataLogging();
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Team>().ToTable("Teams");
+            modelBuilder.Entity<Team>().ToTable("Teams");
+            modelBuilder.Entity<Team>().ToTable("Teams");
+
 
         }
     }
