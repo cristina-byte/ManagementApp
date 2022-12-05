@@ -32,3 +32,5 @@ C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Pro
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Infrastructure\bin\Debug\net6.0\Domain.pdb
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Infrastructure\obj\Debug\net6.0\Infrastructure.csproj.CopyComplete
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Infrastructure\obj\Debug\net6.0\ref\Infrastructure.dll
+C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Infrastructure\bin\Debug\net6.0\Infrastructure.runtimeconfig.json
+C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Infrastructure\obj\Debug\net6.0\Infrastructure.genruntimeconfig.cache

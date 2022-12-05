@@ -10,13 +10,14 @@ namespace Domain.Entities.TeamEntities
     {
         public int Id { get; private set; }
         public string Name { get; set; }
-        public List<Task> Tasks { get; set; }
+        public ICollection<Task> Tasks { get; set; }
+        public Team Team { get; set; }
 
-        public ToDo(int id, string name, List<Task> tasks)
+        public ToDo(int id, string name)
         {
             Id = id;
             Name = name;
-            Tasks = tasks;
+            Tasks=new List<Task>();
         }
     }
 }

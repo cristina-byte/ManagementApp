@@ -16,7 +16,7 @@ namespace Application.Queries.TeamQueries
 
         public Task<Team> Handle(GetTeamQuery query, CancellationToken cancellationToken)
         {
-            var team = _teamRepository.GetByName(query.Name);
+            var team = _teamRepository.Get(query.Id);
             return Task.FromResult(team);
         }
     }

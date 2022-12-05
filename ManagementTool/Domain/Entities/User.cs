@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using Domain.Entities.OportunityEntities;
+using Domain.Entities.TeamEntities;
+using Task = Domain.Entities.TeamEntities.Task;
 
 namespace Domain.Entities
 {
@@ -8,14 +10,17 @@ namespace Domain.Entities
         public string Name { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public BigInteger Phone { get; set; }
-        public BigInteger Cnp { get; set; }
+        public string Phone { get; set; }
+        public string Cnp { get; set; }
         public DateTime BirthDay { get; set; }
-        public List<Chat> Conversations { get; set; }
-        
-
-        public User(int id,string name, string password, string email, BigInteger phone, 
-            BigInteger cnp, DateTime birthDay)
+        public ICollection<ChatMember> Conversations { get; set; }
+        public ICollection<MemberTeam> MemberTeams { get; set; }
+        public Calendar Calendar { get; set; }
+        public ICollection<UserTask> Tasks { get; set; }    
+        public ICollection<CoreTeamPosition> CoreTeamPositions { get; set; }    
+      
+        public User(int id,string name, string password, string email, string phone, 
+            string cnp, DateTime birthDay)
         {
             Id = id;
             Name = name;

@@ -11,14 +11,15 @@ namespace Domain.Entities.TeamEntities
         public int Id { get; private set; }
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
-        public List<User> Members { get; set; }
+        public ICollection<MemberTeam> MemberTeams { get; set; }
         public User Admin { get; private set; }
+        public ICollection<ToDo> ToDoList { get; set; }
+        public TeamChat Chat { get; set; }
 
-        public Team(int id, string name, User admin)
+        public Team(int id, string name)
         {
             Id = id;
             Name = name;
-            Admin = admin;
             CreatedAt = DateTime.Now;
         }
 

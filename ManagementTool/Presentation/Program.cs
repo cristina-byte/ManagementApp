@@ -24,7 +24,7 @@ namespace Presentation
 
         static async Task<Team> GetTeamByName()
         {
-            var team = await _mediator.Send(new GetTeamQuery { Name = "Christmas" });
+            var team = await _mediator.Send(new GetTeamQuery { Id = 34 });
             return team;
         }
 
@@ -40,18 +40,11 @@ namespace Presentation
             //define a container for dependency injection
             var iOContainer = new ServiceCollection()
                 .AddMediatR(Assembly.GetAssembly(typeof(CreateTeamCommand)))
-                .AddScoped<ITeamRepository, InMemoryTeamRepository>()
+                .AddScoped<ITeamRepository, TeamRepository>()
                 .BuildServiceProvider();
 
             //get the mediator service
            _mediator=iOContainer.GetRequiredService<IMediator>();
-
-            var teamId=CreateTeam();
-            Console.WriteLine(teamId.Result);
-
-            var team = GetTeamByName();
-            Console.WriteLine(team.Result.ToString());
-
         }
     }
 }

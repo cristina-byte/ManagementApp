@@ -31,5 +31,10 @@ namespace Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        Task ITaskRepository.Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

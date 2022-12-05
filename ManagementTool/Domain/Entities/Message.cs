@@ -8,13 +8,13 @@ namespace Domain.Entities
         public DateTime SentAt { get; set; }
         public string Content { get; set; }
         public User Sender { get; set; }
+        public Chat Chat { get; set; }
 
-        public Message(string content, DateTime sentAt, User sender)
+        public Message(string content, DateTime sentAt)
         {
             Id = Id;
             Content = content;
             SentAt = sentAt;
-            Sender = sender;
         }
 
         public TimeSpan GetTimeByNow() => DateTime.Now - SentAt;

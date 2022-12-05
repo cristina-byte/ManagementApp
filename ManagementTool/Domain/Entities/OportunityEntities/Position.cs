@@ -5,6 +5,7 @@
         public int Id { get; private set; }
         public string Name { get; private set; }
         public int LeftSits { get; set; }
+        public Oportunity Oportunity { get; set; }
 
         public Position(int id, string name, int leftSits)
         {

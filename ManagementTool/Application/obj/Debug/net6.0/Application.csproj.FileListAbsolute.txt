@@ -28,3 +28,5 @@ C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Pro
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\refint\Application.dll
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\Application.pdb
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\ref\Application.dll
+C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\bin\Debug\net6.0\Application.runtimeconfig.json
+C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\Application.genruntimeconfig.cache

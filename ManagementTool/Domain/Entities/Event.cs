@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Domain.Entities
 {
     public class Event
@@ -14,7 +9,7 @@ namespace Domain.Entities
         public string Address { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public List<CoreTeamPosition> CoreTeam { get; set; }
+        public ICollection<CoreTeamPosition> CoreTeamPositions { get; set; }
 
         public Event(int id,string name,string description,string address,DateTime startDate, 
             DateTime endDate)
@@ -25,7 +20,7 @@ namespace Domain.Entities
             Address = address;
             StartDate = startDate;
             EndDate = endDate;
-            CoreTeam = new List<CoreTeamPosition>();
+            CoreTeamPositions = new List<CoreTeamPosition>();
         }
     }
 }

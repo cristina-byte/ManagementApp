@@ -16,7 +16,7 @@ namespace Application.Commands.TeamCommands
         }
         public Task<int> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
         {
-            var team = new Team(command.Id, command.Name, command.Admin);
+            var team = new Team(command.Id, command.Name);
             _teamRepository.Create(team);
             return Task.FromResult(team.Id);
         }

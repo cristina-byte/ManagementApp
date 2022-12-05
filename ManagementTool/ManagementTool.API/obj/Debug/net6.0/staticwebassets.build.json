@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ZiFSRarO3fuCRko0foETQW3bxkKQErO+GKXraGZ7z0E=",
+  "Source": "ManagementTool.API",
+  "BasePath": "_content/ManagementTool.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
