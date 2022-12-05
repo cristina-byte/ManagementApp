@@ -1,12 +1,13 @@
 ﻿using Domain.Entities;
+using MediatR;
 
 namespace Application.Abstraction { 
     public interface IEventRepository
     {
-        public void Create(Event ev);
-        public void Update(int id,Event ev);
-        public void Delete(int id);
-        public Event Get(int id);
-        public IEnumerable<Event> GetAll();
+        public Task Create(Event ev);
+        public Task Update(int id,Event ev);
+        public Task Delete(int id);
+        public Task<Event> Get(int id);
+        public Task<IEnumerable<Event>> GetAll();
     }
 }

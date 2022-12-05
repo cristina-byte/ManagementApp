@@ -14,29 +14,29 @@ namespace Infrastructure.Repositories
             Context = context;
         }
 
-        public void Create(User member)
+        public async Task Create(User member)
         {
             Users.Add(member);
         }
 
-        public void Delete(User member)
+        public async Task Delete(User member)
         {
             Users.Remove(member);
         }
 
-        public User GetById(int id)
+        public async Task<User> GetById(int id)
         {
             return Users.Find(user => user.Id == id);
         }
 
-        public IEnumerable<User> GetMembers()
+        public async Task<IEnumerable<User>> GetMembers()
         {
             return Users;
         }
 
         public void Update(int id, User member)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

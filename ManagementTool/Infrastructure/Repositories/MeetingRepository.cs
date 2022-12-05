@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -12,30 +13,30 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create(Meeting meeting)
+        public async Task Create(Meeting meeting)
         {
-            _context.Meetings.Add(meeting);
+           await _context.Meetings.AddAsync(meeting);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var meeting = _context.Meetings.FirstOrDefault(me => me.Id == id);
+            var meeting = await _context.Meetings.FirstOrDefaultAsync(me => me.Id == id);
             _context.Meetings.Remove(meeting);
         }
 
-        public Meeting Get(int id)
+        public async Task<Meeting> Get(int id)
         {
-            return _context.Meetings.Where(m => m.Id == id).FirstOrDefault();
+            return await _context.Meetings.Where(m => m.Id == id).FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Meeting> GetAll()
+        public async Task<IEnumerable<Meeting>> GetAll()
         {
-            return _context.Meetings.ToList<Meeting>();
+            return await _context.Meetings.ToListAsync<Meeting>();
         }
 
-        public void Update(int id, Meeting meeting)
+        public async Task Update(int id, Meeting meeting)
         {
-           _context.Meetings.Where(m => m.Id == id).Select(m => meeting);
+           throw new NotImplementedException();
         }
     }
 }

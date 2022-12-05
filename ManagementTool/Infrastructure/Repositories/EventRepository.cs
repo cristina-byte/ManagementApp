@@ -1,5 +1,9 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 
 namespace Infrastructure.Repositories
 {
@@ -12,30 +16,33 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create(Event ev)
+        public async Task Create(Event ev)
         {
+            Console.WriteLine("You are in the create method");
             _context.Events.Add(ev);
+            Console.WriteLine("The event was added");
+            _context.SaveChanges();  
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var ev = _context.Events.Where(e => e.Id == id).FirstOrDefault();
+            var ev = await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
             _context.Events.Remove(ev);
         }
 
-        public Event Get(int id)
+        public async Task<Event> Get(int id)
         {
-            return _context.Events.Where(e => e.Id == id).FirstOrDefault();
+            return await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
         }
 
-        public IEnumerable<Event> GetAll()
+        public async Task<IEnumerable<Event>> GetAll()
         {
-            return _context.Events.ToList();
+            return await _context.Events.ToListAsync();
         }
 
-        public void Update(int id, Event ev)
+        public async Task Update(int id, Event ev)
         {
-            _context.Events.Where(e => e.Id == id).Select(e => ev);
+            throw new NotImplementedException();
         }
     }
 }

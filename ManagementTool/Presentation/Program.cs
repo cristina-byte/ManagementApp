@@ -7,6 +7,8 @@ using Application.Commands.TeamCommands;
 using Application.Queries.TeamQueries;
 using System.Reflection;
 using Infrastructure.Repositories;
+using Application.Commands.EventCommands;
+using Infrastructure;
 
 namespace Presentation
 {
@@ -35,16 +37,45 @@ namespace Presentation
             return Unit.Task.Result;
         }
 
+        static void CreateUser()
+        {
+
+        }
+
+        static  async void CreateEvent()
+        {
+          await _mediator.Send(new CreateEventCommand
+            {
+               
+                Name = "Christmas Charity",
+                Address = "FC Ripensia",
+                Description = "Lets help children",
+                StartDate = new DateTime(2022, 12, 12),
+                EndDate = new DateTime(2022, 12, 14)
+            });
+
+            Console.WriteLine("You are after send method");
+        }
+
         static  void Main(string[] args)
         {
             //define a container for dependency injection
             var iOContainer = new ServiceCollection()
-                .AddMediatR(Assembly.GetAssembly(typeof(CreateTeamCommand)))
-                .AddScoped<ITeamRepository, TeamRepository>()
+                .AddMediatR(typeof(CreateEventCommand))
+                .AddScoped(typeof(IEventRepository), typeof(EventRepository))
+                .AddScoped(typeof(ApplicationContext), typeof(ApplicationContext))
+                .AddScoped(typeof(IMeetingRepository), typeof(MeetingRepository))
+                .AddScoped(typeof(IMemberRepository), typeof(MemberRepository))
+                .AddScoped(typeof(IMessageRepository), typeof(MessageRepository))
+                .AddScoped(typeof(IOportunityRepository), typeof(OportunityRepository))
                 .BuildServiceProvider();
 
             //get the mediator service
            _mediator=iOContainer.GetRequiredService<IMediator>();
+
+            CreateEvent();
+            
+
         }
     }
 }

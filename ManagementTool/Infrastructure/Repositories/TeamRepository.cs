@@ -1,6 +1,8 @@
 ﻿using Application.Abstraction;
 using Domain.Entities.TeamEntities;
 using Domain.Entities;
+using Task = System.Threading.Tasks.Task;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -13,35 +15,28 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create(Team team)
+        public async Task Create(Team team)
         {
            _context.Teams.Add(team);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var team = _context.Teams.Where(t => t.Id == id).FirstOrDefault();
+            var team = await _context.Teams.Where(t => t.Id == id).FirstOrDefaultAsync();
             _context.Teams.Remove(team);
         }
 
-        public Team Get(int id)
+        public async Task<Team> Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Team> GetAll()
+        public async Task<IEnumerable<Team>> GetAll()
         {
-            return _context.Teams.ToList<Team>();
+            return await _context.Teams.ToListAsync<Team>();
         }
 
-       
-
-        public void Update(int id, string Name)
-        {
-            
-        }
-
-        public void Update(int id, Team team)
+        public async Task Update(int id, Team team)
         {
             throw new NotImplementedException();
         }

@@ -11,10 +11,9 @@ namespace Domain.Entities
         public DateTime EndDate { get; set; }
         public ICollection<CoreTeamPosition> CoreTeamPositions { get; set; }
 
-        public Event(int id,string name,string description,string address,DateTime startDate, 
+        public Event(string name,string description,string address,DateTime startDate, 
             DateTime endDate)
         {
-            Id = id;
             Name = name;
             Description = description;
             Address = address;

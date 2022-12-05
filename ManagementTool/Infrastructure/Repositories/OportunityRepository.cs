@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction;
 using Domain.Entities.OportunityEntities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -12,30 +13,30 @@ namespace Infrastructure.Repositories
             _context= context;
         }
 
-        public void Create(Oportunity oportunity)
+        public async Task Create(Oportunity oportunity)
         {
             _context.Oportunities.Add(oportunity); 
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var oportunity = _context.Oportunities.Where(op => op.Id == id).FirstOrDefault();
+            var oportunity = await _context.Oportunities.Where(op => op.Id == id).FirstOrDefaultAsync();
             _context.Oportunities.Remove(oportunity);
         }
 
-        public IEnumerable<Oportunity> GetAll()
+        public async Task <IEnumerable<Oportunity>> GetAll()
         {
-            return _context.Oportunities.ToList<Oportunity>();
+            return await _context.Oportunities.ToListAsync<Oportunity>();
         }
 
-        public Oportunity Get(int id)
+        public async Task<Oportunity> Get(int id)
         {
-            return _context.Oportunities.Where(op => op.Id == id).FirstOrDefault();
+            return await _context.Oportunities.Where(op => op.Id == id).FirstOrDefaultAsync();
         }
 
         public void Update(int id, Oportunity oportunity)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

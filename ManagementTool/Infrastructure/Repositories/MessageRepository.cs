@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -12,20 +13,20 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create(Message message)
+        public async Task Create(Message message)
         {
            _context.Messages.Add(message); 
         }
 
-        public IEnumerable<Message> GetAll()
+        public async Task<IEnumerable<Message>> GetAll()
         {
-            return _context.Messages.ToList<Message>();
+            return await _context.Messages.ToListAsync();
         }
 
-        public IEnumerable<Message> GetAllSentOn(DateTime date)
+        public async Task<IEnumerable<Message>> GetAllSentOn(DateTime date)
         {
-            return _context.Messages.Where(m => m.SentAt.Year == date.Year 
-            && m.SentAt.Month == date.Month && m.SentAt.Day == date.Day).ToList<Message>();
+            return await _context.Messages.Where(m => m.SentAt.Year == date.Year 
+            && m.SentAt.Month == date.Month && m.SentAt.Day == date.Day).ToListAsync<Message>();
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Domain.Entities.OportunityEntities;
+using MediatR;
 
 namespace Application.Abstraction
 {
     public interface IOportunityRepository
     {
-        public void Create(Oportunity oportunity);
-        public void Update(int id,Oportunity oportunity);
-        public void Delete(int id);
-        public Oportunity Get(int id);
-        public IEnumerable<Oportunity> GetAll();
+        public Task Create(Oportunity oportunity);
+        public Task Update(int id,Oportunity oportunity);
+        public Task Delete(int id);
+        public Task<Oportunity> Get(int id);
+        public Task<IEnumerable<Oportunity>> GetAll();
     }
 }

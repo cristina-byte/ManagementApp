@@ -1,5 +1,7 @@
 ﻿using Application.Abstraction;
 using Domain.Entities.TeamEntities;
+using Microsoft.EntityFrameworkCore;
+using Task = System.Threading.Tasks.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -12,23 +14,23 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create(ToDo toDoItem)
+        public async Task Create(ToDo toDoItem)
         {
             _context.ToDoLists.Add(toDoItem);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var toDo=_context.Teams.FirstOrDefault(t => t.Id == id);
+            var toDo= await _context.Teams.FirstOrDefaultAsync(t => t.Id == id);
             _context.Teams.Remove(toDo);
         }
 
-        public IEnumerable<ToDo> GetAll()
+        public async Task<IEnumerable<ToDo>> GetAll()
         {
-            return _context.ToDoLists.ToList<ToDo>();
+            return await _context.ToDoLists.ToListAsync<ToDo>();
         }
 
-        public void Update(int id, ToDo toDoItem)
+        public async Task Update(int id, ToDo toDoItem)
         {
             throw new NotImplementedException();
         }

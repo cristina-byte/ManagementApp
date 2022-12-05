@@ -1,5 +1,7 @@
 ﻿using Application.Abstraction;
+using Microsoft.EntityFrameworkCore;
 using Task = Domain.Entities.TeamEntities.Task;
+using Task2 = System.Threading.Tasks.Task;
 namespace Infrastructure.Repositories
 {
     public class TaskRepository : ITaskRepository
@@ -11,28 +13,23 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public void Create( Task task)
+        public async Task2 Create( Task task)
         {
             _context.Tasks.Add(task);
         }
 
-        public void Delete(int id)
+        public async Task2 Delete(int id)
         {
-            var task= _context.Tasks.FirstOrDefault(t => t.Id == id);
+            var task= await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
             _context.Tasks.Remove(task);
         }
 
-        public IEnumerable<Task> GetAll()
+        public async Task<IEnumerable<Task>> GetAll()
         {
-            return _context.Tasks.ToList<Task>();
+            return await _context.Tasks.ToListAsync<Task>();
         }
 
-        public void Update(int id,Task task)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task ITaskRepository.Delete(int id)
+        public async Task2 Update(int id,Task task)
         {
             throw new NotImplementedException();
         }
