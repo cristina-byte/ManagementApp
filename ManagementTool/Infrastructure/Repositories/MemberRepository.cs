@@ -1,42 +1,50 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
     public class MemberRepository : IMemberRepository
     {
-        public List<User> Users { get; set; }
-        public ApplicationContext Context { get; private set; }
+        private readonly ApplicationContext _context;
 
         public MemberRepository(ApplicationContext context)
         {
-            Context = context;
+            _context = context;
+        }
+
+        public async Task ChangePassword(int id, string password)
+        {
+            var member = await _context.Users.FindAsync(id);
+            member.Password = password;
         }
 
         public async Task Create(User member)
         {
-            Users.Add(member);
+           await _context.Users.AddAsync(member);
         }
 
-        public async Task Delete(User member)
+        public async Task Delete(int id)
         {
-            Users.Remove(member);
+            var member = await _context.Users.FindAsync(id);
+            _context.Users.Remove(member);
         }
 
         public async Task<User> GetById(int id)
         {
-            return Users.Find(user => user.Id == id);
+            return await _context.Users.FindAsync(id);
         }
 
         public async Task<IEnumerable<User>> GetMembers()
         {
-            return Users;
+            return await _context.Users.ToListAsync();
         }
 
-        public void Update(int id, User member)
+        public async Task Update(int id, User member)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

@@ -18,25 +18,23 @@ namespace Infrastructure.Repositories
 
         public async Task Create(Event ev)
         {
-            Console.WriteLine("You are in the create method");
-            _context.Events.Add(ev);
-            Console.WriteLine("The event was added");
-            _context.SaveChanges();  
+            await _context.Events.AddAsync(ev); 
         }
 
         public async Task Delete(int id)
         {
-            var ev = await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
+            var ev = await _context.Events.FindAsync(id);
             _context.Events.Remove(ev);
         }
 
         public async Task<Event> Get(int id)
-        {
-            return await _context.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
+        { 
+            var ev = await _context.Events.FindAsync(id);
+            return ev;
         }
 
         public async Task<IEnumerable<Event>> GetAll()
-        {
+        { 
             return await _context.Events.ToListAsync();
         }
 

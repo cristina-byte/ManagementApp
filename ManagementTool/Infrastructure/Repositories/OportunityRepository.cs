@@ -38,5 +38,10 @@ namespace Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        Task IOportunityRepository.Update(int id, Oportunity oportunity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

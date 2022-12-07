@@ -5,11 +5,11 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Application.Queries.TeamQueries
 {
-    public class GetTeamQueryHandler : IRequestHandler<GetTeamQuery, Team>
+    public class GetTeamHandler : IRequestHandler<GetTeamQuery, Team>
     {
         private ITeamRepository _teamRepository;
 
-        public GetTeamQueryHandler(ITeamRepository teamRepository)
+        public GetTeamHandler(ITeamRepository teamRepository)
         {
             _teamRepository = teamRepository;
         }
@@ -17,7 +17,7 @@ namespace Application.Queries.TeamQueries
         public Task<Team> Handle(GetTeamQuery query, CancellationToken cancellationToken)
         {
             var team = _teamRepository.Get(query.Id);
-            return Task.FromResult(team);
+            return team;
         }
     }
 }

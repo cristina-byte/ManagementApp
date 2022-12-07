@@ -6,11 +6,11 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Application.Commands.TeamCommands
 {
-    public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, int>
+    public class CreateTeamHandler : IRequestHandler<CreateTeamCommand, int>
     {
         private readonly ITeamRepository _teamRepository;
 
-        public CreateTeamCommandHandler(ITeamRepository teamRepository)
+        public CreateTeamHandler(ITeamRepository teamRepository)
         {
             _teamRepository = teamRepository;
         }

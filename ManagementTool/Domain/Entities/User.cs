@@ -19,10 +19,9 @@ namespace Domain.Entities
         public ICollection<UserTask> Tasks { get; set; }    
         public ICollection<CoreTeamPosition> CoreTeamPositions { get; set; }    
       
-        public User(int id,string name, string password, string email, string phone, 
+        public User(string name, string password, string email, string phone, 
             string cnp, DateTime birthDay)
         {
-            Id = id;
             Name = name;
             Password = password;
             Email = email;
@@ -31,10 +30,13 @@ namespace Domain.Entities
             BirthDay = birthDay;
         }
 
-        public User(int id,string name)
+        public User(string name,string phone,
+            string cnp, DateTime birthDay)
         {
-            Id = id;
             Name = name;
+            Phone = phone;
+            Cnp = cnp;
+            BirthDay = birthDay;
         }
 
         public override string ToString() => $"\nName:{Name} \nEmail:{Email} \nPhone:{Phone} " +
