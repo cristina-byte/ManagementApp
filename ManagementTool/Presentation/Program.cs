@@ -37,8 +37,6 @@ namespace Presentation
         {
             //get the mediator service
             _mediator = Init();
-            GetEventAsync();
-            Task.Delay(10000).Wait();
         }
 
         public static IMediator Init()
