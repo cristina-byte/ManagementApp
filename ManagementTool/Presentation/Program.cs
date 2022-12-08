@@ -30,20 +30,22 @@ namespace Presentation
         static async Task GetEventAsync()
         {
             var ev=await _mediator.Send(new GetEventQuery { Id = 1 }) ;
-            Console.WriteLine("Suntem aici"+ev.Name); 
+            Console.WriteLine(ev.Id + " "+ev.Name);
         }
 
         static  void Main(string[] args)
         {
             //get the mediator service
             _mediator = Init();
+            GetEventAsync();
+            Task.Delay(10000).Wait();
         }
 
         public static IMediator Init()
         {
             //define a container for dependency injection
             var iOContainer = new ServiceCollection()
-               .AddMediatR(typeof(CreateEventCommand))
+               .AddMediatR(typeof(CreateEventCommand).Assembly)
                .AddDbContext<ApplicationContext>()
                .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
                .AddScoped(typeof(IEventRepository), typeof(EventRepository))
@@ -51,6 +53,9 @@ namespace Presentation
                .AddScoped(typeof(IMemberRepository), typeof(MemberRepository))
                .AddScoped(typeof(IMessageRepository), typeof(MessageRepository))
                .AddScoped(typeof(IOportunityRepository), typeof(OportunityRepository))
+               .AddScoped(typeof(ITaskRepository),typeof(TaskRepository))
+               .AddScoped(typeof(ITeamRepository),typeof(TeamRepository))
+               .AddScoped(typeof(IToDoRepository),typeof(ToDoRepository))
                .BuildServiceProvider();
             return iOContainer.GetRequiredService<IMediator>();
         }

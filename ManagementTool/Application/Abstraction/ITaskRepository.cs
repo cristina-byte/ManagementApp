@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Task = Domain.Entities.TeamEntities.Task;
+﻿using Task = Domain.Entities.TeamEntities.Task;
 using Task2 = System.Threading.Tasks.Task;
 
 namespace Application.Abstraction

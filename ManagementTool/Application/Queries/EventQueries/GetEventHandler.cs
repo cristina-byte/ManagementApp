@@ -1,26 +1,21 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Queries.EventQueries
 {
     public class GetEventHandler : IRequestHandler<GetEventQuery, Event>
     {
-        private readonly IEventRepository _eventRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetEventHandler(IEventRepository eventRepository)
+        public GetEventHandler(IUnitOfWork unitOfWork)
         {
-            _eventRepository = eventRepository;
+            _unitOfWork=unitOfWork;
         }
 
         public async Task<Event> Handle(GetEventQuery request, CancellationToken cancellationToken)
-        { 
-           var ev= await _eventRepository.Get(request.Id);
+        {
+            var ev = await _unitOfWork.EventRepository.Get(request.Id);
             return ev;
         }
     }

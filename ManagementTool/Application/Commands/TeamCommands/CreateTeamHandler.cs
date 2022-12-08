@@ -6,19 +6,21 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Application.Commands.TeamCommands
 {
-    public class CreateTeamHandler : IRequestHandler<CreateTeamCommand, int>
+    public class CreateTeamHandler : IRequestHandler<CreateTeamCommand>
     {
-        private readonly ITeamRepository _teamRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateTeamHandler(ITeamRepository teamRepository)
+        public CreateTeamHandler(IUnitOfWork unitOfWork)
         {
-            _teamRepository = teamRepository;
+            _unitOfWork = unitOfWork;
         }
-        public Task<int> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
+ 
+        public async Task<Unit> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
         {
             var team = new Team(command.Id, command.Name);
-            _teamRepository.Create(team);
-            return Task.FromResult(team.Id);
+            await _unitOfWork.TeamRepository.Create(team);
+            await _unitOfWork.Save();
+            return Unit.Value;
         }
     }
 }

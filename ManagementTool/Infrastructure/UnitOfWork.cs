@@ -39,6 +39,11 @@ namespace Infrastructure
 
         public IToDoRepository ToDoRepository { get; private set; }
 
+        public async Task Save()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
         {
             _context.Dispose();

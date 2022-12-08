@@ -6,17 +6,19 @@ namespace Application.Commands.UserCommand
 {
     public class EditUserHandler : IRequestHandler<EditUserCommand>
     {
-        private readonly IMemberRepository _memberRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EditUserHandler(IMemberRepository memberRepository)
+        public EditUserHandler(IUnitOfWork unitOfWork)
         {
-            _memberRepository = memberRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(EditUserCommand request, CancellationToken cancellationToken)
         {
-           await _memberRepository.Update(request.Id,new User(request.Name,request.Phone,request.Cnp,request.BirthDay));
-            return Unit.Value;
+           await _unitOfWork.MemberRepository.Update(request.Id,new User(request.Name,request.Phone,
+               request.Cnp,request.BirthDay));
+           await _unitOfWork.Save();
+           return Unit.Value;
         }
     }
 }

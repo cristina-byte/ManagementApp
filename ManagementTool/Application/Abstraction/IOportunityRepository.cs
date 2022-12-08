@@ -1,5 +1,4 @@
 ﻿using Domain.Entities.OportunityEntities;
-using MediatR;
 
 namespace Application.Abstraction
 {

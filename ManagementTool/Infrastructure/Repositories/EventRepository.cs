@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories
 
         public async Task Create(Event ev)
         {
-            await _context.Events.AddAsync(ev); 
+            await _context.Events.AddAsync(ev);  
         }
 
         public async Task Delete(int id)
@@ -28,9 +28,9 @@ namespace Infrastructure.Repositories
         }
 
         public async Task<Event> Get(int id)
-        { 
-            var ev = await _context.Events.FindAsync(id);
-            return ev;
+        {
+            var e = await _context.Events.FindAsync(id);
+            return e;
         }
 
         public async Task<IEnumerable<Event>> GetAll()

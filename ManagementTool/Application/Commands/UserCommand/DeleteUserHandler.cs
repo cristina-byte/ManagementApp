@@ -10,16 +10,17 @@ namespace Application.Commands.UserCommand
 {
     public class DeleteUserHandler : IRequestHandler<DeleteUserCommand>
     {
-        private readonly IMemberRepository _memberRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteUserHandler(IMemberRepository memberRepository)
+        public DeleteUserHandler(IUnitOfWork unitOfWork)
         {
-            _memberRepository = memberRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            await _memberRepository.Delete(request.Id);
+            await _unitOfWork.MemberRepository.Delete(request.Id);
+            await _unitOfWork.Save();
             return Unit.Value;
         }
     }

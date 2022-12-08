@@ -1,5 +1,4 @@
 ﻿using Domain.Entities.TeamEntities;
-using MediatR;
 using Task = System.Threading.Tasks.Task;
 
 namespace Application.Abstraction

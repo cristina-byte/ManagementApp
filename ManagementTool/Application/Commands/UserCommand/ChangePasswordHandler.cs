@@ -10,11 +10,11 @@ namespace Application.Commands.UserCommand
 {
     public class ChangePasswordHandler : IRequestHandler<ChangePasswordCommand>
     {
-        private readonly IMemberRepository _memberRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ChangePasswordHandler(IMemberRepository memberRepository)
+        public ChangePasswordHandler(IUnitOfWork unitOfWork)
         {
-            _memberRepository = memberRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)

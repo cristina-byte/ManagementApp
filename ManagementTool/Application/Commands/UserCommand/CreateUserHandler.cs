@@ -10,20 +10,19 @@ namespace Application.Commands.UserCommand
 {
     public class CreateUserHandler : IRequestHandler<CreateUserCommand>
     {
-        private readonly IMemberRepository _memberRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CreateUserHandler(IMemberRepository memberRepository)
+        public CreateUserHandler(IUnitOfWork unitOfWork)
         {
-            _memberRepository = memberRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            if(request.Password.Equals(request.ConfirmedPassword))
-           await _memberRepository.Create(new Domain.Entities.User(request.Name, request.Password, request.Email,
-                request.Phone, request.Cnp, request.BirthDay));
-            return Unit.Value;
-            
+           await _unitOfWork.MemberRepository.Create(new Domain.Entities.User(request.Name, request.Password, 
+               request.Email,request.Phone, request.Cnp, request.BirthDay));
+            await _unitOfWork.Save();
+            return Unit.Value;  
         }
     }
 }
