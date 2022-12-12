@@ -15,9 +15,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Create(Team team)
+        public async Task CreateAsync(Team team)
         {
-           _context.Teams.Add(team);
+            
+           await _context.Teams.AddAsync(team);
         }
 
         public async Task Delete(int id)
@@ -26,19 +27,26 @@ namespace Infrastructure.Repositories
             _context.Teams.Remove(team);
         }
 
-        public async Task<Team> Get(int id)
+        public async Task<Team> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Teams.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Team>> GetAll()
+        public async Task<IEnumerable<Team>> GetAllAsync()
         {
             return await _context.Teams.ToListAsync<Team>();
         }
 
-        public async Task Update(int id, Team team)
+        public async Task UpdateNameAsync(int id, string name)
         {
-            throw new NotImplementedException();
+            var team = await _context.Teams.FindAsync(id);
+            team.Name = name;
+        }
+
+        public async Task AddMemberAsync(int userId, int teamId)
+        {
+            var teamMember = new MemberTeam(userId, teamId);
+            await _context.TeamMembers.AddAsync(teamMember);
         }
     }
 }

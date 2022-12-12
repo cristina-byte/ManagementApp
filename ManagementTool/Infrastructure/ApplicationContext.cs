@@ -11,6 +11,9 @@ namespace Infrastructure
         public DbSet<User> Users{get;set;}
         public DbSet<Team> Teams { get;set;}
         public DbSet<Chat> Conversations { get; set; }
+        public DbSet<ChatMember> ChatMembers { get; set; }
+
+        public DbSet<MemberTeam> TeamMembers { get; set; }
         public DbSet<ToDo> ToDoLists { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Oportunity> Oportunities { get; set; }
@@ -31,7 +34,6 @@ namespace Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<MemberTeam>().HasKey(mt => new { mt.MemberId, mt.TeamId });
 
             //UserTask configuration
@@ -54,7 +56,8 @@ namespace Infrastructure
             chatMember.HasOne(cm => cm.User)
                       .WithMany(m => m.Conversations)
                       .HasForeignKey(cm => cm.UserId);
+
+          
         }
-    }
-    
+    }   
 }

@@ -7,12 +7,11 @@ namespace Domain.Entities
         public string Title { get; set; }
         public string Address { get; set; }
         public DateTime Date { get; set; }
-        
         public Calendar Calendar { get; set; }
+        public User Organizator { get; set; }
 
-        public Meeting(int id,string title, string address, DateTime date)
+        public Meeting(string title, string address, DateTime date)
         {
-            Id = id;
             Title = title;
             Address = address;
             Date = date;

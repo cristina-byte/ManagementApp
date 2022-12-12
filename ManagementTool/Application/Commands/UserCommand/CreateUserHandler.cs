@@ -1,10 +1,6 @@
 ﻿using Application.Abstraction;
+using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands.UserCommand
 {
@@ -19,8 +15,10 @@ namespace Application.Commands.UserCommand
 
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-           await _unitOfWork.MemberRepository.Create(new Domain.Entities.User(request.Name, request.Password, 
+           await _unitOfWork.MemberRepository.Create(new User(request.Name, request.Password, 
                request.Email,request.Phone, request.Cnp, request.BirthDay));
+            //insert a calendar object after the user is created
+           // await _unitOfWork.CalendarRepository.Create(new Calendar());
             await _unitOfWork.Save();
             return Unit.Value;  
         }

@@ -9,9 +9,8 @@ namespace Domain.Entities.TeamEntities
         public string Status { get; set; }
         public ToDo ToDo { get; set; }
 
-        public Task(int id, string title,string status)
+        public Task(string title,string status)
         {
-            Id = id;
             Title = title;
             Status = status;
         }

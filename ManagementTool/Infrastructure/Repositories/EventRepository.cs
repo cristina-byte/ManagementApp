@@ -1,9 +1,6 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-
 
 namespace Infrastructure.Repositories
 {
@@ -16,7 +13,7 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Create(Event ev)
+        public async Task CreateAsync(Event ev)
         {
             await _context.Events.AddAsync(ev);  
         }
@@ -27,18 +24,30 @@ namespace Infrastructure.Repositories
             _context.Events.Remove(ev);
         }
 
-        public async Task<Event> Get(int id)
+        public async Task<Event> GetAsync(int id)
         {
             var e = await _context.Events.FindAsync(id);
             return e;
         }
 
-        public async Task<IEnumerable<Event>> GetAll()
+        public async Task<IEnumerable<Event>> GetAllAsync()
         { 
             return await _context.Events.ToListAsync();
         }
 
-        public async Task Update(int id, Event ev)
+        public async Task<IEnumerable<Event>> GetInProcessAsync()
+        {
+            DateTime date = DateTime.Now;
+            return await _context.Events.Where(ev => ev.StartDate < date && ev.EndDate > date).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Event>> GetUpcomingAsync()
+        {
+            DateTime date = DateTime.Now;
+            return await _context.Events.Where(ev => ev.StartDate > date).ToListAsync();
+        }
+
+        public async Task UpdateAsync(int id, Event ev)
         {
             throw new NotImplementedException();
         }

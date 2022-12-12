@@ -2,6 +2,7 @@
 using Domain.Entities.TeamEntities;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
+using Task2 = Domain.Entities.TeamEntities.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -14,9 +15,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Create(ToDo toDoItem)
+        public async Task CreateAsync(ToDo toDoItem)
         {
-            _context.ToDoLists.Add(toDoItem);
+            Console.WriteLine("Hello from repository");
+            await _context.ToDoLists.AddAsync(toDoItem);
         }
 
         public async Task Delete(int id)
@@ -25,12 +27,19 @@ namespace Infrastructure.Repositories
             _context.Teams.Remove(toDo);
         }
 
-        public async Task<IEnumerable<ToDo>> GetAll()
+        
+
+        public async Task<IEnumerable<ToDo>> GetAllAsync()
         {
             return await _context.ToDoLists.ToListAsync<ToDo>();
         }
 
-        public async Task Update(int id, ToDo toDoItem)
+        public async Task<ToDo> GetAsync(int id)
+        {
+            return await _context.ToDoLists.FindAsync(id);
+        }
+
+        public async Task UpdateAsync(int id, ToDo toDoItem)
         {
             throw new NotImplementedException();
         }

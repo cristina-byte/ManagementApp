@@ -13,9 +13,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Create(Meeting meeting)
+        public async Task CreateAsync(Calendar calendar, Meeting meeting)
         {
-           await _context.Meetings.AddAsync(meeting);
+            meeting.Calendar = calendar;
+            await _context.AddAsync(meeting);
         }
 
         public async Task Delete(int id)
@@ -24,17 +25,24 @@ namespace Infrastructure.Repositories
             _context.Meetings.Remove(meeting);
         }
 
-        public async Task<Meeting> Get(int id)
+        public async Task<Meeting> GetAsync(int id)
         {
             return await _context.Meetings.Where(m => m.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Meeting>> GetAll()
+        public async Task<IEnumerable<Meeting>> GetAllAsync(int calendarId)
         {
-            return await _context.Meetings.ToListAsync<Meeting>();
+            //get the calendar object
+            var c = await _context.Calendars.FindAsync(calendarId);
+
+            return await _context.Meetings.Join(
+                _context.Calendars,
+                meeting => meeting.Calendar.Id,
+                calendar => calendar.Id,
+                (meeting, calendar) => meeting).ToListAsync();
         }
 
-        public async Task Update(int id, Meeting meeting)
+        public async Task UpdateAsync(int id, Meeting meeting)
         {
            throw new NotImplementedException();
         }

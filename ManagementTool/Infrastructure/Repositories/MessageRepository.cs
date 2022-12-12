@@ -15,7 +15,7 @@ namespace Infrastructure.Repositories
 
         public async Task Create(Message message)
         {
-           _context.Messages.Add(message); 
+          await _context.Messages.AddAsync(message); 
         }
 
         public async Task<IEnumerable<Message>> GetAll()

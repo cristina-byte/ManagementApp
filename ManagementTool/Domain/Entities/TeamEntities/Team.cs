@@ -12,13 +12,12 @@ namespace Domain.Entities.TeamEntities
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public ICollection<MemberTeam> MemberTeams { get; set; }
-        public User Admin { get; private set; }
+        public User Admin { get; set; }
         public ICollection<ToDo> ToDoList { get; set; }
         public TeamChat Chat { get; set; }
 
-        public Team(int id, string name)
+        public Team(string name)
         {
-            Id = id;
             Name = name;
             CreatedAt = DateTime.Now;
         }

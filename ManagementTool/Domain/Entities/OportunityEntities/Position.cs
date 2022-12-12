@@ -7,9 +7,8 @@
         public int LeftSits { get; set; }
         public Oportunity Oportunity { get; set; }
 
-        public Position(int id, string name, int leftSits)
+        public Position( string name, int leftSits)
         {
-            Id = id;
             Name = name;
             LeftSits = leftSits;
         }

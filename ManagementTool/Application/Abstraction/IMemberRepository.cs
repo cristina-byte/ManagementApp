@@ -11,5 +11,6 @@ namespace Application.Abstraction
         public Task Delete(int id);
         public Task<User> GetById(int id);
         public Task<IEnumerable<User>> GetMembers();
+        public Task<string> GetPassword(int id);
     }
 }

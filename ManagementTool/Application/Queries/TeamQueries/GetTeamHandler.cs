@@ -15,7 +15,7 @@ namespace Application.Queries.TeamQueries
 
         public async Task<Team> Handle(GetTeamQuery query, CancellationToken cancellationToken)
         {
-            var team = await _unitOfWork.TeamRepository.Get(query.Id);
+            var team = await _unitOfWork.TeamRepository.GetAsync(query.Id);
             return team;
         }
     }

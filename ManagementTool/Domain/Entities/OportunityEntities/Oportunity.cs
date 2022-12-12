@@ -12,10 +12,9 @@ namespace Domain.Entities.OportunityEntities
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
 
-        public Oportunity(int id, string title, string description,
+        public Oportunity(string title, string description,
               DateTime startDate, DateTime endDate, string location)
         {
-            Id = id;
             Title = title;
             CreatedAt = DateTime.Now;
             Description = description;

@@ -19,6 +19,13 @@ namespace Application.Commands.UserCommand
 
         public async Task<Unit> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
+            //verifica mai intai daca parola actuala este corecta
+            //obtine parola actuala
+            var password = await _unitOfWork.MemberRepository.GetPassword(request.Id);
+            if(password.Equals(request.Password))
+            //daca este corecta o actualizeaza cu parola noua
+            await _unitOfWork.MemberRepository.ChangePassword(request.Id, request.NewPassword);
+            await _unitOfWork.Save();
             return Unit.Value;
         }
     }

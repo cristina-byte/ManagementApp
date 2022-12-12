@@ -8,7 +8,6 @@ namespace Application.Commands.EventCommands
     {
         private readonly IUnitOfWork _unitOfWork;
 
-
         public CreateEventHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -18,7 +17,7 @@ namespace Application.Commands.EventCommands
         {
             await _unitOfWork.EventRepository.Create(new Event(request.Name,request.Description,
                 request.Address,request.StartDate,request.EndDate));
-           // await _unitOfWork.Save();
+            await _unitOfWork.Save();
             return Unit.Value;
         }
     }

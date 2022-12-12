@@ -7,5 +7,12 @@
 
         public int TeamId { get; set; }
         public Team Team { get; set; }
+
+        public MemberTeam(int memberId,int teamId)
+        {
+            MemberId = memberId;
+            TeamId = teamId;
+        }
+
     }
 }

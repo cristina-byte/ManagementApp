@@ -13,9 +13,9 @@ namespace Infrastructure.Repositories
             _context= context;
         }
 
-        public async Task Create(Oportunity oportunity)
+        public async Task CreateAsync(Oportunity oportunity)
         {
-            _context.Oportunities.Add(oportunity); 
+            await _context.Oportunities.AddAsync(oportunity); 
         }
 
         public async Task Delete(int id)
@@ -24,22 +24,17 @@ namespace Infrastructure.Repositories
             _context.Oportunities.Remove(oportunity);
         }
 
-        public async Task <IEnumerable<Oportunity>> GetAll()
+        public async Task <IEnumerable<Oportunity>> GetAllAsync()
         {
             return await _context.Oportunities.ToListAsync<Oportunity>();
         }
 
-        public async Task<Oportunity> Get(int id)
+        public async Task<Oportunity> GetAsync(int id)
         {
             return await _context.Oportunities.Where(op => op.Id == id).FirstOrDefaultAsync();
         }
 
-        public void Update(int id, Oportunity oportunity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IOportunityRepository.Update(int id, Oportunity oportunity)
+        public void UpdateAsync(int id, Oportunity oportunity)
         {
             throw new NotImplementedException();
         }
