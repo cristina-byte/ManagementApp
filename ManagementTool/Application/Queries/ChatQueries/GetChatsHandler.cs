@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Abstraction;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace Application.Queries.ChatQueries
 {
-    public class GetChatsHandler : IRequestHandler<GetChatsCommand, IEnumerable<Chat>>
+    public class GetChatsHandler : IRequestHandler<GetChatsQuery, IEnumerable<Chat>>
     {
-        public Task<IEnumerable<Chat>> Handle(GetChatsCommand request, CancellationToken cancellationToken)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GetChatsHandler(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+        public Task<IEnumerable<Chat>> Handle(GetChatsQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

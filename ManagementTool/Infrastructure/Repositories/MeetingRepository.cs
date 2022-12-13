@@ -13,9 +13,9 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(Calendar calendar, Meeting meeting)
+        public async Task CreateAsync(Meeting meeting)
         {
-            meeting.Calendar = calendar;
+            
             await _context.AddAsync(meeting);
         }
 
@@ -30,21 +30,29 @@ namespace Infrastructure.Repositories
             return await _context.Meetings.Where(m => m.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Meeting>> GetAllAsync(int calendarId)
+        public async Task<IEnumerable<Meeting>> GetAllAsync(int userId)
         {
-            //get the calendar object
-            var c = await _context.Calendars.FindAsync(calendarId);
-
-            return await _context.Meetings.Join(
-                _context.Calendars,
-                meeting => meeting.Calendar.Id,
-                calendar => calendar.Id,
-                (meeting, calendar) => meeting).ToListAsync();
+            return await _context.MeetingInviteds.Where(mI=>mI.UserId==userId).Join(
+             _context.Meetings,
+              meetingInvited => meetingInvited.MeetingId,
+              meeting => meeting.Id,
+               (meetingInvited, meeting) => meeting).ToListAsync();
         }
 
         public async Task UpdateAsync(int id, Meeting meeting)
         {
            throw new NotImplementedException();
+        }
+
+        public async Task AddGuests(int meetingId,IEnumerable<int> guests)
+        {
+            List<MeetingInvited> meetingInviteds = new List<MeetingInvited>();
+            foreach(var guest in guests)
+            {
+                var meetingInvited = new MeetingInvited(guest, meetingId);
+                meetingInviteds.Add(meetingInvited);
+            }
+            await _context.MeetingInviteds.AddRangeAsync(meetingInviteds);
         }
     }
 }

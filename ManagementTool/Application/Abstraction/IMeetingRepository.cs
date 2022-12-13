@@ -4,10 +4,11 @@ namespace Application.Abstraction
 {
     public interface IMeetingRepository
     {
-        public Task Create(Meeting meeting);
-        public Task Update(int id,Meeting meeting);
+        public Task CreateAsync(Meeting meeting);
+        public Task UpdateAsync(int id,Meeting meeting);
         public Task Delete(int id);
-        public Task<Meeting> Get(int id);
-        public Task<IEnumerable<Meeting>> GetAll(int calendarId);
+        public Task<Meeting> GetAsync(int id);
+        public Task<IEnumerable<Meeting>> GetAllAsync(int userId);
+        public Task AddGuests(int meetingId,IEnumerable<int> guests);
     }
 }

@@ -4,8 +4,8 @@ namespace Application.Abstraction
 {
     public interface IMessageRepository
     {
-        public Task Create(Message message);
-        public Task<IEnumerable<Message>> GetAll();
-        public Task<IEnumerable<Message>> GetAllSentOn(DateTime date);
+        public Task CreateAsync(Message message);
+        public Task<IEnumerable<Message>> GetAllAsync();
+        public Task<IEnumerable<Message>> GetAllSentOnAsync(DateTime date);
     }
 }

@@ -10,6 +10,6 @@ namespace Application.Commands.TeamCommands
     public class AddMemberCommand:IRequest
     {
         public int TeamId { get; set; }
-        public int UserId { get; private set;}
+        public int UserId { get; set;}
     }
 }

@@ -15,9 +15,10 @@ namespace Domain.Entities
         public DateTime BirthDay { get; set; }
         public ICollection<ChatMember> Conversations { get; set; }
         public ICollection<MemberTeam> MemberTeams { get; set; }
-        public Calendar Calendar { get; set; }
         public ICollection<UserTask> Tasks { get; set; }    
-        public ICollection<CoreTeamPosition> CoreTeamPositions { get; set; }    
+        public ICollection<CoreTeamPosition> CoreTeamPositions { get; set; } 
+        public ICollection<MeetingInvited> MeetingInvited { get; set; }
+
       
         public User(string name, string password, string email, string phone, 
             string cnp, DateTime birthDay)

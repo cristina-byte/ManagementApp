@@ -21,10 +21,10 @@ namespace Application.Commands.OportunityCommands
 
         public async Task<Unit> Handle(AddOportunityPositionCommand request, CancellationToken cancellationToken)
         {
-            var oportunity = await _unitOfWork.OportunityRepository.Get(request.OportunityId);
+            var oportunity = await _unitOfWork.OportunityRepository.GetAsync(request.OportunityId);
             var position = new Position(request.Name, request.LeftSits);
             position.Oportunity = oportunity;
-            await _unitOfWork.OportunityPositionRepository.Create(position);
+            await _unitOfWork.OportunityPositionRepository.CreateAsync(position);
             await _unitOfWork.Save();
             return Unit.Value;
         }

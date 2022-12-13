@@ -15,7 +15,7 @@ namespace Application.Queries.EventQueries
 
         public async Task<Event> Handle(GetEventQuery request, CancellationToken cancellationToken)
         {
-            var ev = await _unitOfWork.EventRepository.Get(request.Id);
+            var ev = await _unitOfWork.EventRepository.GetAsync(request.Id);
             return ev;
         }
     }

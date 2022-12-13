@@ -29,7 +29,7 @@ namespace Infrastructure.Repositories
 
         public async Task<Team> GetAsync(int id)
         {
-            return await _context.Teams.FindAsync(id);
+            return await _context.Teams.Include(t => t.Chat).Where(t => t.Id == id).FirstAsync();
         }
 
         public async Task<IEnumerable<Team>> GetAllAsync()

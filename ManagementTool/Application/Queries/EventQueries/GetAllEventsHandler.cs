@@ -15,7 +15,7 @@ namespace Application.Queries.EventQueries
 
         public async Task<IEnumerable<Event>> Handle(GetAllEventsQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.EventRepository.GetAll();
+            return await _unitOfWork.EventRepository.GetAllAsync();
         }
     }
 }

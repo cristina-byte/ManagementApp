@@ -8,6 +8,10 @@ using Task = System.Threading.Tasks.Task;
 using Application.Commands.TeamCommands;
 using Application.Commands.UserCommand;
 using Application.Commands.OportunityCommands;
+using Application.Commands.MeetingCommands;
+using Application.Commands;
+using Microsoft.EntityFrameworkCore;
+using Application.Commands.ChatCommands;
 
 namespace Presentation
 {
@@ -15,26 +19,37 @@ namespace Presentation
     {
         private static IMediator _mediator;
 
+
+        public static void TestFunction()
+        {
+             _mediator.Send(new TestCommand { });
+           
+        }
+
         static  void Main(string[] args)
         {
-            //get the mediator service
             _mediator = Init();
+            //TestFunction();
+            PopulateDatabase();
+
             Task.Delay(90000).Wait();
         }
 
         public async static Task PopulateDatabase()
         {
-            await PopulateDatabaseWithToDo();
-            await PopulateDatabaseWithTasks();
+            Console.WriteLine("Hello from function");
+
+
+            await PopulateDatabaseWithEventCoreTeam();
+           
         }
 
         public static IMediator Init()
         {
-            //define a container for dependency injection
             var iOContainer = new ServiceCollection()
-               .AddMediatR(typeof(CreateEventCommand).Assembly)
                .AddDbContext<ApplicationContext>()
-               .AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork))
+               .AddMediatR(typeof(CreateUserCommand).Assembly)
+               .AddScoped<IUnitOfWork,UnitOfWork>()
                .AddScoped(typeof(IEventRepository), typeof(EventRepository))
                .AddScoped(typeof(IMeetingRepository), typeof(MeetingRepository))
                .AddScoped(typeof(IMemberRepository), typeof(MemberRepository))
@@ -43,17 +58,20 @@ namespace Presentation
                .AddScoped(typeof(ITeamRepository),typeof(TeamRepository))
                .AddScoped(typeof(IToDoRepository),typeof(ToDoRepository))
                .AddScoped(typeof(ITaskRepository), typeof(TaskRepository))
-               .AddScoped(typeof(ICalendarRepository), typeof(CalendarRepository))
                .AddScoped(typeof(IChatRepository), typeof(ChatRepository))
                .AddScoped(typeof(IMessageRepository), typeof(MessageRepository))
+               .AddScoped(typeof(IOportunityPositionRepository),typeof(OportunityPositionRepository))
+               .AddScoped(typeof(ICoreTeamPositionRepository),typeof(CoreTeamPositionRepository))
                .BuildServiceProvider();
             return iOContainer.GetRequiredService<IMediator>();
         }
 
         public async static Task PopulateDatabaseWithUsers()
         {
+            Console.WriteLine("Hello from function2");
+
             //addUsers
-           await _mediator.Send(new CreateUserCommand
+            await _mediator.Send(new CreateUserCommand
             {
                 Name = "Cristina Siscanu",
                 Password = "user45",
@@ -102,6 +120,9 @@ namespace Presentation
                 Cnp = "9086543278900",
                 BirthDay = new DateTime(1992, 8, 5)
             });
+
+           
+
         }
         public async static Task PopulateDatabaseWithTeams()
         {
@@ -110,6 +131,7 @@ namespace Presentation
                 Name = "Christmas Charity",
                 AdminId = 1
             });
+            Console.WriteLine("/////////////////////////////Hello after first team command");
 
            await _mediator.Send(new CreateTeamCommand
             {
@@ -140,31 +162,31 @@ namespace Presentation
 
            await _mediator.Send(new CreateToDoListCommand
             {
-                TeamId = 1,
+                TeamId = 7,
                 Name="Food"
             });
 
            await _mediator.Send(new CreateToDoListCommand
             {
-                TeamId = 1,
+                TeamId = 7,
                 Name = "Fundraising"
             });
 
            await _mediator.Send(new CreateToDoListCommand
             {
-                TeamId = 3,
+                TeamId = 8,
                 Name = "Fundraising"
             });
 
             await _mediator.Send(new CreateToDoListCommand
             {
-                TeamId = 3,
+                TeamId = 8,
                 Name = "Done"
             });
 
             await _mediator.Send(new CreateToDoListCommand
             {
-                TeamId = 2,
+                TeamId = 9,
                 Name = "Interviews"
             });
         }
@@ -174,35 +196,35 @@ namespace Presentation
             {
                 Title = "Make a list of needed products",
                 Status = "Unfinished",
-                ToDoId = 1
+                ToDoId = 2
             });
 
             await _mediator.Send(new CreateTaskCommand
             {
                 Title = "Make a budget",
                 Status = "Unfinished",
-                ToDoId = 1
+                ToDoId = 2
             });
 
             await _mediator.Send(new CreateTaskCommand
             {
                 Title = "Go shopping",
                 Status = "Unfinished",
-                ToDoId = 1
+                ToDoId = 2
             });
 
             await _mediator.Send(new CreateTaskCommand
             {
                 Title = "Cook food",
                 Status = "Unfinished",
-                ToDoId = 1
+                ToDoId = 2
             });
 
             await _mediator.Send(new CreateTaskCommand
             {
                 Title = "Make a scheduale",
                 Status = "Unfinished",
-                ToDoId = 5
+                ToDoId = 6
             });
         }
         public async static Task PopulateDatabaseWithEvents()
@@ -279,6 +301,174 @@ namespace Presentation
                 StartDate = new DateTime(2023, 3, 4,10,0,0),
                 EndDate = new DateTime(2023, 3, 4,15,0,0),
                 Location = "Timisoara"
+            });
+        }
+        public async static Task PopulateDatabaseWithTeamMembers()
+        {
+            await _mediator.Send(new AddMemberCommand
+            { 
+                UserId=1,
+                TeamId=7,
+            });
+
+            await _mediator.Send(new AddMemberCommand
+            {
+                UserId = 2,
+                TeamId = 7,
+            });
+
+            await _mediator.Send(new AddMemberCommand
+            {
+                UserId = 3,
+                TeamId = 7,
+            });
+
+            await _mediator.Send(new AddMemberCommand
+            {
+                UserId = 1,
+                TeamId = 8,
+            });
+
+            await _mediator.Send(new AddMemberCommand
+            {
+                UserId = 4,
+                TeamId = 10,
+            });
+        }
+        public async static Task PopulateDatabaseWithMeetings()
+        {
+            await _mediator.Send(new CreateMeetingCommand
+            {
+                Title = "Meeting with clients",
+                Address = "online",
+                StartDate = new DateTime(2022, 12, 14, 12, 00, 00),
+                EndDate=new DateTime(2022,12,14,14,30,00),
+                UserId=1
+            });
+
+            await _mediator.Send(new CreateMeetingCommand
+            {
+                Title = "Meeting with partners",
+                Address = "online",
+                StartDate = new DateTime(2022, 12, 13, 10, 00, 00),
+                EndDate = new DateTime(2022, 12, 13, 11, 30, 00),
+                UserId = 2
+            });
+
+            await _mediator.Send(new CreateMeetingCommand
+            {
+                Title = "Weekly Meeting",
+                Address = "online",
+                StartDate = new DateTime(2022, 12, 15, 12, 00, 00),
+                EndDate = new DateTime(2022, 12, 15, 14, 00, 00),
+                UserId = 3
+            });
+
+            await _mediator.Send(new CreateMeetingCommand
+            {
+                Title = "Meeting HR",
+                Address = "online",
+                StartDate = new DateTime(2022, 12, 18, 12, 00, 00),
+                EndDate = new DateTime(2022, 12, 18, 14, 30, 00),
+                UserId = 1
+            });
+
+            await _mediator.Send(new CreateMeetingCommand
+            {
+                Title = "Meeting with Managers",
+                Address = "online",
+                StartDate = new DateTime(2022, 12, 16, 12, 00, 00),
+                EndDate = new DateTime(2022, 12, 16, 14, 30, 00),
+                UserId = 4
+            });
+        }
+        public async static Task PopulateDatabaseWithMeetingInvited()
+        {
+            await _mediator.Send(new AddGuestsCommand
+            {
+                MeetingId=1,
+                UsersId=new List<int> { 1,2,3}
+            });
+
+            await _mediator.Send(new AddGuestsCommand
+            {
+                MeetingId = 2,
+                UsersId = new List<int> { 2,3,4}
+            });
+
+            await _mediator.Send(new AddGuestsCommand
+            {
+                MeetingId = 3,
+                UsersId = new List<int> { 2, 4 }
+            });
+        }
+        public async static Task PopulateDatabaseWithMessages()
+        {
+            await _mediator.Send(new SendMessageCommand
+            {
+                ChatId = 1,
+                Content = "Hello people!",
+                SenderId = 1,
+            });
+
+            await _mediator.Send(new SendMessageCommand
+            {
+                ChatId = 1,
+                Content = "Hello!",
+                SenderId = 2,
+            });
+
+            await _mediator.Send(new SendMessageCommand
+            {
+                ChatId = 1,
+                Content = "How are you!",
+                SenderId = 1,
+            });
+        }
+        public async static Task PopulateDatabaseWithOportunityRoles()
+        {
+            await _mediator.Send(new AddOportunityPositionCommand
+            {
+                OportunityId = 1,
+                Name = "Social Responsible",
+                LeftSits = 1
+            });
+
+            await _mediator.Send(new AddOportunityPositionCommand
+            {
+                OportunityId = 1,
+                Name = "Fundraising Responsible",
+                LeftSits = 3
+            });
+
+            await _mediator.Send(new AddOportunityPositionCommand
+            {
+                OportunityId = 3,
+                Name = "Cooking helper",
+                LeftSits = 2
+            });
+        }
+        public async static Task PopulateDatabaseWithEventCoreTeam()
+        {
+            await _mediator.Send(new AddCoreTeamPositionCommand
+            {
+                Name = "Gifts Responsible",
+                EventId = 1,
+                UserId = 2
+            });
+
+            await _mediator.Send(new AddCoreTeamPositionCommand
+            {
+                Name = "Gifts Responsible",
+                EventId = 1,
+                UserId = 2
+            });
+
+            await _mediator.Send(new AddCoreTeamPositionCommand
+            {
+                Name = "Trainer",
+                EventId = 5,
+                UserId = 3
             });
         }
     }

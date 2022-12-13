@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Create(Position position)
+        public async Task CreateAsync(Position position)
         {
             await _context.Positions.AddAsync(position);
         }

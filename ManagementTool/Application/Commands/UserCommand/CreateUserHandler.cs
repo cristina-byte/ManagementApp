@@ -15,10 +15,9 @@ namespace Application.Commands.UserCommand
 
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-           await _unitOfWork.MemberRepository.Create(new User(request.Name, request.Password, 
+            Console.WriteLine("Hello from command");
+           await _unitOfWork.MemberRepository.CreateAsync(new User(request.Name, request.Password, 
                request.Email,request.Phone, request.Cnp, request.BirthDay));
-            //insert a calendar object after the user is created
-           // await _unitOfWork.CalendarRepository.Create(new Calendar());
             await _unitOfWork.Save();
             return Unit.Value;  
         }

@@ -25,20 +25,39 @@ namespace Infrastructure.Repositories
             await _context.ChatMembers.AddAsync(chatMember);
         }
 
-        public async Task CreateAsync(Chat chat)
+        public async Task<Chat> CreateAsync(Chat chat)
         {
-            await _context.Conversations.AddAsync(chat);
+            var c=await _context.Chats.AddAsync(chat);
+            return c.Entity;
         }
 
         public async Task Delete(int id)
         {
-            var chat = await _context.Conversations.FindAsync(id);
-            _context.Conversations.Remove(chat);
+            var chat = await _context.Chats.FindAsync(id);
+            _context.Chats.Remove(chat);
         }
 
-        public Task<IEnumerable<Chat>> GetChatsAsync(int userId)
+        public async Task<IEnumerable<Chat>> GetChatsAsync(int userId)
         {
-            throw new NotImplementedException();
+            return await _context.Chats.GroupJoin(
+                _context.Teams,
+                chat => chat.Id,
+                team => team.Chat.Id,
+                (c, t) => new
+                {
+                    chat = c,
+                    team = t
+                }).Where(ob => ob.team != null).Select(ob => ob.chat).ToListAsync();
+        }
+
+        public async Task<Chat> GetByPrivatePair(int value)
+        {
+            return await _context.Chats.Where(c => c.PrivatePair != null && c.PrivatePair == value).FirstAsync();
+        }
+
+        public async Task<Chat> Get(int id)
+        {
+            return await _context.Chats.FindAsync(id);
         }
     }
 }

@@ -17,30 +17,6 @@ namespace Domain.Entities
             SentAt = sentAt;
         }
 
-        public TimeSpan GetTimeByNow() => DateTime.Now - SentAt;
-
-        public override string ToString()
-        {
-            TimeSpan interval = GetTimeByNow();
-            string time;
-
-            if (interval.Days < 1)
-            {
-                if (interval.Hours < 1)
-                {
-                    if (interval.Minutes < 1)
-                    {
-                        time = interval.Seconds.ToString() + " seconds";
-                    }
-                    else { time = interval.Minutes.ToString() + " minutes"; }
-                }
-                else { time = interval.Hours.ToString() + " hours"; }
-            }
-            else { time = interval.Days.ToString() + " days"; }
-
-            return $"{time} ago \nMessage:{Content} \nSent at: {new DateTimeOffset(SentAt).ToString()} " +
-                   $"\nSent to:{Sender.Email} \nSent from:{CultureInfo.CurrentCulture.DisplayName}" +
-                   $" \nTime zone: {TimeZone.CurrentTimeZone.StandardName}";
-        }
+        public TimeSpan GetTimeByNow() => DateTime.Now - SentAt;   
     }
 }

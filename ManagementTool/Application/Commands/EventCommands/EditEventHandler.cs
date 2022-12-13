@@ -19,7 +19,7 @@ namespace Application.Commands.EventCommands
 
         public async Task<Unit> Handle(EditEventCommand request, CancellationToken cancellationToken)
         {
-            _eventRepository.UpdateAsync(request.Id, new Domain.Entities.Event(request.Name, request.Description, request.Address, request.StartDate, request.EndDate));
+            await _eventRepository.UpdateAsync(request.Id, new Domain.Entities.Event(request.Name, request.Description, request.Address, request.StartDate, request.EndDate));
             return Unit.Value;
         }
     }

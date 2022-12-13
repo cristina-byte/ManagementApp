@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Abstraction
 {
-    public interface ICalendarRepository
+    public interface ICoreTeamPositionRepository
     {
-        public Task<Calendar> GetAsync(int userId);
-        public Task CreateAsync(Calendar calendar);
+        public Task CreateAsync(CoreTeamPosition position);
     }
 }

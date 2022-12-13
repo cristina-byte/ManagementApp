@@ -6,10 +6,10 @@ namespace Application.Abstraction
 {
     public interface IToDoRepository
     {
-        public Task Create(ToDo toDoItem);
-        public Task Update(int id, ToDo toDoItem);
+        public Task CreateAsync(ToDo toDoItem);
+        public Task UpdateAsync(int id, ToDo toDoItem);
         public Task Delete(int id);
-        public Task<ToDo> GetById(int id);
-        public Task<IEnumerable<ToDo>> GetAll();
+        public Task<ToDo> GetAsync(int id);
+        public Task<IEnumerable<ToDo>> GetAllAsync();
     }
 }

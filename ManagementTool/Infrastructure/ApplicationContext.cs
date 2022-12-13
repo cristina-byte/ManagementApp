@@ -10,16 +10,15 @@ namespace Infrastructure
     {
         public DbSet<User> Users{get;set;}
         public DbSet<Team> Teams { get;set;}
-        public DbSet<Chat> Conversations { get; set; }
+        public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMember> ChatMembers { get; set; }
-
         public DbSet<MemberTeam> TeamMembers { get; set; }
         public DbSet<ToDo> ToDoLists { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Oportunity> Oportunities { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<Calendar> Calendars { get; set; }
+        public DbSet<MeetingInvited> MeetingInviteds { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<CoreTeamPosition> CoreTeamPositions { get; set; }
@@ -57,7 +56,17 @@ namespace Infrastructure
                       .WithMany(m => m.Conversations)
                       .HasForeignKey(cm => cm.UserId);
 
-          
+            var meetingInvited = modelBuilder.Entity<MeetingInvited>();
+            meetingInvited.HasKey(mI => new { mI.UserId, mI.MeetingId });
+
+            meetingInvited.HasOne(mI => mI.User)
+                          .WithMany(u => u.MeetingInvited)
+                          .HasForeignKey(mI => mI.UserId);
+
+            meetingInvited.HasOne(mI => mI.Meeting)
+                            .WithMany(m => m.MeetingInvited)
+                            .HasForeignKey(mI => mI.MeetingId);
+
         }
     }   
 }

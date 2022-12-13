@@ -14,7 +14,7 @@ namespace Domain.Entities.TeamEntities
         public ICollection<MemberTeam> MemberTeams { get; set; }
         public User Admin { get; set; }
         public ICollection<ToDo> ToDoList { get; set; }
-        public TeamChat Chat { get; set; }
+        public Chat Chat { get; set; }
 
         public Team(string name)
         {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20221205124449_Migration1")]
-    partial class Migration1
+    [Migration("20221213085144_Migration4")]
+    partial class Migration4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,25 +25,6 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Calendar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MemberId")
-                        .IsUnique();
-
-                    b.ToTable("Calendars");
-                });
-
             modelBuilder.Entity("Domain.Entities.Chat", b =>
                 {
                     b.Property<int>("Id")
@@ -52,10 +33,6 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -63,10 +40,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Conversations");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Chat");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Domain.Entities.ChatMember", b =>
@@ -81,7 +54,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("ChatMember");
+                    b.ToTable("ChatMembers");
                 });
 
             modelBuilder.Entity("Domain.Entities.CoreTeamPosition", b =>
@@ -154,10 +127,13 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CalendarId")
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrganizatorId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -166,9 +142,24 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CalendarId");
+                    b.HasIndex("OrganizatorId");
 
                     b.ToTable("Meetings");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MeetingInvited", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeetingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "MeetingId");
+
+                    b.HasIndex("MeetingId");
+
+                    b.ToTable("MeetingInviteds");
                 });
 
             modelBuilder.Entity("Domain.Entities.Message", b =>
@@ -272,7 +263,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("TeamId");
 
-                    b.ToTable("MemberTeam");
+                    b.ToTable("TeamMembers");
                 });
 
             modelBuilder.Entity("Domain.Entities.TeamEntities.Task", b =>
@@ -312,6 +303,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AdminId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -322,6 +316,8 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AdminId");
+
+                    b.HasIndex("ChatId");
 
                     b.ToTable("Teams");
                 });
@@ -399,31 +395,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamChat", b =>
-                {
-                    b.HasBaseType("Domain.Entities.Chat");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("TeamId")
-                        .IsUnique()
-                        .HasFilter("[TeamId] IS NOT NULL");
-
-                    b.HasDiscriminator().HasValue("TeamChat");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Calendar", b =>
-                {
-                    b.HasOne("Domain.Entities.User", "Member")
-                        .WithOne("Calendar")
-                        .HasForeignKey("Domain.Entities.Calendar", "MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Member");
-                });
-
             modelBuilder.Entity("Domain.Entities.ChatMember", b =>
                 {
                     b.HasOne("Domain.Entities.Chat", "Chat")
@@ -464,13 +435,32 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Meeting", b =>
                 {
-                    b.HasOne("Domain.Entities.Calendar", "Calendar")
-                        .WithMany("Meetings")
-                        .HasForeignKey("CalendarId")
+                    b.HasOne("Domain.Entities.User", "Organizator")
+                        .WithMany()
+                        .HasForeignKey("OrganizatorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Calendar");
+                    b.Navigation("Organizator");
+                });
+
+            modelBuilder.Entity("Domain.Entities.MeetingInvited", b =>
+                {
+                    b.HasOne("Domain.Entities.Meeting", "Meeting")
+                        .WithMany("MeetingInvited")
+                        .HasForeignKey("MeetingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("MeetingInvited")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Meeting");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Message", b =>
@@ -541,7 +531,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Chat", "Chat")
+                        .WithMany()
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Admin");
+
+                    b.Navigation("Chat");
                 });
 
             modelBuilder.Entity("Domain.Entities.TeamEntities.ToDo", b =>
@@ -574,22 +572,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamChat", b =>
-                {
-                    b.HasOne("Domain.Entities.TeamEntities.Team", "Team")
-                        .WithOne("Chat")
-                        .HasForeignKey("Domain.Entities.TeamChat", "TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Team");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Calendar", b =>
-                {
-                    b.Navigation("Meetings");
-                });
-
             modelBuilder.Entity("Domain.Entities.Chat", b =>
                 {
                     b.Navigation("Messages");
@@ -600,6 +582,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Event", b =>
                 {
                     b.Navigation("CoreTeamPositions");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Meeting", b =>
+                {
+                    b.Navigation("MeetingInvited");
                 });
 
             modelBuilder.Entity("Domain.Entities.OportunityEntities.Oportunity", b =>
@@ -614,9 +601,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.TeamEntities.Team", b =>
                 {
-                    b.Navigation("Chat")
-                        .IsRequired();
-
                     b.Navigation("MemberTeams");
 
                     b.Navigation("ToDoList");
@@ -629,12 +613,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.Navigation("Calendar")
-                        .IsRequired();
-
                     b.Navigation("Conversations");
 
                     b.Navigation("CoreTeamPositions");
+
+                    b.Navigation("MeetingInvited");
 
                     b.Navigation("MemberTeams");
 

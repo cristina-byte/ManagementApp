@@ -17,10 +17,10 @@ namespace Application.Commands.TeamCommands
 
         public async Task<Unit> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
-            var toDo = await _unitOfWork.ToDoRepository.GetById(request.ToDoId);
+            var toDo = await _unitOfWork.ToDoRepository.GetAsync(request.ToDoId);
             var task = new Task2(request.Title, request.Status);
             task.ToDo = toDo;
-            await _unitOfWork.TaskRepository.Create(task);
+            await _unitOfWork.TaskRepository.CreateAsync(task);
             await _unitOfWork.Save();
             return Unit.Value;
         }

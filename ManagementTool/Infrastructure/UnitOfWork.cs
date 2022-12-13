@@ -14,9 +14,10 @@ namespace Infrastructure
         public UnitOfWork(ApplicationContext context,IEventRepository eventRepository, 
             IMeetingRepository meetingRepository, IMemberRepository memberRepository,IOportunityRepository oportunityRepository
             ,ITeamRepository teamRepository,IToDoRepository toDoRepository,ITaskRepository taskRepository,
-            ICalendarRepository calendarRepository,IChatRepository chatRepository,
-            IMessageRepository messageRepository,IOportunityPositionRepository oportunityPositionRepository)
+            IChatRepository chatRepository,
+            IMessageRepository messageRepository,IOportunityPositionRepository oportunityPositionRepository,ICoreTeamPositionRepository coreTeamPositionRepository)
         {
+            Console.WriteLine("Hello from unit of work");
             _context = context;
             EventRepository = eventRepository;
             MeetingRepository = meetingRepository;
@@ -25,10 +26,10 @@ namespace Infrastructure
             TaskRepository = taskRepository;
             TeamRepository = teamRepository;
             ToDoRepository = toDoRepository;
-            CalendarRepository = calendarRepository;
             ChatRepository = chatRepository;
             MessageRepository = messageRepository;
             OportunityPositionRepository = oportunityPositionRepository;
+            CoreTeamPositionRepository = coreTeamPositionRepository;
         }
 
         public IEventRepository EventRepository { get; private set; }
@@ -44,11 +45,11 @@ namespace Infrastructure
         public ITeamRepository TeamRepository { get; private set; }
 
         public IToDoRepository ToDoRepository { get; private set; }
-        public ICalendarRepository CalendarRepository { get; private set; }
+        
         public IChatRepository ChatRepository { get; private set; }
         public IMessageRepository MessageRepository { get; private set; }
-
         public IOportunityPositionRepository OportunityPositionRepository { get; private set; }
+        public ICoreTeamPositionRepository CoreTeamPositionRepository { get; private set; }
 
         public async Task Save()
         {

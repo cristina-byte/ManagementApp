@@ -13,17 +13,17 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task Create(Message message)
+        public async Task CreateAsync(Message message)
         {
           await _context.Messages.AddAsync(message); 
         }
 
-        public async Task<IEnumerable<Message>> GetAll()
+        public async Task<IEnumerable<Message>> GetAllAsync()
         {
             return await _context.Messages.ToListAsync();
         }
 
-        public async Task<IEnumerable<Message>> GetAllSentOn(DateTime date)
+        public async Task<IEnumerable<Message>> GetAllSentOnAsync(DateTime date)
         {
             return await _context.Messages.Where(m => m.SentAt.Year == date.Year 
             && m.SentAt.Month == date.Month && m.SentAt.Day == date.Day).ToListAsync<Message>();

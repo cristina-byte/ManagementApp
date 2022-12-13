@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Domain.Entities;
 using Domain.Entities.TeamEntities;
 using MediatR;
 
@@ -15,11 +16,14 @@ namespace Application.Commands.TeamCommands
  
         public async Task<Unit> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
         {
-            var user = await _unitOfWork.MemberRepository.GetById(command.AdminId);
+            var user = await _unitOfWork.MemberRepository.GetByIdAsync(command.AdminId);
             var team = new Team(command.Name);
             team.Admin = user;
-
-            await _unitOfWork.TeamRepository.Create(team);
+            var chat = new Chat();
+            chat.Name = team.Name;
+           Chat c= await _unitOfWork.ChatRepository.CreateAsync(chat);
+            team.Chat = c;
+            await _unitOfWork.TeamRepository.CreateAsync(team);
             await _unitOfWork.Save();
             return Unit.Value;
         }

@@ -21,10 +21,10 @@ namespace Application.Commands.UserCommand
         {
             //verifica mai intai daca parola actuala este corecta
             //obtine parola actuala
-            var password = await _unitOfWork.MemberRepository.GetPassword(request.Id);
+            var password = await _unitOfWork.MemberRepository.GetPasswordAsync(request.Id);
             if(password.Equals(request.Password))
             //daca este corecta o actualizeaza cu parola noua
-            await _unitOfWork.MemberRepository.ChangePassword(request.Id, request.NewPassword);
+            await _unitOfWork.MemberRepository.ChangePasswordAsync(request.Id, request.NewPassword);
             await _unitOfWork.Save();
             return Unit.Value;
         }

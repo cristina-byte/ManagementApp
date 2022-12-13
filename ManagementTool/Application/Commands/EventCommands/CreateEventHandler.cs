@@ -15,7 +15,7 @@ namespace Application.Commands.EventCommands
 
         public async Task<Unit> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.EventRepository.Create(new Event(request.Name,request.Description,
+            await _unitOfWork.EventRepository.CreateAsync(new Event(request.Name,request.Description,
                 request.Address,request.StartDate,request.EndDate));
             await _unitOfWork.Save();
             return Unit.Value;

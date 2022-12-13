@@ -9,7 +9,7 @@ namespace Application.Abstraction
 {
     public interface IOportunityPositionRepository
     {
-        public Task Create(Position position);
+        public Task CreateAsync(Position position);
 
         public Task Delete(int id);
 
