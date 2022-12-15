@@ -34,6 +34,11 @@ namespace Infrastructure.Repositories
             return await _context.Oportunities.Where(op => op.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<Oportunity>> GetOportunitiesPageAsync(int page)
+        {
+            return await _context.Oportunities.Skip((page - 1) * 3).Take(3).ToListAsync();
+        }
+
         public void UpdateAsync(int id, Oportunity oportunity)
         {
             throw new NotImplementedException();

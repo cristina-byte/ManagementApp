@@ -10,6 +10,6 @@ namespace Application.Abstraction
         public Task UpdateAsync(int id, ToDo toDoItem);
         public Task Delete(int id);
         public Task<ToDo> GetAsync(int id);
-        public Task<IEnumerable<ToDo>> GetAllAsync();
+        public Task<IEnumerable<ToDo>> GetAllAsync(int teamId);
     }
 }

@@ -10,5 +10,6 @@ namespace Application.Abstraction
     public interface ICoreTeamPositionRepository
     {
         public Task CreateAsync(CoreTeamPosition position);
+        public Task<IEnumerable<CoreTeamPosition>> GetAll(int userId);
     }
 }

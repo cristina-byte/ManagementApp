@@ -12,6 +12,15 @@ using Application.Commands.MeetingCommands;
 using Application.Commands;
 using Microsoft.EntityFrameworkCore;
 using Application.Commands.ChatCommands;
+using Application.Queries.EventQueries;
+using Application.Queries.UsersQueries;
+using Application.Queries.OportunityQueries;
+using Domain.Entities;
+using Domain.Entities.OportunityEntities;
+using Application.Queries.ChatQueries;
+using Domain.Entities.TeamEntities;
+using Application.Queries.TeamQueries;
+using Microsoft.Identity.Client;
 
 namespace Presentation
 {
@@ -19,29 +28,10 @@ namespace Presentation
     {
         private static IMediator _mediator;
 
-
-        public static void TestFunction()
-        {
-             _mediator.Send(new TestCommand { });
-           
-        }
-
         static  void Main(string[] args)
         {
             _mediator = Init();
-            //TestFunction();
-            PopulateDatabase();
-
             Task.Delay(90000).Wait();
-        }
-
-        public async static Task PopulateDatabase()
-        {
-            Console.WriteLine("Hello from function");
-
-
-            await PopulateDatabaseWithEventCoreTeam();
-           
         }
 
         public static IMediator Init()
@@ -66,6 +56,7 @@ namespace Presentation
             return iOContainer.GetRequiredService<IMediator>();
         }
 
+        //Populate database with dummy data
         public async static Task PopulateDatabaseWithUsers()
         {
             Console.WriteLine("Hello from function2");
@@ -471,5 +462,71 @@ namespace Presentation
                 UserId = 3
             });
         }
+
+        //Queries to database
+
+        //Take a page of events
+        public async Task<IEnumerable<Event>> GetEventsPage(int page)
+        {
+          return  await _mediator.Send(new GetAEventsPageQuery
+            {
+                Page = page
+            });
+        }
+
+        //Take a page of Oportunities
+        public async Task<IEnumerable<Oportunity>> GetOportunitiesPage(int page)
+        {
+            return await _mediator.Send(new GetOportunitiesPageQuery
+            {
+                Page = page
+            });
+        }
+
+        //Take a page of Members
+        public async Task<IEnumerable<User>> GetMembersPage(int page)
+        {
+           return await _mediator.Send(new GetUsersPageQuery
+            {
+                Page = page
+            });
+        }
+
+        //Get the messages of a chat
+        public async Task<IEnumerable<Message>> GetMessagesOfChat(int chatId)
+        {
+            return await _mediator.Send(new GetMessagesQuery
+            {
+                ChatId = chatId
+            });
+        }
+
+        //Get the roles of an user
+        public async Task<IEnumerable<CoreTeamPosition>> GetCoreTeamPositions(int userId)
+        {
+            return await _mediator.Send(new GetCoreTeamPositionsQuery
+            {
+                UserId = userId
+            });
+        }
+
+        //Get the most active volunteer
+        public async Task<User> GetMostActiveVolunteer()
+        {
+            return await _mediator.Send(new GetMostActiveMemberQuery
+            {
+
+            });
+        }
+
+        //Get a teams page
+        public async Task<IEnumerable<Team>> GetTeamsPage(int page)
+        {
+            return await _mediator.Send(new GetTeamsPageQuery
+            {
+                Page = page
+            });
+        }
+
     }
 }

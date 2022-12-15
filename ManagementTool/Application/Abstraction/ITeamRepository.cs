@@ -12,5 +12,6 @@ namespace Application.Abstraction
         public Task<Team> GetAsync(int id);
         public Task<IEnumerable<Team>> GetAllAsync();
         public Task AddMemberAsync(int memberId, int teamId);
+        public Task<IEnumerable<Team>> GetPageAsync(int page);
     }
 }

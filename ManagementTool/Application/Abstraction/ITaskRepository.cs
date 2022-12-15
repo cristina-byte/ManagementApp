@@ -9,6 +9,5 @@ namespace Application.Abstraction
         public Task Delete(int id);
         public Task<IEnumerable<Task2>> GetAllAsync(int toDoId);
         public Task<IEnumerable<Task2>> GetAllForMemberAsync(int memberId);
-
     }
 }

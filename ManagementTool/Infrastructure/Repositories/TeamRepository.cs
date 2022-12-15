@@ -48,5 +48,10 @@ namespace Infrastructure.Repositories
             var teamMember = new MemberTeam(userId, teamId);
             await _context.TeamMembers.AddAsync(teamMember);
         }
+
+        public async Task<IEnumerable<Team>> GetPageAsync(int page)
+        {
+            return await _context.Teams.Skip((page - 1) * 4).Take(4).ToListAsync();
+        }
     }
 }

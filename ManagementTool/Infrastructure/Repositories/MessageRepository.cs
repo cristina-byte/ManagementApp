@@ -18,9 +18,9 @@ namespace Infrastructure.Repositories
           await _context.Messages.AddAsync(message); 
         }
 
-        public async Task<IEnumerable<Message>> GetAllAsync()
+        public async Task<IEnumerable<Message>> GetAllAsync(int chatId)
         {
-            return await _context.Messages.ToListAsync();
+            return _context.Chats.Where(chat => chat.Id == chatId).SelectMany(chat => chat.Messages);
         }
 
         public async Task<IEnumerable<Message>> GetAllSentOnAsync(DateTime date)

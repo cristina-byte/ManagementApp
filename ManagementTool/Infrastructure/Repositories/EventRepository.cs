@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Infrastructure.Repositories
 {
@@ -51,5 +52,12 @@ namespace Infrastructure.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<Event>> GetEventsPageAsync(int page)
+        {
+            return await _context.Events.Skip((page - 1) * 3).Take(3).ToListAsync();
+        }
+
+        
     }
 }

@@ -29,9 +29,10 @@ namespace Infrastructure.Repositories
 
         
 
-        public async Task<IEnumerable<ToDo>> GetAllAsync()
+        public async Task<IEnumerable<ToDo>> GetAllAsync(int teamId)
         {
-            return await _context.ToDoLists.ToListAsync<ToDo>();
+            return await _context.Teams.Where(team => team.Id == teamId)
+                .SelectMany(team => team.ToDoList).ToListAsync();          
         }
 
         public async Task<ToDo> GetAsync(int id)

@@ -10,5 +10,6 @@ namespace Application.Abstraction {
         public Task<IEnumerable<Event>> GetAllAsync();
         public Task<IEnumerable<Event>> GetUpcomingAsync();
         public Task<IEnumerable<Event>> GetInProcessAsync();
+        public Task<IEnumerable<Event>> GetEventsPageAsync(int page);
     }
 }
