@@ -5,6 +5,6 @@ namespace Application.Queries.ChatQueries
 {
     public class GetChatsQuery:IRequest<IEnumerable<Chat>>
     {
-        public int UserId { get; private set; }
+        public int UserId { get;set; }
     }
 }

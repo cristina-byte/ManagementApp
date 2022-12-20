@@ -14,9 +14,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(Event ev)
+        public async Task<Event> CreateAsync(Event ev)
         {
-            await _context.Events.AddAsync(ev);  
+           var task= await _context.Events.AddAsync(ev);
+            return task.Entity;
         }
 
         public async Task Delete(int id)
@@ -27,7 +28,8 @@ namespace Infrastructure.Repositories
 
         public async Task<Event> GetAsync(int id)
         {
-            var e = await _context.Events.FindAsync(id);
+            var e = await _context.Events.Include(ev => ev.CoreTeamPositions)
+                .Where(ev => ev.Id == id).FirstAsync();
             return e;
         }
 
@@ -36,21 +38,28 @@ namespace Infrastructure.Repositories
             return await _context.Events.ToListAsync();
         }
 
-        public async Task<IEnumerable<Event>> GetInProcessAsync()
+        public async Task<IEnumerable<Event>> GetInProcessPageAsync(int page)
         {
             DateTime date = DateTime.Now;
-            return await _context.Events.Where(ev => ev.StartDate < date && ev.EndDate > date).ToListAsync();
+            return await _context.Events.Where(ev => ev.StartDate < date && ev.EndDate > date)
+                .Skip((page - 1) * 3).Take(3).ToListAsync();
         }
 
-        public async Task<IEnumerable<Event>> GetUpcomingAsync()
+        public async Task<IEnumerable<Event>> GetUpcomingPageAsync(int page)
         {
             DateTime date = DateTime.Now;
-            return await _context.Events.Where(ev => ev.StartDate > date).ToListAsync();
+            return await _context.Events.Where(ev => ev.StartDate > date)
+                .Skip((page - 1) * 3).Take(3).ToListAsync();
         }
 
         public async Task UpdateAsync(int id, Event ev)
         {
-            throw new NotImplementedException();
+            var evt = await _context.Events.FindAsync();
+            evt.Name = ev.Name;
+            evt.StartDate = ev.StartDate;
+            evt.EndDate = ev.EndDate;
+            evt.Description = ev.Description;
+            evt.Address = ev.Address;
         }
 
         public async Task<IEnumerable<Event>> GetEventsPageAsync(int page)

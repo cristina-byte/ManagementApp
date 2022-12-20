@@ -32,7 +32,8 @@ namespace Infrastructure.Repositories
 
         public async Task<User> GetByIdAsync(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users.Where(user => user.Id == id)
+                .Include(user => user.CoreTeamPositions).ThenInclude(ctp => ctp.Event).FirstAsync();
         }
 
         public async Task<IEnumerable<User>> GetMembersAsync()

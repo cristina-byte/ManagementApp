@@ -13,9 +13,10 @@ namespace Infrastructure.Repositories
             _context= context;
         }
 
-        public async Task CreateAsync(Oportunity oportunity)
+        public async Task<Oportunity> CreateAsync(Oportunity oportunity)
         {
-            await _context.Oportunities.AddAsync(oportunity); 
+            var task=await _context.Oportunities.AddAsync(oportunity);
+            return task.Entity;
         }
 
         public async Task Delete(int id)
@@ -31,7 +32,7 @@ namespace Infrastructure.Repositories
 
         public async Task<Oportunity> GetAsync(int id)
         {
-            return await _context.Oportunities.Where(op => op.Id == id).FirstOrDefaultAsync();
+            return await _context.Oportunities.Where(op => op.Id == id).Include(op=>op.Positions).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Oportunity>> GetOportunitiesPageAsync(int page)
@@ -39,14 +40,16 @@ namespace Infrastructure.Repositories
             return await _context.Oportunities.Skip((page - 1) * 3).Take(3).ToListAsync();
         }
 
-        public void UpdateAsync(int id, Oportunity oportunity)
-        {
-            throw new NotImplementedException();
-        }
 
-        Task IOportunityRepository.UpdateAsync(int id, Oportunity oportunity)
+        public async Task UpdateAsync(int id, Oportunity oportunity)
         {
-            throw new NotImplementedException();
+            var op = await _context.Oportunities.FindAsync(id);
+            op.Title = oportunity.Title;
+            op.Location = oportunity.Location;
+            op.StartDate = oportunity.StartDate;
+            op.EndDate = oportunity.EndDate;
+            op.ApplicationDeadline = oportunity.ApplicationDeadline;
+            op.Description = oportunity.Description;
         }
     }
 }

@@ -1,15 +1,17 @@
 using Application.Abstraction;
 using Application.Commands.UserCommand;
+using AutoMapper;
 using Infrastructure;
 using Infrastructure.Repositories;
+using ManagementTool.API;
+using ManagementTool.API.Dto;
+using ManagementTool.API.Profiles;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationContext>();
@@ -27,6 +29,7 @@ builder.Services.AddScoped(typeof(IMessageRepository), typeof(MessageRepository)
 builder.Services.AddScoped(typeof(IOportunityPositionRepository), typeof(OportunityPositionRepository));
 builder.Services.AddScoped(typeof(ICoreTeamPositionRepository), typeof(CoreTeamPositionRepository));
 builder.Services.AddMediatR(typeof(CreateUserCommand).Assembly);
+builder.Services.AddAutoMapper(typeof(AssemblyMarketPresentatio));
 
 
 var app = builder.Build();

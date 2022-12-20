@@ -27,12 +27,10 @@ namespace Infrastructure.Repositories
             _context.Teams.Remove(toDo);
         }
 
-        
-
         public async Task<IEnumerable<ToDo>> GetAllAsync(int teamId)
         {
             return await _context.Teams.Where(team => team.Id == teamId)
-                .SelectMany(team => team.ToDoList).ToListAsync();          
+                .SelectMany(team => team.ToDoList).Include(tD=>tD.Tasks).ThenInclude(task=>task.AssignedTo).ToListAsync();
         }
 
         public async Task<ToDo> GetAsync(int id)

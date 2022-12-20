@@ -17,9 +17,9 @@ namespace Application.Queries.ChatQueries
         {
             _unitOfWork = unitOfWork;
         }
-        public Task<IEnumerable<Chat>> Handle(GetChatsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Chat>> Handle(GetChatsQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _unitOfWork.ChatRepository.GetChatsAsync(request.UserId);
         }
     }
 }

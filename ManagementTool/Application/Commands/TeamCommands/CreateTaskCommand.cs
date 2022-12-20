@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Domain.Entities.TeamEntities;
+using MediatR;
 
 namespace Application.Commands.TeamCommands
 {

@@ -1,0 +1,27 @@
+﻿using Application.Abstraction;
+using Domain.Entities.TeamEntities;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Application.Queries.TeamQueries
+{
+    public class GetTasksHandler : IRequestHandler<GetTasksQuery, IEnumerable<ToDo>>
+    {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GetTasksHandler(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IEnumerable<ToDo>> Handle(GetTasksQuery request, CancellationToken cancellationToken)
+        {
+            var toDo = await _unitOfWork.ToDoRepository.GetAllAsync(request.TeamId);
+            return toDo;
+        }
+    }
+}

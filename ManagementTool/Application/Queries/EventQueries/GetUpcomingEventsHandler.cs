@@ -16,7 +16,7 @@ namespace Application.Queries.EventQueries
 
         public async Task<IEnumerable<Event>> Handle(GetUpcomingEventsQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.EventRepository.GetUpcomingAsync();
+            return await _unitOfWork.EventRepository.GetUpcomingPageAsync(request.Page);
         }
     }
 }

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Queries.EventQueries
+namespace Application.Queries.UserQueries
 {
-    public class GetEventsOrganizedByUserQuery:IRequest<IEnumerable<Event>>
+    public class GetUserQuery:IRequest<User>
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
     }
 }

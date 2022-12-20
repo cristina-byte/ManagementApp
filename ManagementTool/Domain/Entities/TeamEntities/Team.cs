@@ -24,7 +24,7 @@ namespace Domain.Entities.TeamEntities
 
         public override string ToString()
         {
-            return $"Name:{Name}\nAdmin:{Admin.Name}\nCreatedAt:{CreatedAt}";
+            return $"Name:{Name}\nCreatedAt:{CreatedAt}";
         }
     }
 }

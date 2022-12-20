@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Domain.Entities;
+using MediatR;
 
 namespace Application.Commands.EventCommands
 {
-    public class CreateEventCommand : IRequest
+    public class CreateEventCommand : IRequest<Event>
     {
         public string Name { get; set; }
         public string Description { get; set; }

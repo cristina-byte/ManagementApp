@@ -6,7 +6,7 @@ namespace Application.Abstraction
 {
     public interface ITeamRepository
     {
-        public Task CreateAsync(Team team);
+        public Task<Team> CreateAsync(Team team);
         public Task UpdateNameAsync(int id, string name);
         public Task Delete(int id);
         public Task<Team> GetAsync(int id);

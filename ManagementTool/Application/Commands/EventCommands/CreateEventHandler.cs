@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Commands.EventCommands
 {
-    public class CreateEventHandler : IRequestHandler<CreateEventCommand>
+    public class CreateEventHandler : IRequestHandler<CreateEventCommand,Event>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -13,12 +13,12 @@ namespace Application.Commands.EventCommands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(CreateEventCommand request, CancellationToken cancellationToken)
+        public async Task<Event> Handle(CreateEventCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.EventRepository.CreateAsync(new Event(request.Name,request.Description,
+           var ev= await _unitOfWork.EventRepository.CreateAsync(new Event(request.Name,request.Description,
                 request.Address,request.StartDate,request.EndDate));
             await _unitOfWork.Save();
-            return Unit.Value;
+            return ev;
         }
     }
 }

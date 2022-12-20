@@ -36,7 +36,7 @@ namespace Infrastructure.Repositories
              _context.Meetings,
               meetingInvited => meetingInvited.MeetingId,
               meeting => meeting.Id,
-               (meetingInvited, meeting) => meeting).ToListAsync();
+               (meetingInvited, meeting) => meeting).Include(meeting=>meeting.Organizator).ToListAsync();
         }
 
         public async Task UpdateAsync(int id, Meeting meeting)

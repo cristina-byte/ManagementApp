@@ -39,15 +39,9 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Chat>> GetChatsAsync(int userId)
         {
-            return await _context.Chats.GroupJoin(
-                _context.Teams,
-                chat => chat.Id,
-                team => team.Chat.Id,
-                (c, t) => new
-                {
-                    chat = c,
-                    team = t
-                }).Where(ob => ob.team != null).Select(ob => ob.chat).ToListAsync();
+            return await _context.Users.Where(user => user.Id == userId).SelectMany(user => user.Conversations)
+                .Include(c => c.Chat)
+                .Select(c => c.Chat).Where(c=>c.PrivatePair!=null).ToListAsync();
         }
 
         public async Task<Chat> GetByPrivatePair(int value)

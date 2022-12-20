@@ -10,5 +10,6 @@ namespace Application.Queries.EventQueries
 {
     public class GetInProcessEventsQuery:IRequest<IEnumerable<Event>>
     {
+        public int Page { get; set; }
     }
 }

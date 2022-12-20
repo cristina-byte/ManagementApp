@@ -9,8 +9,6 @@ using Application.Commands.TeamCommands;
 using Application.Commands.UserCommand;
 using Application.Commands.OportunityCommands;
 using Application.Commands.MeetingCommands;
-using Application.Commands;
-using Microsoft.EntityFrameworkCore;
 using Application.Commands.ChatCommands;
 using Application.Queries.EventQueries;
 using Application.Queries.UsersQueries;
@@ -20,7 +18,6 @@ using Domain.Entities.OportunityEntities;
 using Application.Queries.ChatQueries;
 using Domain.Entities.TeamEntities;
 using Application.Queries.TeamQueries;
-using Microsoft.Identity.Client;
 
 namespace Presentation
 {

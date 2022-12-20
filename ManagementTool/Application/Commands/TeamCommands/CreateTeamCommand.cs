@@ -1,10 +1,10 @@
 ﻿using Domain.Entities;
+using Domain.Entities.TeamEntities;
 using MediatR;
 namespace Application.Commands.TeamCommands
 {
-    public class CreateTeamCommand : IRequest
+    public class CreateTeamCommand : IRequest<Team>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public int AdminId { get; set; }
 

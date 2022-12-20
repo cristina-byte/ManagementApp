@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Application.Commands.EventCommands
 
         public async Task<Unit> Handle(EditEventCommand request, CancellationToken cancellationToken)
         {
-            await _eventRepository.UpdateAsync(request.Id, new Domain.Entities.Event(request.Name, request.Description, request.Address, request.StartDate, request.EndDate));
+            await _eventRepository.UpdateAsync(request.Id, new Event(request.Name, request.Description, request.Address, request.StartDate, request.EndDate));
             return Unit.Value;
         }
     }

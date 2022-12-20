@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Commands.TeamCommands
 {
-    public class CreateTeamHandler : IRequestHandler<CreateTeamCommand>
+    public class CreateTeamHandler : IRequestHandler<CreateTeamCommand,Team>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -14,7 +14,7 @@ namespace Application.Commands.TeamCommands
             _unitOfWork = unitOfWork;
         }
  
-        public async Task<Unit> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
+        public async Task<Team> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.MemberRepository.GetByIdAsync(command.AdminId);
             var team = new Team(command.Name);
@@ -23,9 +23,9 @@ namespace Application.Commands.TeamCommands
             chat.Name = team.Name;
            Chat c= await _unitOfWork.ChatRepository.CreateAsync(chat);
             team.Chat = c;
-            await _unitOfWork.TeamRepository.CreateAsync(team);
+            var addedTeam=await _unitOfWork.TeamRepository.CreateAsync(team);
             await _unitOfWork.Save();
-            return Unit.Value;
+            return addedTeam;
         }
     }
 }

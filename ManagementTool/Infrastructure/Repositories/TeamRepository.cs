@@ -15,10 +15,11 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(Team team)
+        public async Task<Team> CreateAsync(Team team)
         {
-            
-           await _context.Teams.AddAsync(team);
+
+            var task=await _context.Teams.AddAsync(team);
+            return task.Entity;
         }
 
         public async Task Delete(int id)
@@ -51,7 +52,7 @@ namespace Infrastructure.Repositories
 
         public async Task<IEnumerable<Team>> GetPageAsync(int page)
         {
-            return await _context.Teams.Skip((page - 1) * 4).Take(4).ToListAsync();
+            return await _context.Teams.Skip((page - 1) * 3).Take(3).ToListAsync();
         }
     }
 }
