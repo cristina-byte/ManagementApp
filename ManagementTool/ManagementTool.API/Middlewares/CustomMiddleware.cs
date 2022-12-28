@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 namespace ManagementTool.API.Middlewares
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class Middleware
+    public class CustomMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public Middleware(RequestDelegate next)
+        public CustomMiddleware(RequestDelegate next)
         {
+
             _next = next;
         }
 
@@ -24,9 +25,9 @@ namespace ManagementTool.API.Middlewares
     // Extension method used to add the middleware to the HTTP request pipeline.
     public static class MiddlewareExtensions
     {
-        public static IApplicationBuilder UseMiddleware(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseMiddleware1(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<Middleware>();
+            return builder.UseMiddleware<CustomMiddleware>();
         }
     }
 }

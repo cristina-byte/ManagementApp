@@ -12,9 +12,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(Task2 task)
+        public async Task<Task2> CreateAsync(Task2 task)
         {
-            await _context.Tasks.AddAsync(task);
+            var t=await _context.Tasks.AddAsync(task);
+            return t.Entity;
         }
 
         public Task Delete(int id)

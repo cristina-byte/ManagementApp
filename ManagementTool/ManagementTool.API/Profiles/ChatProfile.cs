@@ -8,8 +8,9 @@ namespace ManagementTool.API.Profiles
     {
         public ChatProfile()
         {
-            CreateMap<Chat, ChatDto>();
+            CreateMap<Chat, GetChatDto>();
             CreateMap<Message, MessageDto>();
+            CreateMap<Chat, ChatDto>();
         }
     }
 }

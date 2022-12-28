@@ -1,12 +1,11 @@
 using Application.Abstraction;
 using Application.Commands.UserCommand;
-using AutoMapper;
 using Infrastructure;
 using Infrastructure.Repositories;
 using ManagementTool.API;
-using ManagementTool.API.Dto;
-using ManagementTool.API.Profiles;
+using ManagementTool.API.Middlewares;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ApplicationContext>();
+builder.Services.AddDbContext<ApplicationContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IEventRepository), typeof(EventRepository));
 builder.Services.AddScoped(typeof(IMeetingRepository), typeof(MeetingRepository));
@@ -30,8 +30,7 @@ builder.Services.AddScoped(typeof(IOportunityPositionRepository), typeof(Oportun
 builder.Services.AddScoped(typeof(ICoreTeamPositionRepository), typeof(CoreTeamPositionRepository));
 builder.Services.AddMediatR(typeof(CreateUserCommand).Assembly);
 builder.Services.AddAutoMapper(typeof(AssemblyMarketPresentatio));
-
-
+builder.Services.Configure<MyApplicationSettings>(builder.Configuration.GetSection(nameof(MyApplicationSettings)));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,5 +45,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseMiddleware1();
 
 app.Run();

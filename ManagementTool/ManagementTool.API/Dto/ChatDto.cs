@@ -4,7 +4,6 @@
     {
         public int Id { get; private set; }
         public string Name { get; set; }
-        public string LastMessage { get; set; }
-        public ICollection<UserDto> Participants { get; set; }
+        public MessageDto LastMessage { get; set; }
     }
 }

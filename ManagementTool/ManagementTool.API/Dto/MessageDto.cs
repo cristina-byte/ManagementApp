@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using ManagementTool.API.Dto.UserDtos;
 
 namespace ManagementTool.API.Dto
 {

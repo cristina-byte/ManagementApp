@@ -30,12 +30,8 @@ namespace Infrastructure.Repositories
 
         public async Task<Team> GetAsync(int id)
         {
-            return await _context.Teams.Include(t => t.Chat).Where(t => t.Id == id).FirstAsync();
-        }
-
-        public async Task<IEnumerable<Team>> GetAllAsync()
-        {
-            return await _context.Teams.ToListAsync<Team>();
+            return await _context.Teams.Include(t => t.Admin).Include(t=>t.Chat)
+                .Include(t=>t.MemberTeams).ThenInclude(mt=>mt.Member).Where(t => t.Id == id).FirstAsync();
         }
 
         public async Task UpdateNameAsync(int id, string name)
@@ -50,9 +46,12 @@ namespace Infrastructure.Repositories
             await _context.TeamMembers.AddAsync(teamMember);
         }
 
-        public async Task<IEnumerable<Team>> GetPageAsync(int page)
+        public async Task<IEnumerable<Team>> GetTeamsForUser(int userId)
         {
-            return await _context.Teams.Skip((page - 1) * 3).Take(3).ToListAsync();
+            var teams = await _context.TeamMembers.Where(tm => tm.MemberId == userId)
+                .Include(tm => tm.Team).ThenInclude(team => team.Chat)
+                .Select(tm => tm.Team).ToListAsync();
+            return teams;
         }
     }
 }

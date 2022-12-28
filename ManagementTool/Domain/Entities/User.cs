@@ -7,6 +7,7 @@ namespace Domain.Entities
     public class User
     {
         public int Id { get;set; }
+        public string ImageLink { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
@@ -38,6 +39,13 @@ namespace Domain.Entities
             Phone = phone;
             Cnp = cnp;
             BirthDay = birthDay;
+        }
+
+        public User(string name,string phone,string imageLink)
+        {
+            Name = name;
+            Phone = phone;
+            ImageLink = imageLink;
         }
 
         public override string ToString() => $"\nName:{Name} \nEmail:{Email} \nPhone:{Phone} " +

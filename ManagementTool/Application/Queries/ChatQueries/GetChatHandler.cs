@@ -15,7 +15,7 @@ namespace Application.Queries.ChatQueries
 
         public async Task<Chat> Handle(GetChatQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.ChatRepository.Get(request.Id);
+            return await _unitOfWork.ChatRepository.GetById(request.Id);
         }
     }
 }

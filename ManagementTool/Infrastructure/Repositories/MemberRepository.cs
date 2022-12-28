@@ -33,7 +33,9 @@ namespace Infrastructure.Repositories
         public async Task<User> GetByIdAsync(int id)
         {
             return await _context.Users.Where(user => user.Id == id)
-                .Include(user => user.CoreTeamPositions).ThenInclude(ctp => ctp.Event).FirstAsync();
+                .Include(user => user.CoreTeamPositions
+                .Where(c => c.Event.EndDate < DateTime.Now))
+                .ThenInclude(ctp => ctp.Event).FirstAsync();
         }
 
         public async Task<IEnumerable<User>> GetMembersAsync()
@@ -68,9 +70,10 @@ namespace Infrastructure.Repositories
 
         public async Task UpdateAsync(int id, User member)
         {
-            throw new NotImplementedException();
-        }
-
-        
+            var user = await _context.Users.FindAsync(id);
+            user.ImageLink = member.ImageLink;
+            user.Name = member.Name;
+            user.Phone = member.Phone;
+        }   
     }
 }

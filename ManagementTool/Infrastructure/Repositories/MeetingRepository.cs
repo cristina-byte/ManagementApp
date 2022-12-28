@@ -13,10 +13,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(Meeting meeting)
+        public async Task<Meeting> CreateAsync(Meeting meeting)
         {
-            
-            await _context.AddAsync(meeting);
+            var task=await _context.AddAsync(meeting);
+            return task.Entity;
         }
 
         public async Task Delete(int id)
@@ -27,7 +27,8 @@ namespace Infrastructure.Repositories
 
         public async Task<Meeting> GetAsync(int id)
         {
-            return await _context.Meetings.Where(m => m.Id == id).FirstOrDefaultAsync();
+            return await _context.Meetings.Include(meeting=>meeting.Organizator).Include(meeting=>meeting.MeetingInvited)
+                .ThenInclude(mI=>mI.User).Where(m => m.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Meeting>> GetAllAsync(int userId)

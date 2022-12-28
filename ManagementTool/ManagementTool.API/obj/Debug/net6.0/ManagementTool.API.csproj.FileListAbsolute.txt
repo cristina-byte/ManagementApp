@@ -91,3 +91,5 @@ C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Pro
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\ManagementTool.API\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\ManagementTool.API\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\ManagementTool.API\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\ManagementTool.API\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\ManagementTool.API\bin\Debug\net6.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll

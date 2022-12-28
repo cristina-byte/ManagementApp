@@ -5,7 +5,7 @@ using System;
 
 namespace Application.Commands.MeetingCommands
 {
-    public class CreateMeetingHandler : IRequestHandler<CreateMeetingCommand>
+    public class CreateMeetingHandler : IRequestHandler<CreateMeetingCommand,Meeting>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -14,15 +14,16 @@ namespace Application.Commands.MeetingCommands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Unit> Handle(CreateMeetingCommand request, CancellationToken cancellationToken)
+        public async Task<Meeting> Handle(CreateMeetingCommand request, CancellationToken cancellationToken)
         {
             
             var user = await _unitOfWork.MemberRepository.GetByIdAsync(request.UserId);
             var meeting = new Meeting(request.Title, request.Address, request.StartDate,request.EndDate);
             meeting.Organizator = user;
-            await _unitOfWork.MeetingRepository.CreateAsync(meeting);
+            var createdMeeting=await _unitOfWork.MeetingRepository.CreateAsync(meeting);
+            await _unitOfWork.MeetingRepository.AddGuests(createdMeeting.Id, new List<int> {user.Id});
             await _unitOfWork.Save();
-            return Unit.Value;
+            return createdMeeting;
         }
     }
 }

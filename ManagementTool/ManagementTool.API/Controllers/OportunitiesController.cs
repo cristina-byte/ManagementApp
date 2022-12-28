@@ -3,7 +3,7 @@ using Application.Queries.OportunityQueries;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.OportunityEntities;
-using ManagementTool.API.Dto;
+using ManagementTool.API.Dto.OportunityDtos;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

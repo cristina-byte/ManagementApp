@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
-using ManagementTool.API.Dto;
+using ManagementTool.API.Dto.EventDtos;
 
 namespace ManagementTool.API.Profiles
 {

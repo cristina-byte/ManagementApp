@@ -1,4 +1,5 @@
-﻿using Application.Queries.ChatQueries;
+﻿using Application.Commands.ChatCommands;
+using Application.Queries.ChatQueries;
 using AutoMapper;
 using Domain.Entities;
 using ManagementTool.API.Dto;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementTool.API.Controllers
 {
-    [Route("api/users/{id}/[controller]")]
+    [Route("api/Users/{userId}/[controller]")]
     [ApiController]
     public class ChatsController : ControllerBase
     {
@@ -22,11 +23,11 @@ namespace ManagementTool.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllPrivate(int id)
+        public async Task<IActionResult> GetAllPrivate(int userId)
         {
-            var chats = await _mediator.Send(new GetChatsQuery { UserId = id });
-            //var chatsDto = _mapper.Map<List<ChatDto>>(chats);
-            return Ok(chats);
+            var chats = await _mediator.Send(new GetChatsQuery { UserId = userId });
+            var chatsDto = _mapper.Map<List<ChatDto>>(chats);
+            return Ok(chatsDto);
         }
 
         [HttpDelete]
@@ -43,14 +44,28 @@ namespace ManagementTool.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        [Route("{chatId}/messages")]
-        public async Task<IActionResult> GetMessages(int chatId)  //this can be a private or a group chat for a team
+        [HttpPost]
+        [Route("{chatId}")]
+        public async Task<IActionResult> AddMessage(int chatId, [FromBody]string message, int userId)
         {
-            var messages = await _mediator.Send(new GetMessagesQuery { ChatId = chatId });
-            var messagesDto = _mapper.Map<List<MessageDto>>(messages);
+            var chat = await _mediator.Send(new SendMessageCommand
+            {
+                ChatId = chatId,
+                Content = message,
+                SenderId = userId
+            });
 
-            return Ok(messagesDto);
+            var chatDto = _mapper.Map<GetChatDto>(chat);
+            return Ok(chatDto);
+        }
+
+        [HttpGet]
+        [Route("{chatId}")]
+        public async Task<IActionResult> GetById(int chatId)
+        {
+            var chat = await _mediator.Send(new GetChatQuery { Id = chatId });
+            var chatDto = _mapper.Map<GetChatDto>(chat);
+            return Ok(chatDto);
         }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Task = System.Threading.Tasks.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -49,9 +45,13 @@ namespace Infrastructure.Repositories
             return await _context.Chats.Where(c => c.PrivatePair != null && c.PrivatePair == value).FirstAsync();
         }
 
-        public async Task<Chat> Get(int id)
+        public async Task<Chat> GetById(int id)
         {
-            return await _context.Chats.FindAsync(id);
-        }
+            var chat = await _context.Chats.Where(chat => chat.Id == id)
+                .Include(chat => chat.Participants).ThenInclude(participant => participant.User)
+                .Include(chat => chat.Messages).
+                ThenInclude(message => message.Sender).FirstAsync();
+            return chat;
+        } 
     }
 }

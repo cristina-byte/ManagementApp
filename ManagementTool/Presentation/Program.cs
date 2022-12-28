@@ -293,31 +293,31 @@ namespace Presentation
         }
         public async static Task PopulateDatabaseWithTeamMembers()
         {
-            await _mediator.Send(new AddMemberCommand
+            await _mediator.Send(new AddMembersCommand
             { 
                 UserId=1,
                 TeamId=7,
             });
 
-            await _mediator.Send(new AddMemberCommand
+            await _mediator.Send(new AddMembersCommand
             {
                 UserId = 2,
                 TeamId = 7,
             });
 
-            await _mediator.Send(new AddMemberCommand
+            await _mediator.Send(new AddMembersCommand
             {
                 UserId = 3,
                 TeamId = 7,
             });
 
-            await _mediator.Send(new AddMemberCommand
+            await _mediator.Send(new AddMembersCommand
             {
                 UserId = 1,
                 TeamId = 8,
             });
 
-            await _mediator.Send(new AddMemberCommand
+            await _mediator.Send(new AddMembersCommand
             {
                 UserId = 4,
                 TeamId = 10,

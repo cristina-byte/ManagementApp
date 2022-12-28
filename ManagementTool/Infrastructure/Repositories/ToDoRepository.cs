@@ -15,10 +15,10 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task CreateAsync(ToDo toDoItem)
+        public async Task<ToDo> CreateAsync(ToDo toDoItem)
         {
-            Console.WriteLine("Hello from repository");
-            await _context.ToDoLists.AddAsync(toDoItem);
+            var task=await _context.ToDoLists.AddAsync(toDoItem);
+            return task.Entity;
         }
 
         public async Task Delete(int id)
@@ -30,7 +30,8 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<ToDo>> GetAllAsync(int teamId)
         {
             return await _context.Teams.Where(team => team.Id == teamId)
-                .SelectMany(team => team.ToDoList).Include(tD=>tD.Tasks).ThenInclude(task=>task.AssignedTo).ToListAsync();
+                .SelectMany(team => team.ToDoList).Include(tD=>tD.Tasks)
+                .ThenInclude(task=>task.AssignedTo).ToListAsync();
         }
 
         public async Task<ToDo> GetAsync(int id)

@@ -1,15 +1,17 @@
 ﻿using Application.Commands.TeamCommands;
+using Application.Queries.ChatQueries;
 using Application.Queries.TeamQueries;
 using AutoMapper;
 using Domain.Entities.TeamEntities;
 using ManagementTool.API.Dto;
+using ManagementTool.API.Dto.TeamDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace ManagementTool.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Users/{userId}/[controller]")]
     [ApiController]
     public class TeamsController : ControllerBase
     {
@@ -23,29 +25,47 @@ namespace ManagementTool.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPage([FromQuery]int page)
+        public async Task<IActionResult> GetUserTeams(int userId)
         {
-            Console.WriteLine("Hello from controller");
-           var ts = await _mediator.Send(new GetTeamsPageQuery{Page = page});
-            var teams = _mapper.Map<List<TeamDto>>(ts);
-            return Ok(teams);
+            var teams = await _mediator.Send(new GetUserTeamsQuery { UserId = userId });
+            var teamsDto = _mapper.Map<List<TeamDto>>(teams);
+            return Ok(teamsDto);
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetTeamById(int id)
+        [Route("{teamId}/Chat")]
+        public async Task<IActionResult> GetTeamChat(int teamId)
         {
-            var t = await _mediator.Send(new GetTeamQuery{Id = id});
-            var team = _mapper.Map<TeamDto>(t);
-            return Ok(team);
+            var team = await _mediator.Send(new GetTeamQuery { Id = teamId });
+            var chat = await _mediator.Send(new GetChatQuery { Id = team.Chat.Id});
+            var chatDto = _mapper.Map<GetChatDto>(chat);
+            return Ok(chatDto);
         }
+
+        [HttpGet]
+        [Route("{teamId}")]
+        public async Task<IActionResult> GetById(int teamId)
+        {
+            var team = await _mediator.Send(new GetTeamQuery { Id=teamId});
+            var teamDto = _mapper.Map<GetTeamDto>(team);
+            return Ok(teamDto);
+        }
+
+        [HttpPut]
+        [Route("{id}/members")]
+        public async Task<IActionResult> AddMembers(int id,ICollection<int> usersId)
+        {
+            await _mediator.Send(new AddMembersCommand { UsersId = usersId, TeamId = id });
+            return Ok();
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> CreateTeam([FromBody]PostTeamDto team)
         {
            var addedTeam= await _mediator.Send(new CreateTeamCommand{Name = team.Name,AdminId = team.AdminId});
             Console.WriteLine(addedTeam);
-            return CreatedAtAction(nameof(GetTeamById), new {Id = addedTeam.Id }, addedTeam); 
+            return CreatedAtAction(nameof(GetById), new {Id = addedTeam.Id }, addedTeam); 
         }
 
         [HttpDelete]

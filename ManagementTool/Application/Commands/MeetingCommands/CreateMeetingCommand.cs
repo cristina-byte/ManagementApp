@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.MeetingCommands
 {
-    public class CreateMeetingCommand:IRequest
+    public class CreateMeetingCommand:IRequest<Meeting>
     {
         public string Title { get; set; }
         public string Address { get; set; }

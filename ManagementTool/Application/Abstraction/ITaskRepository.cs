@@ -4,7 +4,7 @@ namespace Application.Abstraction
 {
     public interface ITaskRepository
     {
-        public Task CreateAsync(Task2 task);
+        public Task<Task2> CreateAsync(Task2 task);
         public Task UpdateAsync(int id, Task2 task);
         public Task Delete(int id);
         public Task<IEnumerable<Task2>> GetAllAsync(int toDoId);

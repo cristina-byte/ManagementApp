@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TMVV+Gb7alKvk75iS8d8Z6Njj1GOVMNOdRoYWFhdYtIUS799v31GMIR08jVDB6dd0Gj+4v8Vk+dd2xvUvuYYzQ==",
+  "dgSpecHash": "nxSjTJBYudd8jTOg1scyd4UG47gSEPXmJTi7ZL3cQgnwHrkviRykvkIZKOmzBxuDfe7wWgfgMZL8fOY7VxJcpQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
@@ -25,7 +25,10 @@
     "C:\\Users\\user\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\user\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
   ],
   "logs": []
 }

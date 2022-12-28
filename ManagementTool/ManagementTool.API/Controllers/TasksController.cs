@@ -2,14 +2,13 @@
 using Application.Queries.TeamQueries;
 using AutoMapper;
 using Domain.Entities.TeamEntities;
-using ManagementTool.API.Dto;
+using ManagementTool.API.Dto.TeamDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Task2 = Domain.Entities.TeamEntities.Task;
 
 namespace ManagementTool.API.Controllers
 {
-    [Route("api/teams/{id}/[controller]")]
+    [Route("api/Users/{userId}/Teams/{teamId}/[controller]")]
     [ApiController]
     public class TasksController : ControllerBase
     {
@@ -23,23 +22,24 @@ namespace ManagementTool.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetToDoLists(int id)
+        public async Task<IActionResult> GetTeamTasks(int teamId)
         {
-            var tasks = await _mediator.Send(new GetTasksQuery { TeamId = id });
-            var tD = _mapper.Map<List<ToDoListDto>>(tasks);
-            return Ok(tD);
+            var tasks = await _mediator.Send(new GetTasksQuery { TeamId = teamId });
+            var tasksDto = _mapper.Map<List<ToDoListDto>>(tasks);
+            return Ok(tasksDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateToDoList(int id, ToDo toDo)
+        public async Task<IActionResult> CreateToDoList(int teamId, [FromBody]string toDoName)
         {
-            var tD = await _mediator.Send(new CreateToDoListCommand { TeamId = id, Name = toDo.Name });
-            return Ok(tD);
+            var toDoList = await _mediator.Send(new CreateToDoListCommand { TeamId = teamId, Name = toDoName });
+            //return CreatedAtAction(nameof(GetTeamTasks), new { Id = teamId },toDoList);
+            return Ok(toDoList);
         }
 
         [HttpPost]
         [Route("{toDoId}")]
-        public async Task<IActionResult> AddTask(int toDoId, Task2 task)
+        public async Task<IActionResult> AddTask(int toDoId, PostTaskDto task)
         {
             var t = await _mediator.Send(new CreateTaskCommand
             {
@@ -47,7 +47,27 @@ namespace ManagementTool.API.Controllers
                 ToDoId = toDoId,
                 Title = task.Title
             });
+            // return CreatedAtAction(nameof(GetTeamTasks), t);
             return Ok(t);
         }
+
+        [HttpDelete]
+        [Route("{toDoId}")]
+        public async Task<IActionResult> DeleteTasksList(int toDoId)
+        {
+
+            return Ok();
+        }
+
+
+        [HttpDelete]
+        [Route("{taskId}")]
+        public async Task<IActionResult> DeleteTask(int taskId)
+        {
+
+            return Ok();
+        }
+
+
     }
 }

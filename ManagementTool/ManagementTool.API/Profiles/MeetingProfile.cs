@@ -9,6 +9,8 @@ namespace ManagementTool.API.Profiles
         public MeetingProfile()
         {
             CreateMap<Meeting, MeetingDto>();
+            CreateMap<Meeting, GetMeetingDto>();
+            CreateMap<Meeting, PutMeetingDto>();
               
         }
     }

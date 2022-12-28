@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Domain.Entities;
+using ManagementTool.API.Dto.EventDtos;
 
 namespace ManagementTool.API.Profiles
 {
@@ -6,6 +8,8 @@ namespace ManagementTool.API.Profiles
     {
         public EventProfile()
         {
+            CreateMap<Event, EventDto>();
+            CreateMap<Event, GetEventDto>();
            
         }
 

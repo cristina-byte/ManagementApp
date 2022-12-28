@@ -1,7 +1,7 @@
 ﻿using Application.Commands.EventCommands;
 using Application.Queries.EventQueries;
 using AutoMapper;
-using ManagementTool.API.Dto;
+using ManagementTool.API.Dto.EventDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +24,8 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetPage([FromQuery]int page)
         {
             var events = await _mediator.Send(new GetAEventsPageQuery { Page = page });
-            return Ok(events);
+            var eventsDto = _mapper.Map<List<EventDto>>(events);
+            return Ok(eventsDto);
         }
 
         [HttpGet]
@@ -32,7 +33,8 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetUpcomingPage([FromQuery] int page)
         {
             var upcomingEvents = await _mediator.Send(new GetUpcomingEventsQuery { Page = page });
-            return Ok(upcomingEvents);
+            var upcomingEventsDto = _mapper.Map<List<EventDto>>(upcomingEvents);
+            return Ok(upcomingEventsDto);
         }
 
         [HttpGet]
@@ -40,7 +42,8 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetInProcessPage([FromQuery]int page)
         {
             var inProcessEvents = await _mediator.Send(new GetInProcessEventsQuery { Page = page });
-            return Ok(inProcessEvents);
+            var inProcessEventsDto = _mapper.Map<List<EventDto>>(inProcessEvents);
+            return Ok(inProcessEventsDto);
         }
 
         [HttpGet]
@@ -48,7 +51,8 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var ev = await _mediator.Send(new GetEventQuery { Id = id });
-            return Ok(ev);
+            var eventDto = _mapper.Map<GetEventDto>(ev);
+            return Ok(eventDto);
         }
 
         [HttpPost]

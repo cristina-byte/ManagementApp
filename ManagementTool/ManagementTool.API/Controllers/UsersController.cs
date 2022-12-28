@@ -1,10 +1,14 @@
-﻿using Application.Queries.UserQueries;
+﻿using Application.Commands.UserCommand;
+using Application.Queries.ChatQueries;
+using Application.Queries.TeamQueries;
+using Application.Queries.UserQueries;
 using Application.Queries.UsersQueries;
 using AutoMapper;
 using Domain.Entities;
 using ManagementTool.API.Dto;
+using ManagementTool.API.Dto.TeamDtos;
+using ManagementTool.API.Dto.UserDtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementTool.API.Controllers
@@ -25,7 +29,7 @@ namespace ManagementTool.API.Controllers
 
         [HttpGet]
         [Route("page")]
-        public async Task<IActionResult> GetAll([FromQuery]int page)
+        public async Task<IActionResult> GetPage([FromQuery]int page)
         {
             var users = await _mediator.Send(new GetUsersPageQuery { Page = page });
             var usersDto = _mapper.Map<List<UserDto>>(users);
@@ -34,10 +38,10 @@ namespace ManagementTool.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var user = await _mediator.Send(new GetUserQuery {Id=id});
-            var userDto = _mapper.Map<ViewUserDto>(user);
+            var userDto = _mapper.Map<GetUserDto>(user);
             return Ok(userDto);
         }
 
@@ -49,15 +53,31 @@ namespace ManagementTool.API.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public ActionResult Edit(int id, User user)
+        public async Task<IActionResult> Edit(int id,[FromBody]PutUserDto user)
+        {
+            await _mediator.Send(new EditUserCommand
+            {
+                Id = id,
+                ImageLink = user.ImageLink,
+                Phone=user.Phone,
+                Name=user.Name
+            });
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("{id}/changePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] PutPasswordDto password)
         {
             return Ok();
         }
 
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            await _mediator.Send(new DeleteUserCommand { Id = id });
             return Ok();
         }
     }

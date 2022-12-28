@@ -8,6 +8,11 @@ namespace Infrastructure
 {
     public class ApplicationContext : DbContext   
     {
+        public ApplicationContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
         public DbSet<User> Users{get;set;}
         public DbSet<Team> Teams { get;set;}
         public DbSet<Chat> Chats { get; set; }
@@ -22,14 +27,6 @@ namespace Infrastructure
         public DbSet<Message> Messages { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<CoreTeamPosition> CoreTeamPositions { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //connection database providing connection string
-            optionsBuilder.UseSqlServer("Data Source=WINDOWS-7MAF9I6\\SQLEXPRESS;Initial Catalog=Project;Integrated Security=True; TrustServerCertificate=True").LogTo(Console.WriteLine, new[] {DbLoggerCategory.Database.Command.Name})
-                .EnableSensitiveDataLogging();
-            base.OnConfiguring(optionsBuilder);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
