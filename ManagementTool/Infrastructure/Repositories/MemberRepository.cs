@@ -16,7 +16,7 @@ namespace Infrastructure.Repositories
         public async Task ChangePasswordAsync(int id, string password)
         {
             var member = await _context.Users.FindAsync(id);
-            member.Password = password;
+           
         }
 
         public async Task CreateAsync(User member)
@@ -33,9 +33,7 @@ namespace Infrastructure.Repositories
         public async Task<User> GetByIdAsync(int id)
         {
             return await _context.Users.Where(user => user.Id == id)
-                .Include(user => user.CoreTeamPositions
-                .Where(c => c.Event.EndDate < DateTime.Now))
-                .ThenInclude(ctp => ctp.Event).FirstAsync();
+            .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<User>> GetMembersAsync()
@@ -43,37 +41,28 @@ namespace Infrastructure.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<IEnumerable<User>> GetMembersPageAsync(int page)
+        public async Task<int> GetMembersNumber()
         {
-            return await _context.Users.Skip((page - 1) * 6).Take(6).ToListAsync();
+            return await _context.Users.CountAsync();
         }
 
-        public async Task<User> GetMostActiveAsync()
+        public async Task<IEnumerable<User>> GetMembersPageAsync(int page)
         {
-            var group = await _context.CoreTeamPositions.Include(c => c.User)
-                .GroupBy(c => c.User.Id)
-                .Select(c => new
-                {
-                    UserId = c.Key,
-                    RolesNumber = c.Count()
-                }).ToListAsync();
-
-            var userId=group.Where(ob => ob.RolesNumber == group.Max(o => o.RolesNumber)).First().UserId;
-            return await _context.Users.FindAsync(userId);    
+            return await _context.Users.Skip((page - 1) * 5).Take(5).ToListAsync();
         }
 
         public async Task<string> GetPasswordAsync(int id)
         {
             var user = await _context.Users.FindAsync(id);
-            return user.Password;
+            return "bb";
+        
         }
 
         public async Task UpdateAsync(int id, User member)
         {
             var user = await _context.Users.FindAsync(id);
             user.ImageLink = member.ImageLink;
-            user.Name = member.Name;
-            user.Phone = member.Phone;
+  
         }   
     }
 }

@@ -10,6 +10,8 @@ namespace Application.Commands.OportunityCommands
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
+        public string ImageLink { get; set; }
         public DateTime ApplicationDeadline { get; set; }
+        public ICollection<Position> Positions { get; set; }
     }
 }

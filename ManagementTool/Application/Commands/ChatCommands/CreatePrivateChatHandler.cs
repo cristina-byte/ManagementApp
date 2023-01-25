@@ -17,10 +17,13 @@ namespace Application.Commands.ChatCommands
 
         public async Task<Unit> Handle(CreatePrivateChatCommand request, CancellationToken cancellationToken)
         {
-            var receiver = await _unitOfWork.MemberRepository.GetByIdAsync(request.ReceiverId);
             var chat = new Chat();
             var uniqueValue = Generator.CantorPairFunction(request.SenderId, request.ReceiverId);
             chat.PrivatePair = uniqueValue;
+            var sender = new ChatMember(request.SenderId, chat.Id);
+            var receiver = new ChatMember(request.ReceiverId, chat.Id);
+            chat.Participants.Add(sender);
+            chat.Participants.Add(receiver);
             await _unitOfWork.ChatRepository.CreateAsync(chat);
             await _unitOfWork.Save();
             return Unit.Value;

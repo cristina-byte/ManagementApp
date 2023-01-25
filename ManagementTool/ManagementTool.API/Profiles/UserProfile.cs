@@ -11,6 +11,7 @@ namespace ManagementTool.API.Profiles
         public UserProfile()
         {
             CreateMap<User, GetUserDto>();
+            CreateMap<UserDto, User>();
             CreateMap<User, UserDto>();
             CreateMap<MeetingInvited, UserDto>()
                 .ForMember(user => user.Id, opt => opt.MapFrom(meetingInvited => meetingInvited.UserId))

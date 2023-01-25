@@ -15,5 +15,6 @@ namespace Application.Commands.MeetingCommands
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int UserId { get; set; }
+        public IEnumerable<int> GuestsId { get; set; }
     }
 }

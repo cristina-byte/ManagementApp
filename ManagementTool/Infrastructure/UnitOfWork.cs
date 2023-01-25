@@ -11,15 +11,15 @@ namespace Infrastructure
     {
         private readonly ApplicationContext _context;
 
-        public UnitOfWork(ApplicationContext context,IEventRepository eventRepository, 
+        public UnitOfWork(ApplicationContext context,
             IMeetingRepository meetingRepository, IMemberRepository memberRepository,IOportunityRepository oportunityRepository
             ,ITeamRepository teamRepository,IToDoRepository toDoRepository,ITaskRepository taskRepository,
             IChatRepository chatRepository,
-            IMessageRepository messageRepository,IOportunityPositionRepository oportunityPositionRepository,ICoreTeamPositionRepository coreTeamPositionRepository)
+            IMessageRepository messageRepository,IOportunityPositionRepository oportunityPositionRepository)
         {
             Console.WriteLine("Hello from unit of work");
             _context = context;
-            EventRepository = eventRepository;
+            
             MeetingRepository = meetingRepository;
             MemberRepository = memberRepository;
             OportunityRepository = oportunityRepository;
@@ -29,10 +29,10 @@ namespace Infrastructure
             ChatRepository = chatRepository;
             MessageRepository = messageRepository;
             OportunityPositionRepository = oportunityPositionRepository;
-            CoreTeamPositionRepository = coreTeamPositionRepository;
+           
         }
 
-        public IEventRepository EventRepository { get; private set; }
+       
 
         public IMeetingRepository MeetingRepository { get; private set; }
 
@@ -49,7 +49,7 @@ namespace Infrastructure
         public IChatRepository ChatRepository { get; private set; }
         public IMessageRepository MessageRepository { get; private set; }
         public IOportunityPositionRepository OportunityPositionRepository { get; private set; }
-        public ICoreTeamPositionRepository CoreTeamPositionRepository { get; private set; }
+   
 
         public async Task Save()
         {

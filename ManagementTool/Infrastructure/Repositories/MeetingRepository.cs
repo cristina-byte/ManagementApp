@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Azure.Core;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,13 +32,14 @@ namespace Infrastructure.Repositories
                 .ThenInclude(mI=>mI.User).Where(m => m.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Meeting>> GetAllAsync(int userId)
+        public async Task<IEnumerable<Meeting>> GetAllAsync(int userId,int month,int year)
         {
             return await _context.MeetingInviteds.Where(mI=>mI.UserId==userId).Join(
              _context.Meetings,
               meetingInvited => meetingInvited.MeetingId,
               meeting => meeting.Id,
-               (meetingInvited, meeting) => meeting).Include(meeting=>meeting.Organizator).ToListAsync();
+               (meetingInvited, meeting) => meeting).Include(meeting=>meeting.Organizator)
+               .Where(m=>m.StartDate.Year==year && m.StartDate.Month==month).ToListAsync();
         }
 
         public async Task UpdateAsync(int id, Meeting meeting)
@@ -45,15 +47,19 @@ namespace Infrastructure.Repositories
            throw new NotImplementedException();
         }
 
-        public async Task AddGuests(int meetingId,IEnumerable<int> guests)
+        public async Task AddGuests(Meeting meeting,IEnumerable<int> guestsId)
         {
-            List<MeetingInvited> meetingInviteds = new List<MeetingInvited>();
-            foreach(var guest in guests)
+            var meetInv= new List<MeetingInvited>();
+
+            foreach (var guest in guestsId)
             {
-                var meetingInvited = new MeetingInvited(guest, meetingId);
-                meetingInviteds.Add(meetingInvited);
+                var user = await _context.Users.FindAsync(guest);
+                var meetingInvited = new MeetingInvited();
+                meetingInvited.Meeting = meeting;
+                meetingInvited.User = user;
+                meetInv.Add(meetingInvited);
             }
-            await _context.MeetingInviteds.AddRangeAsync(meetingInviteds);
+            await _context.MeetingInviteds.AddRangeAsync(meetInv);
         }
     }
 }

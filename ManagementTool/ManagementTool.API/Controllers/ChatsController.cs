@@ -1,11 +1,10 @@
 ﻿using Application.Commands.ChatCommands;
 using Application.Queries.ChatQueries;
 using AutoMapper;
-using Domain.Entities;
 using ManagementTool.API.Dto;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace ManagementTool.API.Controllers
 {
@@ -39,12 +38,6 @@ namespace ManagementTool.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]Chat chat)
-        {
-            return Ok();
-        }
-
-        [HttpPost]
         [Route("{chatId}")]
         public async Task<IActionResult> AddMessage(int chatId, [FromBody]string message, int userId)
         {
@@ -64,8 +57,24 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetById(int chatId)
         {
             var chat = await _mediator.Send(new GetChatQuery { Id = chatId });
+            if (chat == null)
+                return NotFound();
             var chatDto = _mapper.Map<GetChatDto>(chat);
             return Ok(chatDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] int receiverId,int userId)
+        {
+                var createdChat = await _mediator.Send(new CreatePrivateChatCommand
+                {
+                    SenderId = userId,
+                    ReceiverId = receiverId
+                });
+
+                var createdChatDto = _mapper.Map<GetChatDto>(createdChat);
+
+                return CreatedAtAction(nameof(GetById), new { chatId = createdChatDto.Id }, createdChatDto);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Application.Queries.MeetingQueries
 
         public async Task<IEnumerable<Meeting>> Handle(GetMeetingsQuery request, CancellationToken cancellationToken)
         {
-            var meetings = await _unitOfWork.MeetingRepository.GetAllAsync(request.UserId);
+            var meetings = await _unitOfWork.MeetingRepository.GetAllAsync(request.UserId,request.Month,request.Year);
             return meetings;
         }
     }

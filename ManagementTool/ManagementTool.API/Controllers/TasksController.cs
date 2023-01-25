@@ -4,10 +4,14 @@ using AutoMapper;
 using Domain.Entities.TeamEntities;
 using ManagementTool.API.Dto.TeamDtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 
 namespace ManagementTool.API.Controllers
 {
+    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+    [Authorize]
     [Route("api/Users/{userId}/Teams/{teamId}/[controller]")]
     [ApiController]
     public class TasksController : ControllerBase
@@ -55,19 +59,16 @@ namespace ManagementTool.API.Controllers
         [Route("{toDoId}")]
         public async Task<IActionResult> DeleteTasksList(int toDoId)
         {
-
+            await _mediator.Send(new DeleteTasksListCommand { TasksListId = toDoId });
             return Ok();
         }
-
 
         [HttpDelete]
         [Route("{taskId}")]
         public async Task<IActionResult> DeleteTask(int taskId)
         {
-
+            await _mediator.Send(new DeleteTaskCommand { TaskId = taskId });
             return Ok();
         }
-
-
     }
 }

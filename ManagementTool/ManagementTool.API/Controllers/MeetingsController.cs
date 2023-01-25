@@ -4,13 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Queries.MeetingQueries;
 using ManagementTool.API.Dto;
 using Application.Commands.MeetingCommands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ManagementTool.API.Controllers
 {
-    [Route("api/users/{id}/[controller]")]
+
+    [Authorize]
+    [Route("api/{id}/[controller]")]
     [ApiController]
     public class MeetingsController : ControllerBase
     {
+        
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
@@ -21,9 +25,9 @@ namespace ManagementTool.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(int id)
+        public async Task<IActionResult> Get(int id, [FromQuery]int month, [FromQuery]int year)
         {
-            var meetings = await _mediator.Send(new GetMeetingsQuery { UserId = id });
+            var meetings = await _mediator.Send(new GetMeetingsQuery { UserId = id,Month=month,Year=year });
             var meetingsDto = _mapper.Map<List<MeetingDto>>(meetings);
             return Ok(meetingsDto);
         }
@@ -33,6 +37,8 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetById(int meetingId)
         {
             var meeting = await _mediator.Send(new GetMeetingQuery { Id = meetingId });
+            if (meeting == null)
+                return NotFound();
             var meetingDto = _mapper.Map<GetMeetingDto>(meeting); 
             return Ok(meetingDto);
         }
@@ -43,20 +49,21 @@ namespace ManagementTool.API.Controllers
             var m = await _mediator.Send(new CreateMeetingCommand
             {
                 Title = meeting.Title,
-                Address=meeting.Address,
-                StartDate=meeting.StartDate,
-                EndDate=meeting.EndDate,
-                UserId=meeting.OrganizatorId
-            });
+                Address = meeting.Address,
+                StartDate = meeting.StartDate,
+                EndDate = meeting.EndDate,
+                UserId = meeting.OrganizatorId,
+                GuestsId=meeting.GuestsId
+            }); ;
 
-            return CreatedAtAction(nameof(GetById), new { Id = m.Id }, m);
+            return Ok();
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> Cancel(int id)
+        [Route("{meetingId}")]
+        public async Task<IActionResult> Cancel(int meetingId)
         {
-            await _mediator.Send(new CancelMeetingCommand { Id = id });
+            await _mediator.Send(new CancelMeetingCommand { Id = meetingId });
             return Ok();
         }
 
@@ -73,14 +80,6 @@ namespace ManagementTool.API.Controllers
                 EndDate=meeting.EndDate
             });
 
-            return Ok();
-        }
-
-        [HttpPut]
-        [Route("{id}/members")]
-        public async Task<IActionResult> Invite(int id, ICollection<int> usersId)
-        {
-            await _mediator.Send(new AddGuestsCommand { MeetingId = id, UsersId = usersId });
             return Ok();
         }
     }

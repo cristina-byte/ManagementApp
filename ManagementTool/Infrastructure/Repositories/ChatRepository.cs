@@ -42,7 +42,8 @@ namespace Infrastructure.Repositories
 
         public async Task<Chat> GetByPrivatePair(int value)
         {
-            return await _context.Chats.Where(c => c.PrivatePair != null && c.PrivatePair == value).FirstAsync();
+            return await _context.Chats
+                .Where(c => c.PrivatePair != null && c.PrivatePair == value).FirstOrDefaultAsync();
         }
 
         public async Task<Chat> GetById(int id)

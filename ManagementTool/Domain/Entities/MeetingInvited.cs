@@ -18,5 +18,7 @@ namespace Domain.Entities
             UserId = userId;
             MeetingId = meetingId;
         }
+
+        public MeetingInvited() { }
     }
 }

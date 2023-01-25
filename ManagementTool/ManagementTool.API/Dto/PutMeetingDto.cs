@@ -1,4 +1,6 @@
-﻿namespace ManagementTool.API.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ManagementTool.API.Dto
 {
     public class PutMeetingDto
     {

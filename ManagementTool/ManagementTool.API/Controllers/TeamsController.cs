@@ -6,11 +6,13 @@ using Domain.Entities.TeamEntities;
 using ManagementTool.API.Dto;
 using ManagementTool.API.Dto.TeamDtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Identity.Web.Resource;
 
 namespace ManagementTool.API.Controllers
 {
+    [Authorize]
     [Route("api/Users/{userId}/[controller]")]
     [ApiController]
     public class TeamsController : ControllerBase
@@ -37,6 +39,8 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetTeamChat(int teamId)
         {
             var team = await _mediator.Send(new GetTeamQuery { Id = teamId });
+            if (team == null)
+                return NotFound();
             var chat = await _mediator.Send(new GetChatQuery { Id = team.Chat.Id});
             var chatDto = _mapper.Map<GetChatDto>(chat);
             return Ok(chatDto);
@@ -47,40 +51,40 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> GetById(int teamId)
         {
             var team = await _mediator.Send(new GetTeamQuery { Id=teamId});
+            if (team == null)
+                return NotFound();
             var teamDto = _mapper.Map<GetTeamDto>(team);
             return Ok(teamDto);
         }
 
         [HttpPut]
-        [Route("{id}/members")]
-        public async Task<IActionResult> AddMembers(int id,ICollection<int> usersId)
+        [Route("{teamId}/members")]
+        public async Task<IActionResult> AddMembers(int teamId,ICollection<int> usersId)
         {
-            await _mediator.Send(new AddMembersCommand { UsersId = usersId, TeamId = id });
+            await _mediator.Send(new AddMembersCommand { UsersId = usersId, TeamId =teamId });
             return Ok();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> CreateTeam([FromBody]PostTeamDto team)
         {
            var addedTeam= await _mediator.Send(new CreateTeamCommand{Name = team.Name,AdminId = team.AdminId});
-            Console.WriteLine(addedTeam);
             return CreatedAtAction(nameof(GetById), new {Id = addedTeam.Id }, addedTeam); 
         }
 
         [HttpDelete]
-        [Route("{id}")]
-        public async Task<IActionResult> DeleteTeam(int id)
+        [Route("{teamId}")]
+        public async Task<IActionResult> DeleteTeam(int teamId)
         {
-            await _mediator.Send(new DeleteTeamCommand { Id = id });
+            await _mediator.Send(new DeleteTeamCommand { Id = teamId });
             return Ok();
         }
 
         [HttpPut]
-        [Route("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody]string name)
+        [Route("{teamId}")]
+        public async Task<IActionResult> Update(int teamId, [FromBody]string name)
         {
-            await _mediator.Send(new EditTeamCommand { Id = id, Name = name });
+            await _mediator.Send(new EditTeamCommand { Id = teamId, Name = name });
             return Ok();
         }
     }

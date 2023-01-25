@@ -15,7 +15,7 @@ namespace Domain.Entities.OportunityEntities
         public DateTime ApplicationDeadline { get; set; }
 
         public Oportunity(string title, string description,
-              DateTime startDate, DateTime endDate, string location,DateTime applicationDeadline)
+              DateTime startDate, DateTime endDate, string location,DateTime applicationDeadline,string imageLink)
         {
             Title = title;
             CreatedAt = DateTime.Now;
@@ -24,7 +24,9 @@ namespace Domain.Entities.OportunityEntities
             StartDate = startDate;
             EndDate = endDate;
             Location = location;
+            ImageLink = imageLink;
             ApplicationDeadline = applicationDeadline;
         }
+
     }
 }

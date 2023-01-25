@@ -5,12 +5,16 @@ using Domain.Entities;
 using Domain.Entities.OportunityEntities;
 using ManagementTool.API.Dto.OportunityDtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 using Microsoft.IdentityModel.Protocols;
+using Newtonsoft.Json;
 
 namespace ManagementTool.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OportunitiesController : ControllerBase
@@ -29,6 +33,17 @@ namespace ManagementTool.API.Controllers
         {
             var oportunities = await _mediator.Send(new GetOportunitiesPageQuery { Page = page });
             var oportunitiesDto = _mapper.Map<List<OportunityDto>>(oportunities);
+
+            var count = await _mediator.Send(new GetOportunitiesNumberQuery());
+
+            var metaData = new
+            {
+                Total = count,
+                ItemsPerPage = 3
+            };
+
+            Response.Headers.Add("x-total", JsonConvert.SerializeObject(metaData));
+         
             return Ok(oportunitiesDto);
         }
 
@@ -37,12 +52,14 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var oportunity = await _mediator.Send(new GetOportunityQuery { Id = id });
+            if (oportunity == null)
+                return NotFound();
             var oportunityDto = _mapper.Map<OportunityDto>(oportunity);
             return Ok(oportunityDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Oportunity oportunity)
+        public async Task<IActionResult> Create(PostOportunityDto oportunity)
         {
             var createdOportunity = await _mediator.Send(new CreateOportunityCommand
             {
@@ -51,14 +68,16 @@ namespace ManagementTool.API.Controllers
                 Description = oportunity.Description,
                 StartDate = oportunity.StartDate,
                 EndDate = oportunity.EndDate,
-                Title = oportunity.Title
+                Title = oportunity.Title,
+                ImageLink=oportunity.ImageLink,
+                Positions=_mapper.Map<List<Position>>(oportunity.Positions)
             });
             return CreatedAtAction(nameof(Get), new { Id = createdOportunity.Id }, createdOportunity);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Edit(int id, Oportunity oportunity)
+        public async Task<IActionResult> Edit(int id, PutOportunityDto oportunity)
         {
             await _mediator.Send(new EditOportunityCommand
             {
@@ -68,8 +87,11 @@ namespace ManagementTool.API.Controllers
                 Description=oportunity.Description,
                 StartDate=oportunity.StartDate,
                 EndDate=oportunity.EndDate,
-                Title=oportunity.Title
+                Title=oportunity.Title,
+                ImageLink=oportunity.ImageLink,
+                Positions=_mapper.Map<List<Position>>(oportunity.Positions)
             });
+
             return Ok();
         }
 

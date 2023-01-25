@@ -9,7 +9,7 @@ using Moq;
 
 using System.Net;
 
-namespace OnlineBookStore.Tests
+namespace Tests
 {
     [TestClass]
     public class TeamsControllerFixture
@@ -46,6 +46,7 @@ namespace OnlineBookStore.Tests
             var controller = new TeamsController(_mockMediator.Object, _mockMapper.Object);
             var result = await controller.GetTeamChat(7) as ObjectResult;
             _mockMediator.Verify(x => x.Send(It.IsAny<GetChatQuery>(), It.IsAny<CancellationToken>()));
+            _mockMediator.Verify(x => x.Send(It.IsAny<GetTeamQuery>(), It.IsAny<CancellationToken>()));
 
             //Assert
             Assert.AreEqual((int)HttpStatusCode.OK, result.StatusCode);

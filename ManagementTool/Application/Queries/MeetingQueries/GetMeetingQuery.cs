@@ -11,5 +11,6 @@ namespace Application.Queries.MeetingQueries
     public class GetMeetingQuery:IRequest<Meeting>
     {
         public int Id { get; set; }
+       
     }
 }

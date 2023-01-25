@@ -9,7 +9,10 @@ namespace ManagementTool.API.Profiles
         public OportunityProfile()
         {
             CreateMap<Oportunity, OportunityDto>();
+            CreateMap<OportunityDto, Oportunity>();
             CreateMap<Position, PositionDto>();
+            CreateMap<PostPositionDto, Position>();
+            CreateMap<PositionDto, Position>();
         }
 
     }

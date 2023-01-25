@@ -35,21 +35,31 @@ namespace Infrastructure.Repositories
             return await _context.Oportunities.Where(op => op.Id == id).Include(op=>op.Positions).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Oportunity>> GetOportunitiesPageAsync(int page)
+        public async Task<int> GetOportunitiesNumber()
         {
-            return await _context.Oportunities.Skip((page - 1) * 3).Take(3).ToListAsync();
+            return await _context.Oportunities.CountAsync();
         }
 
+        public async Task<IEnumerable<Oportunity>> GetOportunitiesPageAsync(int page)
+        {
+            return await _context.Oportunities.OrderByDescending(op=>op.CreatedAt).Skip((page - 1) * 3).Take(3).ToListAsync();
+        }
 
         public async Task UpdateAsync(int id, Oportunity oportunity)
         {
+            Console.WriteLine("///////////////////////////////////////from update");
+            Console.WriteLine("startdate:" + oportunity.StartDate);
+            Console.WriteLine("enddate:" + oportunity.EndDate);
+            Console.WriteLine("applicationdeadline:" + oportunity.ApplicationDeadline);
             var op = await _context.Oportunities.FindAsync(id);
             op.Title = oportunity.Title;
             op.Location = oportunity.Location;
             op.StartDate = oportunity.StartDate;
             op.EndDate = oportunity.EndDate;
+            op.ImageLink = oportunity.ImageLink;
             op.ApplicationDeadline = oportunity.ApplicationDeadline;
             op.Description = oportunity.Description;
+            op.Positions = oportunity.Positions;
         }
     }
 }

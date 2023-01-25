@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj": {}
+    "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj": {
+    "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj",
+        "projectUniqueName": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj",
+        "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\obj\\",
+        "outputPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj"
+              "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj"
               }
             }
           }
@@ -47,6 +47,10 @@
             "MediatR": {
               "target": "Package",
               "version": "[11.1.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.13, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -89,14 +93,14 @@
         }
       }
     },
-    "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj": {
+    "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj",
+        "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\obj\\",
+        "outputPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -125,6 +129,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -166,14 +174,14 @@
         }
       }
     },
-    "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj": {
+    "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\obj\\",
+        "outputPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -190,8 +198,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\user\\OneDrive\\Desktop\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj"
+              "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj": {
+                "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj"
               }
             }
           }
@@ -206,6 +214,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Azure.Storage.Blobs": {
+              "target": "Package",
+              "version": "[12.14.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0, )"

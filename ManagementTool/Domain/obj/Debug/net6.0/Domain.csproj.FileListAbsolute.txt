@@ -24,3 +24,17 @@ C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Pro
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\ref\Domain.dll
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\bin\Debug\net6.0\Domain.runtimeconfig.json
 C:\Users\user\OneDrive\Desktop\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.genruntimeconfig.cache
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\bin\Debug\net6.0\Domain.deps.json
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\bin\Debug\net6.0\Domain.runtimeconfig.json
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\bin\Debug\net6.0\Domain.dll
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\bin\Debug\net6.0\Domain.pdb
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.dll
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\refint\Domain.dll
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.pdb
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.genruntimeconfig.cache
+E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\ref\Domain.dll

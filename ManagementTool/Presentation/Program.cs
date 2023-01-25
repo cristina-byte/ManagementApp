@@ -515,15 +515,5 @@ namespace Presentation
 
             });
         }
-
-        //Get a teams page
-        public async Task<IEnumerable<Team>> GetTeamsPage(int page)
-        {
-            return await _mediator.Send(new GetTeamsPageQuery
-            {
-                Page = page
-            });
-        }
-
     }
 }

@@ -12,6 +12,7 @@ namespace ManagementTool.API.Dto.OportunityDtos
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
+        public string ImageLink { get; set; }
         public DateTime ApplicationDeadline { get; set; }
     }
 }

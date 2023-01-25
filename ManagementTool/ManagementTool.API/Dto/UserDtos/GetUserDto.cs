@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using ManagementTool.API.Dto.EventDtos;
 
 namespace ManagementTool.API.Dto.UserDtos
 {
@@ -10,8 +9,7 @@ namespace ManagementTool.API.Dto.UserDtos
         public string Name { get; set; }
         public string Cnp { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
-        public ICollection<CoreTeamPositionDto> CoreTeamPositions { get; set; }
+        public string PhoneNumber { get; set; }
 
     }
 }

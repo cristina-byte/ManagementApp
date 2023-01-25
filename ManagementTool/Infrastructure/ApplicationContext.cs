@@ -1,12 +1,15 @@
 ﻿using Domain.Entities;
 using Domain.Entities.OportunityEntities;
 using Domain.Entities.TeamEntities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 using Task = Domain.Entities.TeamEntities.Task;
 
 namespace Infrastructure
 {
-    public class ApplicationContext : DbContext   
+    public class ApplicationContext : IdentityDbContext<User,IdentityRole<int>,int>
     {
         public ApplicationContext(DbContextOptions options) : base(options)
         {
@@ -22,19 +25,23 @@ namespace Infrastructure
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Oportunity> Oportunities { get; set; }
         public DbSet<Position> Positions { get; set; }
-        public DbSet<Event> Events { get; set; }
         public DbSet<MeetingInvited> MeetingInviteds { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
-        public DbSet<CoreTeamPosition> CoreTeamPositions { get; set; }
-
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+
+            
+
             modelBuilder.Entity<MemberTeam>().HasKey(mt => new { mt.MemberId, mt.TeamId });
 
             //UserTask configuration
             var userTask = modelBuilder.Entity<UserTask>();
-            userTask.HasKey(ut => new { ut.UserId, ut.TaskId });
+            userTask.HasKey(ut => new { ut.TaskId,ut.UserId } );
             userTask.HasOne(ut => ut.User)
                     .WithMany(u => u.Tasks)
                     .HasForeignKey(ut => ut.UserId);

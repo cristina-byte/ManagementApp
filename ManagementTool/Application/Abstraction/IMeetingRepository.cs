@@ -8,7 +8,7 @@ namespace Application.Abstraction
         public Task UpdateAsync(int id,Meeting meeting);
         public Task Delete(int id);
         public Task<Meeting> GetAsync(int id);
-        public Task<IEnumerable<Meeting>> GetAllAsync(int userId);
-        public Task AddGuests(int meetingId,IEnumerable<int> guests);
+        public Task<IEnumerable<Meeting>> GetAllAsync(int userId,int month,int year);
+        public Task AddGuests(Meeting meeting,IEnumerable<int> guests);
     }
 }
