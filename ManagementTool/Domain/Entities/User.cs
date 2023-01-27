@@ -9,17 +9,18 @@ namespace Domain.Entities
 {
     public class User:IdentityUser<int>
     {
-        public int Id { get;set; }
+        public override int Id { get;set; }
         public Boolean IsOnline { get; set; }
         public string? ImageLink { get; set; }
         public  string Name { get; set; }
-        public string Email { get; set; }
+        public override string Email { get; set; }
         public override string PhoneNumber { get; set; }
         public DateTime BirthDay { get; set; }
         public ICollection<ChatMember> Conversations { get; set; }
         public ICollection<MemberTeam> MemberTeams { get; set; }
         public ICollection<UserTask> Tasks { get; set; }    
         public ICollection<MeetingInvited> MeetingInvited { get; set; }
+        public ICollection<OportunityApplicant> OportunitiyApplicants { get; set; }
 
      
         public User(string userName,string name, string phone,DateTime birthDay)

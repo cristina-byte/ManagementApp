@@ -13,6 +13,7 @@ namespace Domain.Entities.OportunityEntities
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
         public DateTime ApplicationDeadline { get; set; }
+        public ICollection<OportunityApplicant> OportunityApplicants { get; set; }
 
         public Oportunity(string title, string description,
               DateTime startDate, DateTime endDate, string location,DateTime applicationDeadline,string imageLink)

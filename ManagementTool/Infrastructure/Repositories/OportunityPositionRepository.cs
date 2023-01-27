@@ -27,5 +27,11 @@ namespace Infrastructure.Repositories
             var position = await _context.Positions.FindAsync(id);
             _context.Positions.Remove(position);
         }
+
+        public async Task Update(int positionId)
+        {
+            var position = await _context.Positions.FindAsync(positionId);
+            position.LeftSits = position.LeftSits - 1;
+        }
     }
 }

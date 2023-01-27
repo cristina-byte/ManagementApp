@@ -59,6 +59,14 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Role", policy =>
+    {
+        policy.RequireRole("admin");
+    });
+});
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IMeetingRepository), typeof(MeetingRepository));
 builder.Services.AddScoped(typeof(IMemberRepository), typeof(MemberRepository));
@@ -70,7 +78,7 @@ builder.Services.AddScoped(typeof(ITaskRepository), typeof(TaskRepository));
 builder.Services.AddScoped(typeof(IChatRepository), typeof(ChatRepository));
 builder.Services.AddScoped(typeof(IMessageRepository), typeof(MessageRepository));
 builder.Services.AddScoped(typeof(IOportunityPositionRepository), typeof(OportunityPositionRepository));
-builder.Services.AddMediatR(typeof(CreateUserCommand).Assembly);
+builder.Services.AddMediatR(typeof(EditUserCommand).Assembly);
 builder.Services.AddAutoMapper(typeof(AssemblyMarketPresentatio));
 builder.Services.Configure<MyApplicationSettings>(builder.Configuration.GetSection(nameof(MyApplicationSettings)));
 var app = builder.Build();

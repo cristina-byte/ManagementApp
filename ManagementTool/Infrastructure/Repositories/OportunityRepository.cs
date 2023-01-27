@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Domain.Entities;
 using Domain.Entities.OportunityEntities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,12 @@ namespace Infrastructure.Repositories
         public OportunityRepository(ApplicationContext context)
         {
             _context= context;
+        }
+
+        public async Task AddApplicant(int oportunityId, int userId,int positionId)
+        {
+            var oportunityApplicant = new OportunityApplicant(userId,oportunityId,positionId);
+            await _context.OportunityApplicants.AddAsync(oportunityApplicant); 
         }
 
         public async Task<Oportunity> CreateAsync(Oportunity oportunity)
@@ -45,12 +52,18 @@ namespace Infrastructure.Repositories
             return await _context.Oportunities.OrderByDescending(op=>op.CreatedAt).Skip((page - 1) * 3).Take(3).ToListAsync();
         }
 
+        public async Task<List<User>> GetOportunityApplicantsForPosition(int oportunityId, int positionId)
+        {
+            var users = await _context.OportunityApplicants.Include(op=>op.User)
+                .Where(op => op.OportunityId == oportunityId && op.PositionId == positionId)
+                .Select(op=>op.User)
+                .ToListAsync();
+
+            return users;
+        }
+
         public async Task UpdateAsync(int id, Oportunity oportunity)
         {
-            Console.WriteLine("///////////////////////////////////////from update");
-            Console.WriteLine("startdate:" + oportunity.StartDate);
-            Console.WriteLine("enddate:" + oportunity.EndDate);
-            Console.WriteLine("applicationdeadline:" + oportunity.ApplicationDeadline);
             var op = await _context.Oportunities.FindAsync(id);
             op.Title = oportunity.Title;
             op.Location = oportunity.Location;

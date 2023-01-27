@@ -17,9 +17,7 @@ namespace Infrastructure
             IChatRepository chatRepository,
             IMessageRepository messageRepository,IOportunityPositionRepository oportunityPositionRepository)
         {
-            Console.WriteLine("Hello from unit of work");
             _context = context;
-            
             MeetingRepository = meetingRepository;
             MemberRepository = memberRepository;
             OportunityRepository = oportunityRepository;
@@ -29,28 +27,18 @@ namespace Infrastructure
             ChatRepository = chatRepository;
             MessageRepository = messageRepository;
             OportunityPositionRepository = oportunityPositionRepository;
-           
         }
 
-       
-
         public IMeetingRepository MeetingRepository { get; private set; }
-
         public IMemberRepository MemberRepository { get; private set; }
-
         public IOportunityRepository OportunityRepository { get; private set; }
-
         public ITaskRepository TaskRepository { get; private set; }
-
         public ITeamRepository TeamRepository { get; private set; }
-
         public IToDoRepository ToDoRepository { get; private set; }
-        
         public IChatRepository ChatRepository { get; private set; }
         public IMessageRepository MessageRepository { get; private set; }
         public IOportunityPositionRepository OportunityPositionRepository { get; private set; }
    
-
         public async Task Save()
         {
             await _context.SaveChangesAsync();

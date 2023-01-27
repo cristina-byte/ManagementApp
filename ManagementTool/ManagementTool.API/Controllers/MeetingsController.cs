@@ -54,7 +54,7 @@ namespace ManagementTool.API.Controllers
                 EndDate = meeting.EndDate,
                 UserId = meeting.OrganizatorId,
                 GuestsId=meeting.GuestsId
-            }); ;
+            }); 
 
             return Ok();
         }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities.OportunityEntities;
+﻿using Domain.Entities;
+using Domain.Entities.OportunityEntities;
 
 namespace Application.Abstraction
 {
@@ -11,5 +12,7 @@ namespace Application.Abstraction
         public Task<Oportunity> GetAsync(int id);
         public Task<IEnumerable<Oportunity>> GetAllAsync();
         public Task<IEnumerable<Oportunity>> GetOportunitiesPageAsync(int page);
+        public Task AddApplicant(int oportunityId, int userId,int positionId);
+        public Task<List<User>> GetOportunityApplicantsForPosition(int oportunityId, int positionId);
     }
 }

@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using Application.Queries.UserQueries;
+using Application.Queries.UsersQueries;
+using AutoMapper;
 using Domain.Entities;
 using ManagementTool.API.Dto.UserDtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -18,37 +18,30 @@ namespace ManagementTool.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole<int>> _roleManager;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public AuthController(IMapper mapper, IMediator mediator,UserManager<User> userManager, RoleManager<IdentityRole<int>> roleManager)
+        public AuthController(IMapper mapper, IMediator mediator,UserManager<User> userManager,
+            RoleManager<IdentityRole<int>> roleManager)
         {
             _mapper = mapper;
             _mediator = mediator;
             _userManager = userManager;
-            _roleManager = roleManager;
-            
+            _roleManager = roleManager;  
         }
-
 
         [HttpPost]
         [Route("signup")]
         public async Task<IActionResult> SignUp([FromBody] UserSignUpDto userSignUpDto)
         {
-            Console.WriteLine(userSignUpDto.UserName);
-
             var userExists = await _userManager.FindByNameAsync(userSignUpDto.UserName);
 
             if (userExists!=null)
             {
                 return BadRequest("User already exists");
             }
-
-
-            Console.WriteLine(userSignUpDto.BirthDay);
 
             User user = new User();
             user.Email = userSignUpDto.Email;
@@ -63,12 +56,38 @@ namespace ManagementTool.API.Controllers
             if (userCreateResult.Succeeded)
             {
                 var u = await _userManager.FindByNameAsync(user.UserName);
-                var addRoleToUser = await _userManager.AddToRoleAsync(u, "reader");
-                return Ok("User created");
+                
+                    var addRoleToUser = await _userManager.AddToRoleAsync(u, "reader");
+
+                    if (!addRoleToUser.Succeeded)
+                        return Problem(addRoleToUser.Errors.First().Description, null, 500);
+
+                    return Ok("User created successfully");
             }
+
             return Problem(userCreateResult.Errors.First().Description, null, 500);
         }
 
+        [HttpDelete]
+        [Route("delete-role")]
+        public async Task<IActionResult> DeleteRole(UserRoleDto userRole)
+        {
+            User user = await _userManager.FindByNameAsync(userRole.UserName);
+            if (user == null)
+                return BadRequest("User was not found");
+
+            var role = await _roleManager.FindByNameAsync(userRole.Role);
+
+            if (role == null)
+                return BadRequest("Role was not found");
+
+            var deleteAction = await _userManager.RemoveFromRoleAsync(user, userRole.Role);
+
+            if (!deleteAction.Succeeded)
+                return BadRequest("Failed to delete");
+
+            return Ok();
+        }
 
         [HttpPost]
         [Route("assign-role")]
@@ -88,20 +107,29 @@ namespace ManagementTool.API.Controllers
                 });
             }
 
-            Console.WriteLine(user.Id);
-            Console.WriteLine(user.NormalizedUserName);
-            Console.WriteLine(user.UserName);
-
-            var addedRoleToUser = await _userManager.AddToRoleAsync(user, "ADMIN");
+            var addedRoleToUser = await _userManager.AddToRoleAsync(user, userRole.Role);
 
            if (!addedRoleToUser.Succeeded)
               return BadRequest("Fail to add user to role");
 
             return Ok("User was added to role");
-
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> GetUserRoles()
+        {
+            var users = await _mediator.Send(new GetUsersQuery());
+            var usersDto = _mapper.Map<List<GetUserRolesDto>>(users);
+
+            foreach(var user in usersDto)
+            {
+                var u = await _userManager.FindByNameAsync(user.UserName);
+                user.Roles = (List<string>)await _userManager.GetRolesAsync(u);
+            }
+
+            return Ok(usersDto);
+        }
 
         [HttpPost]
         [Route("sign-in")]
@@ -113,10 +141,6 @@ namespace ManagementTool.API.Controllers
             {
                 var roles = await _userManager.GetRolesAsync(user);
 
-                Console.WriteLine("/////////////////heyyyyyyy");
-               
-
-
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name,user.UserName)
@@ -124,9 +148,7 @@ namespace ManagementTool.API.Controllers
 
                 foreach (var userRole in roles)
                 {
-                    Console.WriteLine("/////////////////");
-                    
-                    authClaims.Add(new Claim("role", userRole));
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
                 authClaims.Add(new Claim(ClaimTypes.Name, user.Name));

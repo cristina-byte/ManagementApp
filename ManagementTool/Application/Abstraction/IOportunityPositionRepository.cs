@@ -12,6 +12,7 @@ namespace Application.Abstraction
         public Task CreateAsync(Position position);
 
         public Task Delete(int id);
+        public Task Update(int positionId);
 
     }
 }

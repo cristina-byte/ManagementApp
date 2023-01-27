@@ -29,14 +29,6 @@ namespace ManagementTool.API.Controllers
             return Ok(chatsDto);
         }
 
-        [HttpDelete]
-        [Route("{chatId}")]
-        public async Task<IActionResult> Delete(int chatId)
-        {
-
-            return Ok();
-        }
-
         [HttpPost]
         [Route("{chatId}")]
         public async Task<IActionResult> AddMessage(int chatId, [FromBody]string message, int userId)

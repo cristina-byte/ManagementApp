@@ -134,6 +134,26 @@ namespace Infrastructure.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("Domain.Entities.OportunityApplicant", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OportunityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "OportunityId", "PositionId");
+
+                    b.HasIndex("OportunityId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("OportunityApplicants");
+                });
+
             modelBuilder.Entity("Domain.Entities.OportunityEntities.Oportunity", b =>
                 {
                     b.Property<int>("Id")
@@ -596,6 +616,33 @@ namespace Infrastructure.Migrations
                     b.Navigation("Sender");
                 });
 
+            modelBuilder.Entity("Domain.Entities.OportunityApplicant", b =>
+                {
+                    b.HasOne("Domain.Entities.OportunityEntities.Oportunity", "Oportunity")
+                        .WithMany("OportunityApplicants")
+                        .HasForeignKey("OportunityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.OportunityEntities.Position", "Position")
+                        .WithMany("PositionApplicants")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("OportunitiyApplicants")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Oportunity");
+
+                    b.Navigation("Position");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Entities.OportunityEntities.Position", b =>
                 {
                     b.HasOne("Domain.Entities.OportunityEntities.Oportunity", "Oportunity")
@@ -751,7 +798,14 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.OportunityEntities.Oportunity", b =>
                 {
+                    b.Navigation("OportunityApplicants");
+
                     b.Navigation("Positions");
+                });
+
+            modelBuilder.Entity("Domain.Entities.OportunityEntities.Position", b =>
+                {
+                    b.Navigation("PositionApplicants");
                 });
 
             modelBuilder.Entity("Domain.Entities.TeamEntities.Task", b =>
@@ -778,6 +832,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("MeetingInvited");
 
                     b.Navigation("MemberTeams");
+
+                    b.Navigation("OportunitiyApplicants");
 
                     b.Navigation("Tasks");
                 });

@@ -3,7 +3,6 @@ namespace Application.Abstraction
 {
    public interface IUnitOfWork:IDisposable
     {
-        
         public IMeetingRepository MeetingRepository { get; }
         public IMemberRepository MemberRepository { get; }
         public IOportunityRepository OportunityRepository { get; }
@@ -13,7 +12,6 @@ namespace Application.Abstraction
         public IChatRepository ChatRepository { get; }
         public IMessageRepository MessageRepository { get; }
         public IOportunityPositionRepository OportunityPositionRepository { get; }
-       
 
         public Task Save();
     }

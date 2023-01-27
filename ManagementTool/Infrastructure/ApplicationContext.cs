@@ -15,7 +15,6 @@ namespace Infrastructure
         {
 
         }
-
         public DbSet<User> Users{get;set;}
         public DbSet<Team> Teams { get;set;}
         public DbSet<Chat> Chats { get; set; }
@@ -28,14 +27,13 @@ namespace Infrastructure
         public DbSet<MeetingInvited> MeetingInviteds { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<OportunityApplicant> OportunityApplicants { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<User>().HasKey(u => u.Id);
-
-            
 
             modelBuilder.Entity<MemberTeam>().HasKey(mt => new { mt.MemberId, mt.TeamId });
 
@@ -71,6 +69,20 @@ namespace Infrastructure
                             .WithMany(m => m.MeetingInvited)
                             .HasForeignKey(mI => mI.MeetingId);
 
+            var oportunityApplicant = modelBuilder.Entity<OportunityApplicant>();
+            oportunityApplicant.HasKey(oApp => new { oApp.UserId, oApp.OportunityId,oApp.PositionId });
+
+            oportunityApplicant.HasOne(op => op.User)
+                               .WithMany(u => u.OportunitiyApplicants)
+                               .HasForeignKey(op => op.UserId);
+
+            oportunityApplicant.HasOne(op => op.Oportunity)
+                               .WithMany(o => o.OportunityApplicants)
+                               .HasForeignKey(op => op.OportunityId);
+
+            oportunityApplicant.HasOne(op => op.Position)
+                             .WithMany(p=>p.PositionApplicants)
+                             .HasForeignKey(op => op.PositionId);
         }
     }   
 }

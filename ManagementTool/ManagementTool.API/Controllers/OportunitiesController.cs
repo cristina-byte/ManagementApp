@@ -1,9 +1,11 @@
 ﻿using Application.Commands.OportunityCommands;
 using Application.Queries.OportunityQueries;
+using Application.Queries.UserQueries;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Entities.OportunityEntities;
 using ManagementTool.API.Dto.OportunityDtos;
+using ManagementTool.API.Dto.UserDtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace ManagementTool.API.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class OportunitiesController : ControllerBase
@@ -43,7 +45,6 @@ namespace ManagementTool.API.Controllers
             };
 
             Response.Headers.Add("x-total", JsonConvert.SerializeObject(metaData));
-         
             return Ok(oportunitiesDto);
         }
 
@@ -92,6 +93,31 @@ namespace ManagementTool.API.Controllers
                 Positions=_mapper.Map<List<Position>>(oportunity.Positions)
             });
 
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("{id}/positions/{positionId}/applicants")]
+        public async Task<IActionResult> GetApplicants(int id,int positionId)
+        {
+            var users = await _mediator.Send(new GetApplicantsQuery { OportunityId = id, PositionId = positionId });
+            var usersDto = _mapper.Map<List<UserDto>>(users);
+            return Ok(usersDto);
+        }
+
+        [HttpPost]
+        [Route("{id}")]
+        public async Task<IActionResult> AddApplicant(int id, OportunityApplicantDto applicant)
+        {
+            var user = await _mediator.Send(new GetUserQuery { Id = applicant.UserId });
+            if (user == null)
+                return BadRequest("User was not found");
+
+            var oportunity = await _mediator.Send(new GetOportunityQuery { Id = id });
+            if (oportunity == null)
+                return BadRequest("Oportunity was not found");
+
+            await _mediator.Send(new AddApplicantCommand { OportunityId = id, UserId = applicant.UserId, PositionId=applicant.CoreTeamPositionId });
             return Ok();
         }
 
