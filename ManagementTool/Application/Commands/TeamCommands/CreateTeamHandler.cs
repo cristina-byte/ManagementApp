@@ -17,15 +17,16 @@ namespace Application.Commands.TeamCommands
         public async Task<Team> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.MemberRepository.GetByIdAsync(command.AdminId);
-            var team = new Team(command.Name);
-            team.Admin = user;
-            var chat = new Chat();
-            chat.Name = team.Name;
-           Chat c= await _unitOfWork.ChatRepository.CreateAsync(chat);
-            team.Chat = c;
-            var addedTeam=await _unitOfWork.TeamRepository.CreateAsync(team);
+            var team = new Team()
+            {
+                Name=command.Name,
+                Admin=user
+            };
+            
+            await _unitOfWork.TeamRepository.CreateAsync(team);
+            
             await _unitOfWork.Save();
-            return addedTeam;
+            return team;
         }
     }
 }

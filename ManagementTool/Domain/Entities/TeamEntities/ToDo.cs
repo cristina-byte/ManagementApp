@@ -13,10 +13,5 @@ namespace Domain.Entities.TeamEntities
         public ICollection<Task> Tasks { get; set; }
         public Team Team { get; set; }
 
-        public ToDo( string name)
-        {
-            Name = name;
-            Tasks=new List<Task>();
-        }
     }
 }

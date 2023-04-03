@@ -2,7 +2,6 @@
 using Domain.Entities.TeamEntities;
 using Microsoft.EntityFrameworkCore;
 using Task = System.Threading.Tasks.Task;
-using Task2 = Domain.Entities.TeamEntities.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -15,16 +14,15 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<ToDo> CreateAsync(ToDo toDoItem)
+        public async Task CreateAsync(ToDo toDoItem)
         {
-            var task=await _context.ToDoLists.AddAsync(toDoItem);
-            return task.Entity;
+            await _context.ToDoLists.AddAsync(toDoItem);
         }
 
         public async Task Delete(int id)
         {
-            var toDo= await _context.Teams.FirstOrDefaultAsync(t => t.Id == id);
-            _context.Teams.Remove(toDo);
+            var toDo = await _context.ToDoLists.FindAsync(id);
+            _context.ToDoLists.Remove(toDo);
         }
 
         public async Task<IEnumerable<ToDo>> GetAllAsync(int teamId)

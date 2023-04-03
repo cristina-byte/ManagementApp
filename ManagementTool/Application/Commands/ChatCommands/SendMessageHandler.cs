@@ -18,8 +18,13 @@ namespace Application.Commands.ChatCommands
         public async Task<Chat> Handle(SendMessageCommand request, CancellationToken cancellationToken)
         {
             var sender = await _unitOfWork.MemberRepository.GetByIdAsync(request.SenderId);
-            var message = new Message(request.Content, DateTime.Now);
-            message.Sender = sender;
+
+            var message = new Message{
+                Content=request.Content,
+                SentAt=DateTime.Now,
+                Sender=sender
+            };
+
             var chat = await _unitOfWork.ChatRepository.GetById(request.ChatId);
             message.Chat = chat;
             await _unitOfWork.MessageRepository.CreateAsync(message);

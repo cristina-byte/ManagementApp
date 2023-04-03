@@ -14,32 +14,48 @@ namespace Infrastructure.Repositories
             _context= context;
         }
 
-        public async Task AddApplicant(int oportunityId, int userId,int positionId)
+        public async Task AddApplicantAsync(int oportunityId, int userId,int positionId)
         {
-            var oportunityApplicant = new OportunityApplicant(userId,oportunityId,positionId);
+            var oportunityApplicant = new OportunityApplicant
+            {
+                UserId=userId,
+                OportunityId=oportunityId,
+                PositionId=positionId 
+            };
             await _context.OportunityApplicants.AddAsync(oportunityApplicant); 
         }
 
-        public async Task<Oportunity> CreateAsync(Oportunity oportunity)
+        public async Task CreateAsync(Oportunity oportunity)
         {
-            var task=await _context.Oportunities.AddAsync(oportunity);
-            return task.Entity;
+            await _context.Oportunities.AddAsync(oportunity);
         }
 
         public async Task Delete(int id)
         {
-            var oportunity = await _context.Oportunities.Where(op => op.Id == id).FirstOrDefaultAsync();
+            var oportunity = await _context.Oportunities.Where(op => op.Id == id)
+                .FirstOrDefaultAsync();
             _context.Oportunities.Remove(oportunity);
         }
 
         public async Task <IEnumerable<Oportunity>> GetAllAsync()
         {
-            return await _context.Oportunities.ToListAsync<Oportunity>();
+            return await _context.Oportunities.ToListAsync();
         }
 
         public async Task<Oportunity> GetAsync(int id)
         {
-            return await _context.Oportunities.Where(op => op.Id == id).Include(op=>op.Positions).FirstOrDefaultAsync();
+            return await _context.Oportunities.Where(op => op.Id == id)
+                .Include(op=>op.Positions).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Oportunity>> GetAvailableOportunitiesAsync()
+        {
+            var oportunities = await _context.Oportunities
+                .Include(op => op.Positions)
+                .Where(op => op.ApplicationDeadline > DateTime.Now && op.Positions
+                .Where(p => p.LeftSits > 0).Count() > 0)
+                .Take(5).ToListAsync();
+            return oportunities;
         }
 
         public async Task<int> GetOportunitiesNumber()
@@ -52,7 +68,7 @@ namespace Infrastructure.Repositories
             return await _context.Oportunities.OrderByDescending(op=>op.CreatedAt).Skip((page - 1) * 3).Take(3).ToListAsync();
         }
 
-        public async Task<List<User>> GetOportunityApplicantsForPosition(int oportunityId, int positionId)
+        public async Task<List<User>> GetOportunityApplicantsForPositionAsync(int oportunityId, int positionId)
         {
             var users = await _context.OportunityApplicants.Include(op=>op.User)
                 .Where(op => op.OportunityId == oportunityId && op.PositionId == positionId)

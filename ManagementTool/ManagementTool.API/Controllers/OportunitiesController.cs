@@ -2,16 +2,10 @@
 using Application.Queries.OportunityQueries;
 using Application.Queries.UserQueries;
 using AutoMapper;
-using Domain.Entities;
 using Domain.Entities.OportunityEntities;
 using ManagementTool.API.Dto.OportunityDtos;
-using ManagementTool.API.Dto.UserDtos;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Web.Resource;
-using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
 
 namespace ManagementTool.API.Controllers
@@ -45,6 +39,15 @@ namespace ManagementTool.API.Controllers
             };
 
             Response.Headers.Add("x-total", JsonConvert.SerializeObject(metaData));
+            return Ok(oportunitiesDto);
+        }
+
+        [HttpGet]
+        [Route("available")]
+        public async Task<IActionResult> GetAvailable()
+        {
+            var oportunities = await _mediator.Send(new GetAvailableOportunitiesQuery());
+            var oportunitiesDto = _mapper.Map<List<OportunityDto>>(oportunities);
             return Ok(oportunitiesDto);
         }
 
@@ -96,14 +99,6 @@ namespace ManagementTool.API.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        [Route("{id}/positions/{positionId}/applicants")]
-        public async Task<IActionResult> GetApplicants(int id,int positionId)
-        {
-            var users = await _mediator.Send(new GetApplicantsQuery { OportunityId = id, PositionId = positionId });
-            var usersDto = _mapper.Map<List<UserDto>>(users);
-            return Ok(usersDto);
-        }
 
         [HttpPost]
         [Route("{id}")]
@@ -126,7 +121,7 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _mediator.Send(new DeleteOportunityCommand { Id = id });
-            return Ok();
+            return NoContent();
         }
     }
 }

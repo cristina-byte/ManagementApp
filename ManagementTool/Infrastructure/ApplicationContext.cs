@@ -15,7 +15,7 @@ namespace Infrastructure
         {
 
         }
-        public DbSet<User> Users{get;set;}
+        public override DbSet<User> Users{get;set;}
         public DbSet<Team> Teams { get;set;}
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatMember> ChatMembers { get; set; }

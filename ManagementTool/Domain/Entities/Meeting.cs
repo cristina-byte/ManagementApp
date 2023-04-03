@@ -10,15 +10,14 @@ namespace Domain.Entities
         public DateTime EndDate { get; set; }
         public User Organizator { get; set; }
         public ICollection<MeetingInvited> MeetingInvited { get; set; }
-
-        public Meeting(string title, string address, DateTime startDate,DateTime endDate)
+       
+        public bool isBetweenDates(DateTime date1, DateTime date2)
         {
-            Title = title;
-            Address = address;
-            StartDate = startDate;
-            EndDate = endDate;
-        }
+            var date= new DateTime(this.StartDate.Year,this.StartDate.Month,this.StartDate.Day);
 
-        public override string ToString() => $"Title: Title \nAddress: Address \nDate: Date";
+            if (DateTime.Compare(date,date1)>=0 && DateTime.Compare(date, date2) <= 0)
+                return true;
+            return false;
+        }
     }
 }

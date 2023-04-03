@@ -12,15 +12,15 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Task2> CreateAsync(Task2 task)
+        public async Task CreateAsync(Task2 task)
         {
             var t=await _context.Tasks.AddAsync(task);
-            return t.Entity;
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var task = await _context.Tasks.FindAsync(id);
+            _context.Tasks.Remove(task);
         }
 
         public Task<IEnumerable<Task2>> GetAllAsync(int toDoId)
@@ -33,9 +33,12 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(int id, Task2 task)
+        public async Task UpdateAsync(int id, Boolean isDone)
         {
-            throw new NotImplementedException();
+            var task=await _context.Tasks.FindAsync(id);
+            task.isDone = isDone;
+            
         }
+
     }
 }

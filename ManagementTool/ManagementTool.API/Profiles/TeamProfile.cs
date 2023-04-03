@@ -13,7 +13,7 @@ namespace ManagementTool.API.Profiles
             CreateMap<Team, TeamDto>()
             .ForMember(tdto => tdto.Id, opt => opt.MapFrom(team => team.Id))
             .ForMember(tdto => tdto.Name, opt => opt.MapFrom(team => team.Name))
-            .ForMember(tdto=>tdto.ChatId,opt=>opt.MapFrom(team=>team.Chat.Id))
+            
             .ForMember(tdto => tdto.CreatedAt, opt => opt.MapFrom(team => team.CreatedAt));
         }
     }

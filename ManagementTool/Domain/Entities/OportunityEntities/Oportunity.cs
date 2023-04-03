@@ -15,19 +15,5 @@ namespace Domain.Entities.OportunityEntities
         public DateTime ApplicationDeadline { get; set; }
         public ICollection<OportunityApplicant> OportunityApplicants { get; set; }
 
-        public Oportunity(string title, string description,
-              DateTime startDate, DateTime endDate, string location,DateTime applicationDeadline,string imageLink)
-        {
-            Title = title;
-            CreatedAt = DateTime.Now;
-            Description = description;
-            Positions = new List<Position>();
-            StartDate = startDate;
-            EndDate = endDate;
-            Location = location;
-            ImageLink = imageLink;
-            ApplicationDeadline = applicationDeadline;
-        }
-
     }
 }

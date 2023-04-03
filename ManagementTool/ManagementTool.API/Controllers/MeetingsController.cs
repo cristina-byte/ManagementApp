@@ -46,7 +46,7 @@ namespace ManagementTool.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]PostMeetingDto meeting)
         {
-            var m = await _mediator.Send(new CreateMeetingCommand
+           await _mediator.Send(new CreateMeetingCommand
             {
                 Title = meeting.Title,
                 Address = meeting.Address,
@@ -64,7 +64,7 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> Cancel(int meetingId)
         {
             await _mediator.Send(new CancelMeetingCommand { Id = meetingId });
-            return Ok();
+            return NoContent();
         }
 
         [HttpPut]

@@ -8,6 +8,6 @@ namespace ManagementTool.API.Dto.TeamDtos
         public int Id { get; private set; }
         public string Title { get; set; }
         public ICollection<UserDto> AssignedTo { get; set; }
-        public string Status { get; set; }
+        public Boolean IsDone { get; set; }
     }
 }

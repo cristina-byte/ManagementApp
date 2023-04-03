@@ -1,5 +1,4 @@
 ﻿using Application.Abstraction;
-using Azure.Core;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +13,9 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Meeting> CreateAsync(Meeting meeting)
+        public async Task CreateAsync(Meeting meeting)
         {
-            var task=await _context.AddAsync(meeting);
-            return task.Entity;
+            await _context.Meetings.AddAsync(meeting);
         }
 
         public async Task Delete(int id)
@@ -28,16 +26,21 @@ namespace Infrastructure.Repositories
 
         public async Task<Meeting> GetAsync(int id)
         {
-            return await _context.Meetings.Include(meeting=>meeting.Organizator).Include(meeting=>meeting.MeetingInvited)
-                .ThenInclude(mI=>mI.User).Where(m => m.Id == id).FirstOrDefaultAsync();
+            return await _context.Meetings
+                .Include(meeting=>meeting.Organizator)
+                .Include(meeting=>meeting.MeetingInvited)
+                .ThenInclude(mI=>mI.User)
+                .Where(m => m.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Meeting>> GetAllAsync(int userId,int month,int year)
         {
-            return await _context.MeetingInviteds.Where(mI=>mI.UserId==userId).Join(
-             _context.Meetings,
-              meetingInvited => meetingInvited.MeetingId,
-              meeting => meeting.Id,
+            return await _context.MeetingInviteds.Where(mI=>mI.UserId==userId)
+                .Join(
+                _context.Meetings,
+                meetingInvited => meetingInvited.MeetingId,
+                meeting => meeting.Id,
                (meetingInvited, meeting) => meeting).Include(meeting=>meeting.Organizator)
                .Where(m=>m.StartDate.Year==year && m.StartDate.Month==month).ToListAsync();
         }
@@ -54,9 +57,13 @@ namespace Infrastructure.Repositories
             foreach (var guest in guestsId)
             {
                 var user = await _context.Users.FindAsync(guest);
-                var meetingInvited = new MeetingInvited();
-                meetingInvited.Meeting = meeting;
-                meetingInvited.User = user;
+
+                var meetingInvited = new MeetingInvited()
+                {
+                    Meeting = meeting,
+                    User = user,
+                };
+
                 meetInv.Add(meetingInvited);
             }
             await _context.MeetingInviteds.AddRangeAsync(meetInv);

@@ -5273,11 +5273,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\ManagementTool.API\\ManagementTool.API.csproj",
+      "projectUniqueName": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\ManagementTool.API\\ManagementTool.API.csproj",
       "projectName": "ManagementTool.API",
-      "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\ManagementTool.API\\ManagementTool.API.csproj",
+      "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\ManagementTool.API\\ManagementTool.API.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\ManagementTool.API\\obj\\",
+      "outputPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\ManagementTool.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5294,11 +5294,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj": {
-              "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Application\\Application.csproj"
+            "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Application\\Application.csproj": {
+              "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Application\\Application.csproj"
             },
-            "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "E:\\Amdaris Internship\\MyRepository\\ManagementApp\\Project\\ManagementTool\\Infrastructure\\Infrastructure.csproj"
+            "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -5379,24 +5379,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.12, 6.0.12]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.12, 6.0.12]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.12, 6.0.12]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.12, 6.0.12]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5405,7 +5387,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

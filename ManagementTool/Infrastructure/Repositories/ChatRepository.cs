@@ -17,7 +17,12 @@ namespace Infrastructure.Repositories
 
         public async Task AddParticipantAsync(int userId, int chatId)
         {
-            var chatMember = new ChatMember(userId, chatId);
+            var chatMember = new ChatMember
+            {
+                UserId=userId, 
+                ChatId=chatId 
+            };
+
             await _context.ChatMembers.AddAsync(chatMember);
         }
 

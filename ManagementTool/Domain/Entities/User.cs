@@ -1,16 +1,12 @@
-﻿
-using Domain.Entities.TeamEntities;
+﻿using Domain.Entities.TeamEntities;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using Task = Domain.Entities.TeamEntities.Task;
 
 namespace Domain.Entities
 {
     public class User:IdentityUser<int>
     {
-        public override int Id { get;set; }
-        public Boolean IsOnline { get; set; }
+        public override int Id { get; set; }
+        public Boolean IsOnline {  get; }
         public string? ImageLink { get; set; }
         public  string Name { get; set; }
         public override string Email { get; set; }
@@ -21,24 +17,6 @@ namespace Domain.Entities
         public ICollection<UserTask> Tasks { get; set; }    
         public ICollection<MeetingInvited> MeetingInvited { get; set; }
         public ICollection<OportunityApplicant> OportunitiyApplicants { get; set; }
-
-     
-        public User(string userName,string name, string phone,DateTime birthDay)
-        {
-            UserName = userName;
-            Name = name;
-            PhoneNumber = phone;
-            BirthDay = birthDay;
-            Email = userName;
-        }
-
-        public User() { }
-
-        public User(string imageLink) {
-            ImageLink = imageLink;
-        
-        }
-
 
     }
 }

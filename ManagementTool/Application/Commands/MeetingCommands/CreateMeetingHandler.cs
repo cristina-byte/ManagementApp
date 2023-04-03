@@ -18,18 +18,24 @@ namespace Application.Commands.MeetingCommands
         {
             
             var user = await _unitOfWork.MemberRepository.GetByIdAsync(request.UserId);
-            var meeting = new Meeting(request.Title, request.Address, request.StartDate,request.EndDate);
-            meeting.Organizator = user;
-            
-            var createdMeeting = await _unitOfWork.MeetingRepository.CreateAsync(meeting);
+
+            var meeting = new Meeting(){
+                Title=request.Title,
+                Address=request.Address,
+                StartDate=request.StartDate,
+                EndDate=request.EndDate,
+                Organizator=user  
+            };
+
+            await _unitOfWork.MeetingRepository.CreateAsync(meeting);
 
             List<int> guestsId = new List<int>(request.GuestsId);
             guestsId.Add(user.Id);
 
-            await _unitOfWork.MeetingRepository.AddGuests(createdMeeting,guestsId);
+            await _unitOfWork.MeetingRepository.AddGuests(meeting,guestsId);
 
             await _unitOfWork.Save();
-            return createdMeeting;
+            return meeting;
         }
     }
 }

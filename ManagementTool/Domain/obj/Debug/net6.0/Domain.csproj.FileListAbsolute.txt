@@ -38,3 +38,17 @@ E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\o
 E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.pdb
 E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\Domain.genruntimeconfig.cache
 E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Domain\obj\Debug\net6.0\ref\Domain.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\bin\Debug\net6.0\Domain.deps.json
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\bin\Debug\net6.0\Domain.runtimeconfig.json
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\bin\Debug\net6.0\Domain.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\bin\Debug\net6.0\Domain.pdb
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\refint\Domain.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.pdb
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\Domain.genruntimeconfig.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Domain\obj\Debug\net6.0\ref\Domain.dll

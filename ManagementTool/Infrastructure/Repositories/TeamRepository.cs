@@ -15,11 +15,9 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Team> CreateAsync(Team team)
+        public async Task CreateAsync(Team team)
         {
-
             var task=await _context.Teams.AddAsync(team);
-            return task.Entity;
         }
 
         public async Task Delete(int id)
@@ -42,16 +40,33 @@ namespace Infrastructure.Repositories
 
         public async Task AddMemberAsync(int userId, int teamId)
         {
-            var teamMember = new MemberTeam(userId, teamId);
+            var teamMember = new MemberTeam
+            {
+                MemberId=userId, 
+                TeamId=teamId 
+            };
             await _context.TeamMembers.AddAsync(teamMember);
         }
 
         public async Task<IEnumerable<Team>> GetTeamsForUser(int userId)
         {
             var teams = await _context.TeamMembers.Where(tm => tm.MemberId == userId)
-                .Include(tm => tm.Team).ThenInclude(team => team.Chat)
+                .Include(tm => tm.Team)
+                .ThenInclude(team => team.MemberTeams)
+                .ThenInclude(tm=>tm.Member)
                 .Select(tm => tm.Team).ToListAsync();
+
             return teams;
+        }
+
+        public async Task<ICollection<User>> GetMembersAsync(int teamId)
+        {
+            var members = await _context.TeamMembers.Where(tm => tm.TeamId == teamId)
+                .Include(tm => tm.Member)
+                .Select(tm => tm.Member)
+                .ToListAsync();
+
+            return members;
         }
     }
 }

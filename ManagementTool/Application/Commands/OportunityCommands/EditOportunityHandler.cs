@@ -15,9 +15,17 @@ namespace Application.Commands.OportunityCommands
 
         public async Task<Unit> Handle(EditOportunityCommand request, CancellationToken cancellationToken)
         {
-            var newOportunity = new Oportunity(request.Title, request.Description, request.StartDate, request.EndDate, 
-                request.Location, request.ApplicationDeadline,request.ImageLink);
-            newOportunity.Positions = request.Positions;
+            var newOportunity = new Oportunity(){
+                Title = request.Title,
+                Description = request.Description,
+                StartDate = request.StartDate,
+                EndDate = request.EndDate,
+                Location = request.Location,
+                ApplicationDeadline = request.ApplicationDeadline,
+                ImageLink = request.ImageLink,
+                Positions = request.Positions
+            };
+            
             await _unitOfWork.OportunityRepository.UpdateAsync(request.Id, newOportunity);
             await _unitOfWork.Save();
             return Unit.Value;

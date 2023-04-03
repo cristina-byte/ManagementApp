@@ -10,13 +10,6 @@ namespace Domain.Entities
         public User Sender { get; set; }
         public Chat Chat { get; set; }
 
-        public Message(string content, DateTime sentAt)
-        {
-            Id = Id;
-            Content = content;
-            SentAt = sentAt;
-        }
-
         public TimeSpan GetTimeByNow() => DateTime.Now - SentAt;   
     }
 }

@@ -20,8 +20,17 @@ namespace Application.Commands.ChatCommands
             var chat = new Chat();
             var uniqueValue = Generator.CantorPairFunction(request.SenderId, request.ReceiverId);
             chat.PrivatePair = uniqueValue;
-            var sender = new ChatMember(request.SenderId, chat.Id);
-            var receiver = new ChatMember(request.ReceiverId, chat.Id);
+            var sender = new ChatMember()
+            {
+                UserId=request.SenderId,
+                ChatId=chat.Id 
+            };
+            var receiver = new ChatMember()
+            {
+                UserId=request.ReceiverId,
+                ChatId=chat.Id
+            };
+
             chat.Participants.Add(sender);
             chat.Participants.Add(receiver);
             await _unitOfWork.ChatRepository.CreateAsync(chat);

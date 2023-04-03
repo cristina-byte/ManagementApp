@@ -43,14 +43,16 @@ namespace ManagementTool.API.Controllers
                 return BadRequest("User already exists");
             }
 
-            User user = new User();
-            user.Email = userSignUpDto.Email;
-            user.UserName = userSignUpDto.UserName;
-            user.PhoneNumber = userSignUpDto.PhoneNumber;
-            user.Name = userSignUpDto.Name;
-            user.BirthDay = userSignUpDto.BirthDay;
-            user.ImageLink = "https://media.istockphoto.com/id/1298261537/vector/blank-man-profile-head-icon-placeholder.jpg?s=612x612&w=0&k=20&c=CeT1RVWZzQDay4t54ookMaFsdi7ZHVFg2Y5v7hxigCA=";
-
+            User user = new User()
+            {
+                Email = userSignUpDto.Email,
+                UserName = userSignUpDto.UserName,
+                PhoneNumber = userSignUpDto.PhoneNumber,
+                Name = userSignUpDto.Name,
+                BirthDay = userSignUpDto.BirthDay,
+                ImageLink = "https://media.istockphoto.com/id/1298261537/vector/blank-man-profile-head-icon-placeholder.jpg?s=612x612&w=0&k=20&c=CeT1RVWZzQDay4t54ookMaFsdi7ZHVFg2Y5v7hxigCA="
+            };
+           
             var userCreateResult = await _userManager.CreateAsync(user, userSignUpDto.Password);
 
             if (userCreateResult.Succeeded)
@@ -86,7 +88,7 @@ namespace ManagementTool.API.Controllers
             if (!deleteAction.Succeeded)
                 return BadRequest("Failed to delete");
 
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost]

@@ -16,8 +16,12 @@ namespace Application.Commands.TeamCommands
         public async Task<Unit> Handle(CreateToDoListCommand request, CancellationToken cancellationToken)
         {
             var team = await _unitOfWork.TeamRepository.GetAsync(request.TeamId);
-            var toDo = new ToDo(request.Name);
-            toDo.Team = team;
+            var toDo = new ToDo
+            {
+                Name=request.Name,
+                Team=team
+            };
+            
             await _unitOfWork.ToDoRepository.CreateAsync(toDo);
             await _unitOfWork.Save();
             return Unit.Value; 

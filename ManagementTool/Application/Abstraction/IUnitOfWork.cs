@@ -1,7 +1,7 @@
 ﻿
 namespace Application.Abstraction
 {
-   public interface IUnitOfWork:IDisposable
+   public interface IUnitOfWork
     {
         public IMeetingRepository MeetingRepository { get; }
         public IMemberRepository MemberRepository { get; }

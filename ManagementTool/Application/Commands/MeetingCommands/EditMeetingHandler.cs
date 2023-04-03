@@ -16,9 +16,16 @@ namespace Application.Commands.MeetingCommands
         public async Task<Unit> Handle(EditMeetingCommand request, CancellationToken cancellationToken)
         {
             await _unitOfWork.MeetingRepository.UpdateAsync(request.Id,
-                new Meeting(request.Title,request.Address,request.StartDate,request.EndDate));
+                new Meeting()
+                {
+                    Title = request.Title,
+                    Address = request.Address,
+                    StartDate = request.StartDate,
+                    EndDate = request.EndDate
+                });
             await _unitOfWork.Save();
             return Unit.Value;
+           
         }
     }
 }

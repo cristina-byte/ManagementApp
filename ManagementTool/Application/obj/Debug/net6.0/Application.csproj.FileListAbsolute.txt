@@ -47,3 +47,20 @@ E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Applicat
 E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\Application.pdb
 E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\Application.genruntimeconfig.cache
 E:\Amdaris Internship\MyRepository\ManagementApp\Project\ManagementTool\Application\obj\Debug\net6.0\ref\Application.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\bin\Debug\net6.0\Application.deps.json
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\bin\Debug\net6.0\Application.runtimeconfig.json
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\bin\Debug\net6.0\Application.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\bin\Debug\net6.0\Application.pdb
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\bin\Debug\net6.0\Domain.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\bin\Debug\net6.0\Domain.pdb
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.csproj.AssemblyReference.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.AssemblyInfoInputs.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.AssemblyInfo.cs
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.csproj.CoreCompileInputs.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.csproj.CopyComplete
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\refint\Application.dll
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.pdb
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\Application.genruntimeconfig.cache
+E:\Internship Amdaris 2022-2023\Final Project\BackEnd\ManagementTool\Application\obj\Debug\net6.0\ref\Application.dll

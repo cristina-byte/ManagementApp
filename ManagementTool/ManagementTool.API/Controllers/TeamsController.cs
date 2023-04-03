@@ -5,6 +5,7 @@ using AutoMapper;
 using Domain.Entities.TeamEntities;
 using ManagementTool.API.Dto;
 using ManagementTool.API.Dto.TeamDtos;
+using ManagementTool.API.Dto.UserDtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,8 @@ using Microsoft.Identity.Web.Resource;
 
 namespace ManagementTool.API.Controllers
 {
-    [Authorize]
-    [Route("api/Users/{userId}/[controller]")]
+   
+    [Route("api/[controller]")]
     [ApiController]
     public class TeamsController : ControllerBase
     {
@@ -27,10 +28,10 @@ namespace ManagementTool.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserTeams(int userId)
+        public async Task<IActionResult> GetUserTeams([FromQuery]int userId)
         {
             var teams = await _mediator.Send(new GetUserTeamsQuery { UserId = userId });
-            var teamsDto = _mapper.Map<List<TeamDto>>(teams);
+            var teamsDto = _mapper.Map<List<GetTeamDto>>(teams);
             return Ok(teamsDto);
         }
 
@@ -44,6 +45,15 @@ namespace ManagementTool.API.Controllers
             var chat = await _mediator.Send(new GetChatQuery { Id = team.Chat.Id});
             var chatDto = _mapper.Map<GetChatDto>(chat);
             return Ok(chatDto);
+        }
+
+        [HttpGet]
+        [Route("{teamId}/members")]
+        public async Task<IActionResult> GetTeamMembers(int teamId)
+        {
+            var teamMembers = await _mediator.Send(new GetTeamMembersQuery { TeamId = teamId });
+            var teamMembersDto = _mapper.Map<List<UserDto>>(teamMembers);
+            return Ok(teamMembersDto);
         }
 
         [HttpGet]
@@ -69,7 +79,9 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> CreateTeam([FromBody]PostTeamDto team)
         {
            var addedTeam= await _mediator.Send(new CreateTeamCommand{Name = team.Name,AdminId = team.AdminId});
-            return CreatedAtAction(nameof(GetById), new {Id = addedTeam.Id }, addedTeam); 
+           await _mediator.Send(new AddMembersCommand { TeamId = addedTeam.Id, UsersId = new List<int> { team.AdminId } });
+
+            return Ok(addedTeam);
         }
 
         [HttpDelete]
@@ -77,7 +89,7 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> DeleteTeam(int teamId)
         {
             await _mediator.Send(new DeleteTeamCommand { Id = teamId });
-            return Ok();
+            return NoContent();
         }
 
         [HttpPut]
@@ -85,7 +97,7 @@ namespace ManagementTool.API.Controllers
         public async Task<IActionResult> Update(int teamId, [FromBody]string name)
         {
             await _mediator.Send(new EditTeamCommand { Id = teamId, Name = name });
-            return Ok();
+            return NoContent();
         }
     }
 }
