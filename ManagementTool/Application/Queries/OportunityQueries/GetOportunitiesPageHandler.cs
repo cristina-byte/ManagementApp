@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using MediatR;
 
 namespace Application.Queries.OportunityQueries
@@ -15,7 +15,7 @@ namespace Application.Queries.OportunityQueries
 
         public async Task<IEnumerable<Oportunity>> Handle(GetOportunitiesPageQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.OportunityRepository.GetOportunitiesPageAsync(request.Page);
+            return await _unitOfWork.OportunityRepository.GetPageAsync(request.Page);
         }
     }
 }

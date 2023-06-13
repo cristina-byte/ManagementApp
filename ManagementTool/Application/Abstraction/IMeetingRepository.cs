@@ -1,14 +1,10 @@
-﻿using Domain.Entities;
+﻿using Domain.MeetingEntities;
 
 namespace Application.Abstraction
 {
-    public interface IMeetingRepository
+    public interface IMeetingRepository:IRepository<Meeting>,IReadOnlyRepository<Meeting>
     {
-        public Task CreateAsync(Meeting meeting);
-        public Task UpdateAsync(int id,Meeting meeting);
-        public Task Delete(int id);
-        public Task<Meeting> GetAsync(int id);
-        public Task<IEnumerable<Meeting>> GetAllAsync(int userId,int month,int year);
-        public Task AddGuests(Meeting meeting,IEnumerable<int> guests);
+        Task<IEnumerable<Meeting>> GetAsync(int userId,int month,int year);
+        public Task AddGuestsAsync(Meeting meeting,IEnumerable<int> guests);
     }
 }

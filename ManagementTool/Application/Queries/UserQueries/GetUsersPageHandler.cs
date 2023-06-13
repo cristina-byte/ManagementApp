@@ -15,7 +15,7 @@ namespace Application.Queries.UsersQueries
 
         public async Task<IEnumerable<User>> Handle(GetUsersPageQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.MemberRepository.GetMembersPageAsync(request.Page);
+            return await _unitOfWork.MemberRepository.GetPageAsync(request.Page);
         }
     }
 }

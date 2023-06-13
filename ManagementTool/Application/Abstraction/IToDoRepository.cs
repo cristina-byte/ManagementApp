@@ -1,15 +1,9 @@
-﻿using Domain.Entities.TeamEntities;
-using Task = System.Threading.Tasks.Task;
-using Task2 = Domain.Entities.TeamEntities.Task;
+﻿using Domain.TeamEntities;
 
 namespace Application.Abstraction
 {
-    public interface IToDoRepository
+    public interface IToDoRepository:IRepository<ToDo>,IReadOnlyRepository<ToDo>
     {
-        public Task CreateAsync(ToDo toDoItem);
-        public Task UpdateAsync(int id, ToDo toDoItem);
-        public Task Delete(int id);
-        public Task<ToDo> GetAsync(int id);
-        public Task<IEnumerable<ToDo>> GetAllAsync(int teamId);
+        public Task<IEnumerable<ToDo>> GetAsync(int teamId);
     }
 }

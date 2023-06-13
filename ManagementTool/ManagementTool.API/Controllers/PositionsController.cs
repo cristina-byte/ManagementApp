@@ -2,7 +2,6 @@
 using AutoMapper;
 using ManagementTool.API.Dto.UserDtos;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManagementTool.API.Controllers

@@ -1,9 +1,4 @@
 ﻿using Application.Abstraction;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure
 {
@@ -12,10 +7,10 @@ namespace Infrastructure
         private readonly ApplicationContext _context;
 
         public UnitOfWork(ApplicationContext context,
-            IMeetingRepository meetingRepository, IMemberRepository memberRepository,IOportunityRepository oportunityRepository
-            ,ITeamRepository teamRepository,IToDoRepository toDoRepository,ITaskRepository taskRepository,
-            IChatRepository chatRepository,
-            IMessageRepository messageRepository,IOportunityPositionRepository oportunityPositionRepository)
+            IMeetingRepository meetingRepository, IMemberRepository memberRepository,
+            IOportunityRepository oportunityRepository,ITeamRepository teamRepository,
+            IToDoRepository toDoRepository,ITaskRepository taskRepository,
+            IOportunityPositionRepository oportunityPositionRepository)
         {
             _context = context;
             MeetingRepository = meetingRepository;
@@ -24,8 +19,6 @@ namespace Infrastructure
             TaskRepository = taskRepository;
             TeamRepository = teamRepository;
             ToDoRepository = toDoRepository;
-            ChatRepository = chatRepository;
-            MessageRepository = messageRepository;
             OportunityPositionRepository = oportunityPositionRepository;
         }
 
@@ -35,11 +28,9 @@ namespace Infrastructure
         public ITaskRepository TaskRepository { get; private set; }
         public ITeamRepository TeamRepository { get; private set; }
         public IToDoRepository ToDoRepository { get; private set; }
-        public IChatRepository ChatRepository { get; private set; }
-        public IMessageRepository MessageRepository { get; private set; }
         public IOportunityPositionRepository OportunityPositionRepository { get; private set; }
    
-        public async Task Save()
+        public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }

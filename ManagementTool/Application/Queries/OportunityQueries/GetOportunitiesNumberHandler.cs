@@ -1,10 +1,5 @@
 ﻿using Application.Abstraction;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Queries.OportunityQueries
 {
@@ -19,7 +14,7 @@ namespace Application.Queries.OportunityQueries
 
         public async Task<int> Handle(GetOportunitiesNumberQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.OportunityRepository.GetOportunitiesNumber();
+            return await _unitOfWork.OportunityRepository.GetNumberAsync();
         }
     }
 }

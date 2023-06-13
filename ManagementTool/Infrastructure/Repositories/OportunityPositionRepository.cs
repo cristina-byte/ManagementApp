@@ -1,10 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.OportunityEntities;
 
 namespace Infrastructure.Repositories
 {
@@ -22,16 +17,21 @@ namespace Infrastructure.Repositories
             await _context.Positions.AddAsync(position);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var position = await _context.Positions.FindAsync(id);
             _context.Positions.Remove(position);
         }
 
-        public async Task Update(int positionId)
+        public async Task DecrementAvailableSpotsAsync(int positionId)
         {
             var position = await _context.Positions.FindAsync(positionId);
             position.LeftSits = position.LeftSits - 1;
+        }
+
+        public Task UpdateAsync(Position entity, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

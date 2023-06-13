@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.MeetingEntities;
 using MediatR;
 using System;
 using System.Collections.Generic;

@@ -1,10 +1,5 @@
 ﻿using Application.Abstraction;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands.TeamCommands
 {
@@ -18,8 +13,8 @@ namespace Application.Commands.TeamCommands
         }
         public async Task<Unit> Handle(DeleteTasksListCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.ToDoRepository.Delete(request.TasksListId);
-            await _unitOfWork.Save();
+            await _unitOfWork.ToDoRepository.DeleteAsync(request.TasksListId);
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

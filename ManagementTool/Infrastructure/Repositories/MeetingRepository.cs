@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Domain.MeetingEntities;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,23 +19,12 @@ namespace Infrastructure.Repositories
             await _context.Meetings.AddAsync(meeting);
         }
 
-        public async Task Delete(int id)
+        public async Task<IEnumerable<Meeting>> GetAsync()
         {
-            var meeting = await _context.Meetings.FirstOrDefaultAsync(me => me.Id == id);
-            _context.Meetings.Remove(meeting);
+            return await _context.Meetings.ToListAsync();
         }
 
-        public async Task<Meeting> GetAsync(int id)
-        {
-            return await _context.Meetings
-                .Include(meeting=>meeting.Organizator)
-                .Include(meeting=>meeting.MeetingInvited)
-                .ThenInclude(mI=>mI.User)
-                .Where(m => m.Id == id)
-                .FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<Meeting>> GetAllAsync(int userId,int month,int year)
+        public async Task<IEnumerable<Meeting>> GetAsync(int userId,int month,int year)
         {
             return await _context.MeetingInviteds.Where(mI=>mI.UserId==userId)
                 .Join(
@@ -45,19 +35,39 @@ namespace Infrastructure.Repositories
                .Where(m=>m.StartDate.Year==year && m.StartDate.Month==month).ToListAsync();
         }
 
-        public async Task UpdateAsync(int id, Meeting meeting)
+        public async Task<Meeting> GetByIdAsync(int id)
         {
-           throw new NotImplementedException();
+            return await _context.Meetings
+                .Include(meeting => meeting.Organizator)
+                .Include(meeting => meeting.MeetingInvited)
+                .ThenInclude(mI => mI.User)
+                .Where(m => m.Id == id)
+                .FirstOrDefaultAsync();
         }
 
-        public async Task AddGuests(Meeting meeting,IEnumerable<int> guestsId)
+        public async Task UpdateAsync(Meeting entity, int id)
+        {
+            var meeting = await _context.Meetings.FindAsync(id);
+
+            meeting.Title = entity.Title;
+            meeting.Address = entity.Address;
+            meeting.StartDate = entity.StartDate;
+            meeting.EndDate = entity.EndDate;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var meeting = await _context.Meetings.FirstOrDefaultAsync(me => me.Id == id);
+            _context.Meetings.Remove(meeting);
+        }
+
+        public async Task AddGuestsAsync(Meeting meeting,IEnumerable<int> guestsId)
         {
             var meetInv= new List<MeetingInvited>();
 
             foreach (var guest in guestsId)
             {
                 var user = await _context.Users.FindAsync(guest);
-
                 var meetingInvited = new MeetingInvited()
                 {
                     Meeting = meeting,

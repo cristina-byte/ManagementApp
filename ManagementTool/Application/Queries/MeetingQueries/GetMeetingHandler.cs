@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities;
+using Domain.MeetingEntities;
 using MediatR;
 
 namespace Application.Queries.MeetingQueries
@@ -15,7 +15,7 @@ namespace Application.Queries.MeetingQueries
 
         public async Task<Meeting> Handle(GetMeetingQuery request, CancellationToken cancellationToken)
         {
-            var meeting = await _unitOfWork.MeetingRepository.GetAsync(request.Id);
+            var meeting = await _unitOfWork.MeetingRepository.GetByIdAsync(request.Id);
             return meeting;
         }
     }

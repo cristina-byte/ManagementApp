@@ -1,15 +1,11 @@
 ﻿using Application.Commands.TeamCommands;
-using Application.Queries.ChatQueries;
 using Application.Queries.TeamQueries;
 using AutoMapper;
-using Domain.Entities.TeamEntities;
 using ManagementTool.API.Dto;
 using ManagementTool.API.Dto.TeamDtos;
 using ManagementTool.API.Dto.UserDtos;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Web.Resource;
 
 namespace ManagementTool.API.Controllers
 {
@@ -25,26 +21,6 @@ namespace ManagementTool.API.Controllers
         {
             _mediator = mediator;
             _mapper = mapper;
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetUserTeams([FromQuery]int userId)
-        {
-            var teams = await _mediator.Send(new GetUserTeamsQuery { UserId = userId });
-            var teamsDto = _mapper.Map<List<GetTeamDto>>(teams);
-            return Ok(teamsDto);
-        }
-
-        [HttpGet]
-        [Route("{teamId}/Chat")]
-        public async Task<IActionResult> GetTeamChat(int teamId)
-        {
-            var team = await _mediator.Send(new GetTeamQuery { Id = teamId });
-            if (team == null)
-                return NotFound();
-            var chat = await _mediator.Send(new GetChatQuery { Id = team.Chat.Id});
-            var chatDto = _mapper.Map<GetChatDto>(chat);
-            return Ok(chatDto);
         }
 
         [HttpGet]

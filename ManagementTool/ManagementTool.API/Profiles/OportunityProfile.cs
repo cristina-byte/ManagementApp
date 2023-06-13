@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using ManagementTool.API.Dto.OportunityDtos;
 
 namespace ManagementTool.API.Profiles

@@ -1,4 +1,4 @@
-﻿using Domain.Entities.OportunityEntities;
+﻿using Domain.OportunityEntities;
 
 namespace ManagementTool.API.Dto.OportunityDtos
 {

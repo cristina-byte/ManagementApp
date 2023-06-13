@@ -1,17 +1,15 @@
 ﻿using Domain.Entities;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using Task = System.Threading.Tasks.Task;
 
 namespace Application.Abstraction
 {
-    public interface ITeamRepository
+    public interface ITeamRepository:IRepository<Team>,IReadOnlyRepository<Team>
     {
-        public Task CreateAsync(Team team);
-        public Task UpdateNameAsync(int id, string name);
-        public Task Delete(int id);
-        public Task<Team> GetAsync(int id);
-        public Task<ICollection<User>> GetMembersAsync(int teamId);
-        public Task AddMemberAsync(int memberId, int teamId);
-        public Task<IEnumerable<Team>> GetTeamsForUser(int userId);
+        Task UpdateAsync(int id, string name);
+        Task<IEnumerable<User>> GetMembersAsync(int teamId);
+        Task AddMemberAsync(int memberId, int teamId);
+        Task<IEnumerable<Team>> GetAsync(int userId);
+        Task<IEnumerable<ToDo>> GetTasksAsync(int teamId);
     }
 }

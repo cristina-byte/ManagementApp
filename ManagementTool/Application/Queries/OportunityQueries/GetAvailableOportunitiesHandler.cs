@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using MediatR;
 
 namespace Application.Queries.OportunityQueries

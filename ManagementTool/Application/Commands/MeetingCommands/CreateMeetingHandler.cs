@@ -1,7 +1,6 @@
 ﻿using Application.Abstraction;
-using Domain.Entities;
+using Domain.MeetingEntities;
 using MediatR;
-using System;
 
 namespace Application.Commands.MeetingCommands
 {
@@ -32,9 +31,9 @@ namespace Application.Commands.MeetingCommands
             List<int> guestsId = new List<int>(request.GuestsId);
             guestsId.Add(user.Id);
 
-            await _unitOfWork.MeetingRepository.AddGuests(meeting,guestsId);
+            await _unitOfWork.MeetingRepository.AddGuestsAsync(meeting,guestsId);
 
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
             return meeting;
         }
     }

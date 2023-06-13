@@ -13,7 +13,7 @@ namespace Application.Queries.UserQueries
 
         public async Task<int> Handle(GetMembersNumberQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.MemberRepository.GetMembersNumber();
+            return await _unitOfWork.MemberRepository.GetNumberAsync();
         }
     }
 }

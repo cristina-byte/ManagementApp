@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using ManagementTool.API.Dto.TeamDtos;
-using Task = Domain.Entities.TeamEntities.Task;
+using Task = Domain.TeamEntities.Task;
 
 namespace ManagementTool.API.Profiles
 {

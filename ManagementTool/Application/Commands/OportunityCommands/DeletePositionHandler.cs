@@ -14,8 +14,8 @@ namespace Application.Commands.OportunityCommands
 
         public async Task<Unit> Handle(DeletePositionCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.OportunityPositionRepository.Delete(request.Id);
-            await _unitOfWork.Save();
+            await _unitOfWork.OportunityPositionRepository.DeleteAsync(request.Id);
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

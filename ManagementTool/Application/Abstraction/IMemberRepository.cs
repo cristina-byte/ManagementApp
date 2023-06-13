@@ -2,13 +2,8 @@
 
 namespace Application.Abstraction
 {
-    public interface IMemberRepository
+    public interface IMemberRepository:IEnumerableRepository<User>,IReadOnlyRepository<User>
     {
-        public Task UpdateAsync(int id,User member);
-        public Task<User> GetByIdAsync(int id);
-        public Task<int> GetMembersNumber();
-        public Task<IEnumerable<User>> GetMembersAsync();
-        public Task<IEnumerable<User>> GetMembersPageAsync(int page);
-
+        Task UpdateAsync(string photoLink, int id);  
     }
 }

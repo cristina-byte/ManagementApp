@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using MediatR;
 
 namespace Application.Commands.OportunityCommands
@@ -26,8 +26,8 @@ namespace Application.Commands.OportunityCommands
                 Positions = request.Positions
             };
             
-            await _unitOfWork.OportunityRepository.UpdateAsync(request.Id, newOportunity);
-            await _unitOfWork.Save();
+            await _unitOfWork.OportunityRepository.UpdateAsync(newOportunity,request.Id);
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

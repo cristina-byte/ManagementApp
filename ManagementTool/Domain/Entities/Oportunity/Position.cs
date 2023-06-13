@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities.OportunityEntities
+﻿namespace Domain.OportunityEntities
 {
     public class Position
     {

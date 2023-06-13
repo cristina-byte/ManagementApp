@@ -14,8 +14,8 @@ namespace Application.Commands.MeetingCommands
 
         public async Task<Unit> Handle(CancelMeetingCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.MeetingRepository.Delete(request.Id);
-            await _unitOfWork.Save();
+            await _unitOfWork.MeetingRepository.DeleteAsync(request.Id);
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Task2 = Domain.Entities.TeamEntities.Task;
+using Task2 = Domain.TeamEntities.Task;
 
 namespace Infrastructure.Repositories
 {
@@ -17,28 +17,21 @@ namespace Infrastructure.Repositories
             var t=await _context.Tasks.AddAsync(task);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var task = await _context.Tasks.FindAsync(id);
             _context.Tasks.Remove(task);
         }
 
-        public Task<IEnumerable<Task2>> GetAllAsync(int toDoId)
+        public async Task UpdateAsync(Task2 entity, int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Task2>> GetAllForMemberAsync(int memberId)
+        public async Task UpdateAsync(int id, bool status)
         {
-            throw new NotImplementedException();
+            var task = await _context.Tasks.FindAsync(id);
+            task.isDone = status;
         }
-
-        public async Task UpdateAsync(int id, Boolean isDone)
-        {
-            var task=await _context.Tasks.FindAsync(id);
-            task.isDone = isDone;
-            
-        }
-
     }
 }

@@ -1,5 +1,7 @@
-﻿
-namespace Domain.Entities.TeamEntities
+﻿using Domain.Entities;
+
+namespace Domain.TeamEntities
+
 {
     public class Team
     {
@@ -10,7 +12,5 @@ namespace Domain.Entities.TeamEntities
         public ICollection<MemberTeam> MemberTeams { get; set; }
         public User Admin { get; set; }
         public ICollection<ToDo> ToDoList { get; set; }
-        public Chat? Chat { get; set; }
-
     }
 }

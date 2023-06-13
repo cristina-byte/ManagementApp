@@ -1,10 +1,5 @@
 ﻿using Application.Abstraction;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands.OportunityCommands
 {
@@ -19,8 +14,8 @@ namespace Application.Commands.OportunityCommands
 
         public async Task<Unit> Handle(DeleteOportunityCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.OportunityRepository.Delete(request.Id);
-            await _unitOfWork.Save();
+            await _unitOfWork.OportunityRepository.DeleteAsync(request.Id);
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

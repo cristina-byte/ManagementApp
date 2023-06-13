@@ -1,11 +1,7 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Application.Commands.OportunityCommands
 {
@@ -21,14 +17,15 @@ namespace Application.Commands.OportunityCommands
 
         public async Task<Unit> Handle(AddOportunityPositionCommand request, CancellationToken cancellationToken)
         {
-            var oportunity = await _unitOfWork.OportunityRepository.GetAsync(request.OportunityId);
+            var oportunity = await _unitOfWork.OportunityRepository.GetByIdAsync(request.OportunityId);
             var position = new Position(){
                 Name=request.Name,
-                LeftSits=request.LeftSits 
+                LeftSits=request.LeftSits,
+                Oportunity=oportunity
             };
-            position.Oportunity = oportunity;
+         
             await _unitOfWork.OportunityPositionRepository.CreateAsync(position);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

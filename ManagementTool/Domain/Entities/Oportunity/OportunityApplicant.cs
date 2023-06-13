@@ -1,6 +1,6 @@
-﻿using Domain.Entities.OportunityEntities;
+﻿using Domain.Entities;
 
-namespace Domain.Entities
+namespace Domain.OportunityEntities
 {
     public class OportunityApplicant
     {

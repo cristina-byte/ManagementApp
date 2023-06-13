@@ -1,11 +1,11 @@
 ﻿using Domain.Entities;
-using Domain.Entities.OportunityEntities;
-using Domain.Entities.TeamEntities;
+using Domain.MeetingEntities;
+using Domain.OportunityEntities;
+using Domain.TeamEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
-using Task = Domain.Entities.TeamEntities.Task;
+using Task = Domain.TeamEntities.Task;
 
 namespace Infrastructure
 {
@@ -15,17 +15,15 @@ namespace Infrastructure
         {
 
         }
+
         public override DbSet<User> Users{get;set;}
         public DbSet<Team> Teams { get;set;}
-        public DbSet<Chat> Chats { get; set; }
-        public DbSet<ChatMember> ChatMembers { get; set; }
         public DbSet<MemberTeam> TeamMembers { get; set; }
         public DbSet<ToDo> ToDoLists { get; set; }
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Oportunity> Oportunities { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<MeetingInvited> MeetingInviteds { get; set; }
-        public DbSet<Message> Messages { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<OportunityApplicant> OportunityApplicants { get; set; }
        
@@ -33,8 +31,7 @@ namespace Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
-
+            //MemberTeam configuration
             modelBuilder.Entity<MemberTeam>().HasKey(mt => new { mt.MemberId, mt.TeamId });
 
             //UserTask configuration
@@ -47,17 +44,7 @@ namespace Infrastructure
                     .WithMany(t => t.AssignedTo)
                     .HasForeignKey(ut => ut.TaskId);
 
-            //ChatMember configuration
-            var chatMember=modelBuilder.Entity<ChatMember>();
-            chatMember.HasKey(cm => new { cm.UserId, cm.ChatId });
-            chatMember.HasOne(cm => cm.Chat)
-                      .WithMany(c => c.Participants)
-                      .HasForeignKey(cm => cm.ChatId);
-
-            chatMember.HasOne(cm => cm.User)
-                      .WithMany(m => m.Conversations)
-                      .HasForeignKey(cm => cm.UserId);
-
+            //Meeting configuration
             var meetingInvited = modelBuilder.Entity<MeetingInvited>();
             meetingInvited.HasKey(mI => new { mI.UserId, mI.MeetingId });
 
@@ -69,6 +56,7 @@ namespace Infrastructure
                             .WithMany(m => m.MeetingInvited)
                             .HasForeignKey(mI => mI.MeetingId);
 
+            //OportunityApplicant configuration
             var oportunityApplicant = modelBuilder.Entity<OportunityApplicant>();
             oportunityApplicant.HasKey(oApp => new { oApp.UserId, oApp.OportunityId,oApp.PositionId });
 

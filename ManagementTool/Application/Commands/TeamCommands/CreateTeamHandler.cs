@@ -1,6 +1,6 @@
 ﻿using Application.Abstraction;
-using Domain.Entities;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
+
 using MediatR;
 
 namespace Application.Commands.TeamCommands
@@ -25,7 +25,7 @@ namespace Application.Commands.TeamCommands
             
             await _unitOfWork.TeamRepository.CreateAsync(team);
             
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
             return team;
         }
     }

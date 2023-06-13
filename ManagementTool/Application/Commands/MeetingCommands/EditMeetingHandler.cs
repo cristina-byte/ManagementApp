@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities;
+using Domain.MeetingEntities;
 using MediatR;
 
 namespace Application.Commands.MeetingCommands
@@ -15,17 +15,18 @@ namespace Application.Commands.MeetingCommands
 
         public async Task<Unit> Handle(EditMeetingCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.MeetingRepository.UpdateAsync(request.Id,
+            await _unitOfWork.MeetingRepository.UpdateAsync(
+
                 new Meeting()
                 {
                     Title = request.Title,
                     Address = request.Address,
                     StartDate = request.StartDate,
                     EndDate = request.EndDate
-                });
-            await _unitOfWork.Save();
+                },request.Id);
+
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
-           
         }
     }
 }

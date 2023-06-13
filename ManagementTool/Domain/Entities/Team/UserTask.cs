@@ -1,5 +1,6 @@
-﻿
-namespace Domain.Entities.TeamEntities
+﻿using Domain.Entities;
+
+namespace Domain.TeamEntities
 {
     public class UserTask
     {

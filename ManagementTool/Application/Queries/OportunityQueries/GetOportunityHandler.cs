@@ -1,11 +1,6 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Queries.OportunityQueries
 {
@@ -20,7 +15,7 @@ namespace Application.Queries.OportunityQueries
 
         public async Task<Oportunity> Handle(GetOportunityQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.OportunityRepository.GetAsync(request.Id);
+            return await _unitOfWork.OportunityRepository.GetByIdAsync(request.Id);
         }
     }
 }

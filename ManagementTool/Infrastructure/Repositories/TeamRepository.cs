@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using Domain.Entities;
 using Task = System.Threading.Tasks.Task;
 using Microsoft.EntityFrameworkCore;
@@ -17,22 +17,23 @@ namespace Infrastructure.Repositories
 
         public async Task CreateAsync(Team team)
         {
-            var task=await _context.Teams.AddAsync(team);
+            await _context.Teams.AddAsync(team);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var team = await _context.Teams.Where(t => t.Id == id).FirstOrDefaultAsync();
             _context.Teams.Remove(team);
         }
 
-        public async Task<Team> GetAsync(int id)
+        public async Task<Team> GetByIdAsync(int id)
         {
-            return await _context.Teams.Include(t => t.Admin).Include(t=>t.Chat)
-                .Include(t=>t.MemberTeams).ThenInclude(mt=>mt.Member).Where(t => t.Id == id).FirstAsync();
+            return await _context.Teams.Include(t => t.Admin)
+                .Include(t=>t.MemberTeams).ThenInclude(mt=>mt.Member)
+                .Where(t => t.Id == id).FirstAsync();
         }
 
-        public async Task UpdateNameAsync(int id, string name)
+        public async Task UpdateAsync(int id, string name)
         {
             var team = await _context.Teams.FindAsync(id);
             team.Name = name;
@@ -48,7 +49,7 @@ namespace Infrastructure.Repositories
             await _context.TeamMembers.AddAsync(teamMember);
         }
 
-        public async Task<IEnumerable<Team>> GetTeamsForUser(int userId)
+        public async Task<IEnumerable<Team>> GetAsync(int userId)
         {
             var teams = await _context.TeamMembers.Where(tm => tm.MemberId == userId)
                 .Include(tm => tm.Team)
@@ -59,7 +60,7 @@ namespace Infrastructure.Repositories
             return teams;
         }
 
-        public async Task<ICollection<User>> GetMembersAsync(int teamId)
+       public async Task<IEnumerable<User>> GetMembersAsync(int teamId)
         {
             var members = await _context.TeamMembers.Where(tm => tm.TeamId == teamId)
                 .Include(tm => tm.Member)
@@ -67,6 +68,23 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
 
             return members;
+        }
+
+        public async Task<IEnumerable<ToDo>> GetTasksAsync(int teamId)
+        {
+            return await _context.Teams.Where(team => team.Id == teamId)
+               .SelectMany(team => team.ToDoList).Include(tD => tD.Tasks)
+               .ThenInclude(task => task.AssignedTo).ToListAsync();
+        }
+
+        public Task UpdateAsync(Team entity, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Team>> GetAsync()
+        {
+            return await _context.Teams.ToListAsync();
         }
     }
 }

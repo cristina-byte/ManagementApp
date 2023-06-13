@@ -1,6 +1,6 @@
 ﻿using Application.Abstraction;
 using MediatR;
-using Task2 = Domain.Entities.TeamEntities.Task;
+using Task2 = Domain.TeamEntities.Task;
 
 namespace Application.Commands.TeamCommands
 {
@@ -12,21 +12,19 @@ namespace Application.Commands.TeamCommands
         public CreateTaskHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-
         }
 
         public async Task<Task2> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
-            var toDo = await _unitOfWork.ToDoRepository.GetAsync(request.ToDoId);
+            var toDo = await _unitOfWork.ToDoRepository.GetByIdAsync(request.ToDoId);
             var task = new Task2 
             {
                 Title=request.Title,
                 ToDo=toDo
-
             };
           
             await _unitOfWork.TaskRepository.CreateAsync(task);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
             return task;
         }
     }

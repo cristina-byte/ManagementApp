@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using ManagementTool.API.Dto;
 using ManagementTool.API.Dto.TeamDtos;
 

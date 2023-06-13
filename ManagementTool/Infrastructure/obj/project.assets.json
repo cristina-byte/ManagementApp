@@ -4033,6 +4033,7 @@
     "net6.0": [
       "Application >= 1.0.0",
       "Azure.Storage.Blobs >= 12.14.1",
+      "Domain >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.13",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.13",
       "Microsoft.EntityFrameworkCore >= 7.0.0",
@@ -4069,6 +4070,9 @@
           "projectReferences": {
             "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Application\\Application.csproj": {
               "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Application\\Application.csproj"
+            },
+            "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Domain\\Domain.csproj": {
+              "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Domain\\Domain.csproj"
             }
           }
         }

@@ -1,6 +1,6 @@
-﻿using Domain.Entities;
-using Domain.Entities.TeamEntities;
-using MediatR;
+﻿using MediatR;
+using Domain.TeamEntities;
+
 namespace Application.Commands.TeamCommands
 {
     public class CreateTeamCommand : IRequest<Team>

@@ -1,4 +1,6 @@
-﻿using Domain.Entities.TeamEntities;
+﻿using Domain.MeetingEntities;
+using Domain.OportunityEntities;
+using Domain.TeamEntities;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
@@ -12,7 +14,6 @@ namespace Domain.Entities
         public override string Email { get; set; }
         public override string PhoneNumber { get; set; }
         public DateTime BirthDay { get; set; }
-        public ICollection<ChatMember> Conversations { get; set; }
         public ICollection<MemberTeam> MemberTeams { get; set; }
         public ICollection<UserTask> Tasks { get; set; }    
         public ICollection<MeetingInvited> MeetingInvited { get; set; }

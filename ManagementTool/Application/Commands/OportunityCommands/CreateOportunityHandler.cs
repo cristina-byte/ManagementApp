@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using MediatR;
 
 namespace Application.Commands.OportunityCommands
@@ -30,7 +30,7 @@ namespace Application.Commands.OportunityCommands
 
             await _unitOfWork.OportunityRepository.CreateAsync(newOportunity);
 
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
             return newOportunity;
         }
     }

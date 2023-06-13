@@ -17,9 +17,8 @@ namespace Application.Commands.TeamCommands
             foreach(int userId in request.UsersId)
             {
                 await _unitOfWork.TeamRepository.AddMemberAsync(userId, request.TeamId);
-                //var team = await _unitOfWork.TeamRepository.GetAsync(request.TeamId);
-                //await _unitOfWork.ChatRepository.AddParticipantAsync(userId, team.Chat.Id);
-                await _unitOfWork.Save();
+               
+                await _unitOfWork.SaveAsync();
             }
             return Unit.Value;
         }

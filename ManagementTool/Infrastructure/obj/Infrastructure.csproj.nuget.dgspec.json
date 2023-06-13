@@ -172,6 +172,9 @@
             "projectReferences": {
               "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Application\\Application.csproj": {
                 "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Application\\Application.csproj"
+              },
+              "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Domain\\Domain.csproj": {
+                "projectPath": "E:\\Internship Amdaris 2022-2023\\Final Project\\BackEnd\\ManagementTool\\Domain\\Domain.csproj"
               }
             }
           }

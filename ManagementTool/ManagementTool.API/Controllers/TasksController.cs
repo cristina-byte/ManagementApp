@@ -1,12 +1,9 @@
 ﻿using Application.Commands.TeamCommands;
 using Application.Queries.TeamQueries;
 using AutoMapper;
-using Domain.Entities.TeamEntities;
 using ManagementTool.API.Dto.TeamDtos;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Web.Resource;
 
 namespace ManagementTool.API.Controllers
 {

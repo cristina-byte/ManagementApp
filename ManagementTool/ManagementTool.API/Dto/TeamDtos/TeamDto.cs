@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using ManagementTool.API.Dto.UserDtos;
 
 namespace ManagementTool.API.Dto.TeamDtos

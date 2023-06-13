@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using MediatR;
 
 namespace Application.Queries.TeamQueries
@@ -15,7 +15,7 @@ namespace Application.Queries.TeamQueries
 
         public async Task<Team> Handle(GetTeamQuery query, CancellationToken cancellationToken)
         {
-            var team = await _unitOfWork.TeamRepository.GetAsync(query.Id);
+            var team = await _unitOfWork.TeamRepository.GetByIdAsync(query.Id);
             return team;
         }
     }

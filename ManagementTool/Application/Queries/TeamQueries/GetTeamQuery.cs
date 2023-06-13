@@ -1,4 +1,4 @@
-﻿using Domain.Entities.TeamEntities;
+﻿using Domain.TeamEntities;
 using MediatR;
 
 namespace Application.Queries.TeamQueries

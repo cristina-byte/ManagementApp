@@ -16,8 +16,8 @@ namespace Application.Commands.OportunityCommands
         public async Task<Unit> Handle(AddApplicantCommand request, CancellationToken cancellationToken)
         {
             await _unitOfWork.OportunityRepository.AddApplicantAsync(request.OportunityId, request.UserId,request.PositionId);
-            await _unitOfWork.OportunityPositionRepository.Update(request.PositionId);
-            await _unitOfWork.Save();
+            await _unitOfWork.OportunityPositionRepository.DecrementAvailableSpotsAsync(request.PositionId);
+            await _unitOfWork.SaveAsync();
             return Unit.Value;
         }
     }

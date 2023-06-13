@@ -1,6 +1,6 @@
 ﻿using Application.Abstraction;
 using Domain.Entities;
-using Domain.Entities.OportunityEntities;
+using Domain.OportunityEntities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
@@ -30,19 +30,19 @@ namespace Infrastructure.Repositories
             await _context.Oportunities.AddAsync(oportunity);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var oportunity = await _context.Oportunities.Where(op => op.Id == id)
                 .FirstOrDefaultAsync();
             _context.Oportunities.Remove(oportunity);
         }
 
-        public async Task <IEnumerable<Oportunity>> GetAllAsync()
+        public async Task <IEnumerable<Oportunity>> GetAsync()
         {
             return await _context.Oportunities.ToListAsync();
         }
 
-        public async Task<Oportunity> GetAsync(int id)
+        public async Task<Oportunity> GetByIdAsync(int id)
         {
             return await _context.Oportunities.Where(op => op.Id == id)
                 .Include(op=>op.Positions).FirstOrDefaultAsync();
@@ -58,12 +58,12 @@ namespace Infrastructure.Repositories
             return oportunities;
         }
 
-        public async Task<int> GetOportunitiesNumber()
+        public async Task<int> GetNumberAsync()
         {
             return await _context.Oportunities.CountAsync();
         }
 
-        public async Task<IEnumerable<Oportunity>> GetOportunitiesPageAsync(int page)
+        public async Task<IEnumerable<Oportunity>> GetPageAsync(int page)
         {
             return await _context.Oportunities.OrderByDescending(op=>op.CreatedAt).Skip((page - 1) * 3).Take(3).ToListAsync();
         }
@@ -78,7 +78,7 @@ namespace Infrastructure.Repositories
             return users;
         }
 
-        public async Task UpdateAsync(int id, Oportunity oportunity)
+        public async Task UpdateAsync(Oportunity oportunity, int id )
         {
             var op = await _context.Oportunities.FindAsync(id);
             op.Title = oportunity.Title;

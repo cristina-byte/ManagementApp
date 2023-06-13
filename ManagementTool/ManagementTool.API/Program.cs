@@ -6,14 +6,11 @@ using ManagementTool.API;
 using ManagementTool.API.Middlewares;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Identity.Web;
 using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,13 +67,10 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IMeetingRepository), typeof(MeetingRepository));
 builder.Services.AddScoped(typeof(IMemberRepository), typeof(MemberRepository));
-builder.Services.AddScoped(typeof(IMessageRepository), typeof(MessageRepository));
 builder.Services.AddScoped(typeof(IOportunityRepository), typeof(OportunityRepository));
 builder.Services.AddScoped(typeof(ITeamRepository), typeof(TeamRepository));
 builder.Services.AddScoped(typeof(IToDoRepository), typeof(ToDoRepository));
 builder.Services.AddScoped(typeof(ITaskRepository), typeof(TaskRepository));
-builder.Services.AddScoped(typeof(IChatRepository), typeof(ChatRepository));
-builder.Services.AddScoped(typeof(IMessageRepository), typeof(MessageRepository));
 builder.Services.AddScoped(typeof(IOportunityPositionRepository), typeof(OportunityPositionRepository));
 builder.Services.AddMediatR(typeof(EditUserCommand).Assembly);
 builder.Services.AddAutoMapper(typeof(AssemblyMarketPresentatio));

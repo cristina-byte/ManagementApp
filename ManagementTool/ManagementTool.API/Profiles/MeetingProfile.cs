@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain.Entities;
+using Domain.MeetingEntities;
 using ManagementTool.API.Dto;
 
 namespace ManagementTool.API.Profiles

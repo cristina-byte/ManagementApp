@@ -1,5 +1,4 @@
-﻿
-namespace Application.Abstraction
+﻿namespace Application.Abstraction
 {
    public interface IUnitOfWork
     {
@@ -9,10 +8,8 @@ namespace Application.Abstraction
         public ITaskRepository TaskRepository { get; }
         public ITeamRepository TeamRepository { get; }
         public IToDoRepository ToDoRepository { get; }
-        public IChatRepository ChatRepository { get; }
-        public IMessageRepository MessageRepository { get; }
         public IOportunityPositionRepository OportunityPositionRepository { get; }
 
-        public Task Save();
+        public Task SaveAsync();
     }
 }

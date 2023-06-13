@@ -1,4 +1,4 @@
-﻿using Domain.Entities.OportunityEntities;
+﻿using Domain.OportunityEntities;
 using MediatR;
 
 namespace Application.Commands.OportunityCommands

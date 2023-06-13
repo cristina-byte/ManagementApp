@@ -1,10 +1,5 @@
 ﻿using Application.Abstraction;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Commands.TeamCommands
 {
@@ -19,7 +14,7 @@ namespace Application.Commands.TeamCommands
 
         public async Task<Unit> Handle(EditTeamCommand request, CancellationToken cancellationToken)
         {
-            await _unitOfWork.TeamRepository.UpdateNameAsync(request.Id, request.Name);
+            await _unitOfWork.TeamRepository.UpdateAsync(request.Id, request.Name);
             return Unit.Value;
         }
     }

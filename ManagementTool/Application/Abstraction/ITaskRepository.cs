@@ -1,13 +1,10 @@
-﻿using Task2 = Domain.Entities.TeamEntities.Task;
+﻿using Task2 = Domain.TeamEntities.Task;
 
 namespace Application.Abstraction
 {
-    public interface ITaskRepository
+    public interface ITaskRepository:IRepository<Task2>
     {
-        public Task CreateAsync(Task2 task);
-        public Task UpdateAsync(int id, Boolean isDone);
-        public Task Delete(int id);
-        public Task<IEnumerable<Task2>> GetAllAsync(int toDoId);
-        public Task<IEnumerable<Task2>> GetAllForMemberAsync(int memberId);
+        Task UpdateAsync(int id, bool status);
+        
     }
 }

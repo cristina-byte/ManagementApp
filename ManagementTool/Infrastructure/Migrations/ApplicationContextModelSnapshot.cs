@@ -22,314 +22,6 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Chat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PrivatePair")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chats");
-                });
-
-            modelBuilder.Entity("Domain.Entities.ChatMember", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ChatId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "ChatId");
-
-                    b.HasIndex("ChatId");
-
-                    b.ToTable("ChatMembers");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Meeting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrganizatorId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizatorId");
-
-                    b.ToTable("Meetings");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MeetingInvited", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MeetingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "MeetingId");
-
-                    b.HasIndex("MeetingId");
-
-                    b.ToTable("MeetingInviteds");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ChatId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("SentAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OportunityApplicant", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OportunityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PositionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "OportunityId", "PositionId");
-
-                    b.HasIndex("OportunityId");
-
-                    b.HasIndex("PositionId");
-
-                    b.ToTable("OportunityApplicants");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OportunityEntities.Oportunity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ApplicationDeadline")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Oportunities");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OportunityEntities.Position", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("LeftSits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OportunityId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OportunityId");
-
-                    b.ToTable("Positions");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.MemberTeam", b =>
-                {
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MemberId", "TeamId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("TeamMembers");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.Task", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ToDoId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isDone")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ToDoId");
-
-                    b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.Team", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ChatId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
-
-                    b.HasIndex("ChatId");
-
-                    b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.ToDo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("ToDoLists");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.UserTask", b =>
-                {
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TaskId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserTask");
-                });
-
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -358,9 +50,6 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("ImageLink")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsOnline")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -411,6 +100,244 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.MeetingEntities.Meeting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrganizatorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizatorId");
+
+                    b.ToTable("Meetings");
+                });
+
+            modelBuilder.Entity("Domain.MeetingEntities.MeetingInvited", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MeetingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "MeetingId");
+
+                    b.HasIndex("MeetingId");
+
+                    b.ToTable("MeetingInviteds");
+                });
+
+            modelBuilder.Entity("Domain.OportunityEntities.Oportunity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ApplicationDeadline")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Oportunities");
+                });
+
+            modelBuilder.Entity("Domain.OportunityEntities.OportunityApplicant", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OportunityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PositionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "OportunityId", "PositionId");
+
+                    b.HasIndex("OportunityId");
+
+                    b.HasIndex("PositionId");
+
+                    b.ToTable("OportunityApplicants");
+                });
+
+            modelBuilder.Entity("Domain.OportunityEntities.Position", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LeftSits")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OportunityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OportunityId");
+
+                    b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.MemberTeam", b =>
+                {
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MemberId", "TeamId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamMembers");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.Task", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ToDoId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isDone")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ToDoId");
+
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdminId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.ToDo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("ToDoLists");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.UserTask", b =>
+                {
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TaskId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -546,26 +473,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.ChatMember", b =>
-                {
-                    b.HasOne("Domain.Entities.Chat", "Chat")
-                        .WithMany("Participants")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Conversations")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Meeting", b =>
+            modelBuilder.Entity("Domain.MeetingEntities.Meeting", b =>
                 {
                     b.HasOne("Domain.Entities.User", "Organizator")
                         .WithMany()
@@ -576,9 +484,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Organizator");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MeetingInvited", b =>
+            modelBuilder.Entity("Domain.MeetingEntities.MeetingInvited", b =>
                 {
-                    b.HasOne("Domain.Entities.Meeting", "Meeting")
+                    b.HasOne("Domain.MeetingEntities.Meeting", "Meeting")
                         .WithMany("MeetingInvited")
                         .HasForeignKey("MeetingId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -595,34 +503,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Message", b =>
+            modelBuilder.Entity("Domain.OportunityEntities.OportunityApplicant", b =>
                 {
-                    b.HasOne("Domain.Entities.Chat", "Chat")
-                        .WithMany("Messages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
-
-                    b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OportunityApplicant", b =>
-                {
-                    b.HasOne("Domain.Entities.OportunityEntities.Oportunity", "Oportunity")
+                    b.HasOne("Domain.OportunityEntities.Oportunity", "Oportunity")
                         .WithMany("OportunityApplicants")
                         .HasForeignKey("OportunityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.OportunityEntities.Position", "Position")
+                    b.HasOne("Domain.OportunityEntities.Position", "Position")
                         .WithMany("PositionApplicants")
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -641,9 +530,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.OportunityEntities.Position", b =>
+            modelBuilder.Entity("Domain.OportunityEntities.Position", b =>
                 {
-                    b.HasOne("Domain.Entities.OportunityEntities.Oportunity", "Oportunity")
+                    b.HasOne("Domain.OportunityEntities.Oportunity", "Oportunity")
                         .WithMany("Positions")
                         .HasForeignKey("OportunityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -652,7 +541,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Oportunity");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamEntities.MemberTeam", b =>
+            modelBuilder.Entity("Domain.TeamEntities.MemberTeam", b =>
                 {
                     b.HasOne("Domain.Entities.User", "Member")
                         .WithMany("MemberTeams")
@@ -660,7 +549,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.TeamEntities.Team", "Team")
+                    b.HasOne("Domain.TeamEntities.Team", "Team")
                         .WithMany("MemberTeams")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -671,9 +560,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamEntities.Task", b =>
+            modelBuilder.Entity("Domain.TeamEntities.Task", b =>
                 {
-                    b.HasOne("Domain.Entities.TeamEntities.ToDo", "ToDo")
+                    b.HasOne("Domain.TeamEntities.ToDo", "ToDo")
                         .WithMany("Tasks")
                         .HasForeignKey("ToDoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -682,7 +571,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("ToDo");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamEntities.Team", b =>
+            modelBuilder.Entity("Domain.TeamEntities.Team", b =>
                 {
                     b.HasOne("Domain.Entities.User", "Admin")
                         .WithMany()
@@ -690,18 +579,12 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Chat", "Chat")
-                        .WithMany()
-                        .HasForeignKey("ChatId");
-
                     b.Navigation("Admin");
-
-                    b.Navigation("Chat");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamEntities.ToDo", b =>
+            modelBuilder.Entity("Domain.TeamEntities.ToDo", b =>
                 {
-                    b.HasOne("Domain.Entities.TeamEntities.Team", "Team")
+                    b.HasOne("Domain.TeamEntities.Team", "Team")
                         .WithMany("ToDoList")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -710,9 +593,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("Domain.Entities.TeamEntities.UserTask", b =>
+            modelBuilder.Entity("Domain.TeamEntities.UserTask", b =>
                 {
-                    b.HasOne("Domain.Entities.TeamEntities.Task", "Task")
+                    b.HasOne("Domain.TeamEntities.Task", "Task")
                         .WithMany("AssignedTo")
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -780,57 +663,48 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Chat", b =>
-                {
-                    b.Navigation("Messages");
-
-                    b.Navigation("Participants");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Meeting", b =>
-                {
-                    b.Navigation("MeetingInvited");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OportunityEntities.Oportunity", b =>
-                {
-                    b.Navigation("OportunityApplicants");
-
-                    b.Navigation("Positions");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OportunityEntities.Position", b =>
-                {
-                    b.Navigation("PositionApplicants");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.Task", b =>
-                {
-                    b.Navigation("AssignedTo");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.Team", b =>
-                {
-                    b.Navigation("MemberTeams");
-
-                    b.Navigation("ToDoList");
-                });
-
-            modelBuilder.Entity("Domain.Entities.TeamEntities.ToDo", b =>
-                {
-                    b.Navigation("Tasks");
-                });
-
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.Navigation("Conversations");
-
                     b.Navigation("MeetingInvited");
 
                     b.Navigation("MemberTeams");
 
                     b.Navigation("OportunitiyApplicants");
 
+                    b.Navigation("Tasks");
+                });
+
+            modelBuilder.Entity("Domain.MeetingEntities.Meeting", b =>
+                {
+                    b.Navigation("MeetingInvited");
+                });
+
+            modelBuilder.Entity("Domain.OportunityEntities.Oportunity", b =>
+                {
+                    b.Navigation("OportunityApplicants");
+
+                    b.Navigation("Positions");
+                });
+
+            modelBuilder.Entity("Domain.OportunityEntities.Position", b =>
+                {
+                    b.Navigation("PositionApplicants");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.Task", b =>
+                {
+                    b.Navigation("AssignedTo");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.Team", b =>
+                {
+                    b.Navigation("MemberTeams");
+
+                    b.Navigation("ToDoList");
+                });
+
+            modelBuilder.Entity("Domain.TeamEntities.ToDo", b =>
+                {
                     b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618

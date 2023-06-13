@@ -1,6 +1,5 @@
-﻿using Domain.Entities.TeamEntities;
-using MediatR;
-using Task = Domain.Entities.TeamEntities.Task;
+﻿using MediatR;
+using Task =Domain.TeamEntities.Task;
 
 namespace Application.Commands.TeamCommands
 {

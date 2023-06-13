@@ -1,5 +1,5 @@
 ﻿using Application.Abstraction;
-using Domain.Entities.TeamEntities;
+using Domain.TeamEntities;
 using MediatR;
 
 namespace Application.Commands.TeamCommands
@@ -15,7 +15,7 @@ namespace Application.Commands.TeamCommands
 
         public async Task<Unit> Handle(CreateToDoListCommand request, CancellationToken cancellationToken)
         {
-            var team = await _unitOfWork.TeamRepository.GetAsync(request.TeamId);
+            var team = await _unitOfWork.TeamRepository.GetByIdAsync(request.TeamId);
             var toDo = new ToDo
             {
                 Name=request.Name,
@@ -23,7 +23,7 @@ namespace Application.Commands.TeamCommands
             };
             
             await _unitOfWork.ToDoRepository.CreateAsync(toDo);
-            await _unitOfWork.Save();
+            await _unitOfWork.SaveAsync();
             return Unit.Value; 
         }
     }
