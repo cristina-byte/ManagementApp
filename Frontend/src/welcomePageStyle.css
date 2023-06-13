@@ -1,0 +1,48 @@
+
+.resetPassword-page, .register-page, .signIn-page{
+    font-family: 'Poppins', sans-serif;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.welcome-message{
+    height:100vh;
+    color:#F2F2F2;
+    width:50%;
+    min-width: 200px;
+    background: linear-gradient(158.71deg, #2E3789 32.61%, rgba(255, 111, 30, 0.94) 131.44%);
+    border-radius: 0px 0px 200px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome-message p{
+    font-weight: 300;
+}
+
+.form-container{
+    font-family: 'DM Sans', sans-serif;
+    width: 50%;
+    min-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 100px;
+}
+
+form{
+    padding-top: 20px;
+    width: 80%;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;     
+}
+
+.form-instruction{
+    color:#A3AED0;
+    margin-top: 7px;
+}

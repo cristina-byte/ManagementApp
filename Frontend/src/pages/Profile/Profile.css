@@ -1,0 +1,47 @@
+
+.profile{
+    padding-top: 30px;
+    display: flex;
+    justify-content: center; 
+}
+
+.profile-header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(158.71deg, #2E3789 32.61%, rgba(255, 111, 30, 0.94) 131.44%);
+    border-radius: 10px;
+    width: 900px;
+}
+
+.profile-photo{
+    width: 168px;
+    height: 168px;
+    object-fit:cover;
+    border-radius: 84px;
+    margin-right: 56px;
+    border: 4px solid white;
+}
+
+.profile-header h1{
+font-weight: 500;
+font-size: 30px;
+color: #fcfcfc;
+
+}
+
+.profile-content{
+    margin-top: 30px;
+}
+
+.profile-info{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tab-content{
+    padding: 20px;
+}
